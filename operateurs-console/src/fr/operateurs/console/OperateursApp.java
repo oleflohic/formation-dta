@@ -18,36 +18,46 @@ public class OperateursApp {
 		
 		Scanner sc = new Scanner(System.in);
 		double nb1, nb2, res;
-		
+		String typeOperation;
 		
 		// opérations
 		
-		System.out.println("ADDITION - Saisir deux nombres : ");
+		typeOperation = "ADDITION";
+		System.out.println(typeOperation + " - Saisir le premier nombre : ");
 		nb1 = sc.nextDouble();
+		System.out.println(typeOperation + " - Saisir le second nombre : ");
 		nb2 = sc.nextDouble();
 		res = nb1 + nb2;
 		System.out.println("" + nb1 + " + " + nb2 + " = " + res);
 
-		System.out.println("SOUSTRACTION - Saisir deux nombres : ");
+		typeOperation = "SOUSTRACTION";
+		System.out.println(typeOperation + " - Saisir le premier nombre : ");
 		nb1 = sc.nextDouble();
+		System.out.println(typeOperation + " - Saisir le second nombre : ");
 		nb2 = sc.nextDouble();
 		res = nb1 - nb2;
 		System.out.println("" + nb1 + " - " + nb2 + " = " + res);
 
-		System.out.println("MULTIPLICATION - Saisir deux nombres : ");
+		typeOperation = "MULTIPLICATION";
+		System.out.println(typeOperation + " - Saisir le premier nombre : ");
 		nb1 = sc.nextDouble();
+		System.out.println(typeOperation + " - Saisir le second nombre : ");
 		nb2 = sc.nextDouble();
 		res = nb1 * nb2;
 		System.out.println("" + nb1 + " * " + nb2 + " = " + res);
 
-		System.out.println("DIVISION - Saisir deux nombres : ");
+		typeOperation = "DIVISION";
+		System.out.println(typeOperation + " - Saisir le premier nombre : ");
 		nb1 = sc.nextDouble();
+		System.out.println(typeOperation + " - Saisir le second nombre : ");
 		nb2 = sc.nextDouble();
 		res = nb1 / nb2;
 		System.out.println("" + nb1 + " / " + nb2 + " = " + res);
 
-		System.out.println("MODULO - Saisir deux nombres : ");
+		typeOperation = "MODULO";
+		System.out.println(typeOperation + " - Saisir le premier nombre : ");
 		nb1 = sc.nextDouble();
+		System.out.println(typeOperation + " - Saisir le second nombre : ");
 		nb2 = sc.nextDouble();
 		res = nb1 % nb2;
 		System.out.println("" + nb1 + " % " + nb2 + " = " + res);
