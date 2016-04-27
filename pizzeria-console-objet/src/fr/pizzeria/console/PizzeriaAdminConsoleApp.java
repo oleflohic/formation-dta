@@ -1,6 +1,7 @@
 package fr.pizzeria.console;
 
 import java.util.Scanner;
+import fr.pizzeria.model.Pizza;
 
 /**
  * @author oleflohic
@@ -12,6 +13,7 @@ public class PizzeriaAdminConsoleApp {
 	protected static Scanner sc;
 
 	// pizzas existantes
+	/*
 	protected static Object[][] pizzas = new Object[][] {
 			new Object[] {"PEP", "Peperoni", 10f},
 			new Object[] {"MAR", "Margherita", 14f},
@@ -22,7 +24,17 @@ public class PizzeriaAdminConsoleApp {
 			new Object[] {"ORI", "L'orientale", 13.5f},
 			new Object[] {"IND", "L'indienne", 14f},
 	};
-	
+	*/
+	protected static Pizza[] pizzas = new Pizza[] {
+		new Pizza ("PEP", "Peperoni", 10),
+		new Pizza ("MAR", "Margherita", 14),
+		new Pizza ("REI", "La Reine", 11.5),
+		new Pizza ("FRO", "La 4 fromages", 12),
+		new Pizza ("CAN", "La cannibale", 12.5),
+		new Pizza ("SAV", "La savoyarde", 13),
+		new Pizza ("ORI", "L'orientale", 13.5),
+		new Pizza ("IND", "L'indienne", 14),
+	};
 	
 	public static int menuPrincipal () {
 
@@ -52,7 +64,12 @@ public class PizzeriaAdminConsoleApp {
 			System.out.println("Il n'y a aucune pizza dans la base.");
 		} else {
 			for (int i = 0 ; i < pizzas.length ; i++) {
-				System.out.println("" + pizzas[i][0] + " -> " + pizzas[i][1] + " (" + pizzas[i][2] + "€)");
+				System.out.println("" + pizzas[i].code + " -> " + pizzas[i].nom + " (" + pizzas[i].prix + "€)");
+			}
+			if (Pizza.nbPizzas > 1) {
+				System.out.println("------- " + Pizza.nbPizzas + " pizzas créées depuis l’initialisation du programme");
+			} else {
+				System.out.println("------- " + Pizza.nbPizzas + " pizza créée depuis l’initialisation du programme");
 			}
 		}
 		
@@ -72,7 +89,7 @@ public class PizzeriaAdminConsoleApp {
 		// tester si le code est pris
 		boolean codePris = false;
 		for (int i = 0 ; i < pizzas.length ; i++) {
-			if (pizzas[i][0].equals(codeNouveau)) {
+			if (pizzas[i].code.equals(codeNouveau)) {
 				System.out.println("Erreur : le code " + codeNouveau + " est déjà pris.");
 				codePris = true;
 				break;
@@ -81,8 +98,8 @@ public class PizzeriaAdminConsoleApp {
 		
 		// s'il n'est pas pris, ajouter la pizza
 		if (!codePris) {
-			Object[] nouvellePizza = new Object[] { codeNouveau, nomNouveau, prixNouveau };
-			Object[][] nouvelleListePizzas = new Object[pizzas.length+1][];
+			Pizza nouvellePizza = new Pizza (codeNouveau, nomNouveau, prixNouveau);
+			Pizza[] nouvelleListePizzas = new Pizza[pizzas.length+1];
 			// copier le contenu de la vieille liste dans la nouvelle,
 			// puis mettre la nouvelle pizza à sa fin
 			for (int i = 0 ; i < pizzas.length ; i++) {
@@ -119,7 +136,7 @@ public class PizzeriaAdminConsoleApp {
 				// chercher l'index de la pizza à màj
 				int indexPizzaMaj = -1;
 				for (int i = 0 ; i < pizzas.length ; i++) {
-					if (pizzas[i][0].equals(codeSelectionneMaj)) {
+					if (pizzas[i].code.equals(codeSelectionneMaj)) {
 						indexPizzaMaj = i;
 						break;
 					}
@@ -144,7 +161,7 @@ public class PizzeriaAdminConsoleApp {
 					boolean codePris = false;
 					if (!codeSelectionneMaj.equals(codeMaj)) {
 						for (int i = 0 ; i < pizzas.length ; i++) {
-							if (pizzas[i][0].equals(codeMaj)) {
+							if (pizzas[i].code.equals(codeMaj)) {
 								System.out.println("Erreur : le code " + codeMaj + " est déjà pris.");
 								codePris = true;
 								break;
@@ -154,7 +171,7 @@ public class PizzeriaAdminConsoleApp {
 					
 					// succès : màj de la pizza
 					if (!codePris) {
-						pizzas[indexPizzaMaj] = new Object[] { codeMaj, nomMaj, prixMaj };
+						pizzas[indexPizzaMaj] = new Pizza (codeMaj, nomMaj, prixMaj);
 					}
 					
 				}
@@ -189,7 +206,7 @@ public class PizzeriaAdminConsoleApp {
 				// chercher l'index de la pizza à supprimer
 				int indexPizzaSuppr = -1;
 				for (int i = 0 ; i < pizzas.length ; i++) {
-					if (pizzas[i][0].equals(codeSelectionneSuppr)) {
+					if (pizzas[i].code.equals(codeSelectionneSuppr)) {
 						indexPizzaSuppr = i;
 						break;
 					}
@@ -200,7 +217,7 @@ public class PizzeriaAdminConsoleApp {
 					System.out.println("Erreur : le code " + codeSelectionneSuppr + " est introuvable.");
 				} else {
 
-					Object[][] pizzasApresSuppression = new Object[pizzas.length-1][];
+					Pizza[] pizzasApresSuppression = new Pizza[pizzas.length-1];
 					
 					// créer un nouveau tableau qui ne contient pas l'élément supprimé
 					if (indexPizzaSuppr == 0) { // cas début de liste
