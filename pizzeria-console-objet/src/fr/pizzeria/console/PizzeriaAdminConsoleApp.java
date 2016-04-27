@@ -13,18 +13,6 @@ public class PizzeriaAdminConsoleApp {
 	protected static Scanner sc;
 
 	// pizzas existantes
-	/*
-	protected static Object[][] pizzas = new Object[][] {
-			new Object[] {"PEP", "Peperoni", 10f},
-			new Object[] {"MAR", "Margherita", 14f},
-			new Object[] {"REI", "La Reine", 11.5f},
-			new Object[] {"FRO", "La 4 fromages", 12f},
-			new Object[] {"CAN", "La cannibale", 12.5f},
-			new Object[] {"SAV", "La savoyarde", 13f},
-			new Object[] {"ORI", "L'orientale", 13.5f},
-			new Object[] {"IND", "L'indienne", 14f},
-	};
-	*/
 	protected static Pizza[] pizzas = new Pizza[] {
 		new Pizza ("PEP", "Peperoni", 10),
 		new Pizza ("MAR", "Margherita", 14),
