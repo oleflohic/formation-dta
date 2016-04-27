@@ -15,19 +15,19 @@ public class PizzeriaAdminConsoleApp {
 
 	// pizzas existantes
 	protected static Pizza[] pizzas = new Pizza[] {
-		new Pizza ("PEP", "Peperoni", 10),
-		new Pizza ("MAR", "Margherita", 14),
-		new Pizza ("REI", "La Reine", 11.5),
-		new Pizza ("FRO", "La 4 fromages", 12),
-		new Pizza ("CAN", "La cannibale", 12.5),
-		new Pizza ("SAV", "La savoyarde", 13),
-		new Pizza ("ORI", "L'orientale", 13.5),
-		new Pizza ("IND", "L'indienne", 14),
-	};
+			new Pizza ("PEP", "Peperoni", 10),
+			new Pizza ("MAR", "Margherita", 14),
+			new Pizza ("REI", "La Reine", 11.5),
+			new Pizza ("FRO", "La 4 fromages", 12),
+			new Pizza ("CAN", "La cannibale", 12.5),
+			new Pizza ("SAV", "La savoyarde", 13),
+			new Pizza ("ORI", "L'orientale", 13.5),
+			new Pizza ("IND", "L'indienne", 14),
+		};
 	
 	
 	// METHODES STATIQUES
-
+	
 	/**
 	 * afficher le menu principale ET demander à l'utilisateur de choisir une valeur.
 	 * @return l'entier saisi par l'utilisateur, qui correspond à l'action choisie.
@@ -49,7 +49,7 @@ public class PizzeriaAdminConsoleApp {
 		return sc.nextInt();
 		
 	}
-
+	
 	/**
 	 * afficher les pizzas existantes
 	 */
@@ -62,9 +62,12 @@ public class PizzeriaAdminConsoleApp {
 		if (pizzas.length == 0) {
 			System.out.println("Il n'y a aucune pizza dans la base.");
 		} else {
+			
 			for (int i = 0 ; i < pizzas.length ; i++) {
 				System.out.println("" + pizzas[i].code + " -> " + pizzas[i].nom + " (" + pizzas[i].prix + "€)");
 			}
+			
+			// afficher le nombre de pizzas crées depuis le début. grammaire en bonus.
 			if (Pizza.nbPizzas > 1) {
 				System.out.println("------- " + Pizza.nbPizzas + " pizzas créées depuis l’initialisation du programme");
 			} else {
@@ -77,35 +80,37 @@ public class PizzeriaAdminConsoleApp {
 	public static void ajouterPizza () {
 
 		System.out.print("Veuillez saisir le code : ");
-		String codeNouveau = sc.next();
-		
-		System.out.print("Veuillez saisir le nom : ");
-		String nomNouveau = sc.next();
-		
-		System.out.print("Veuillez saisir le prix (utiliser , comme séparateur décimal) : ");
-		float prixNouveau = sc.nextFloat();
-		
+		String codePizzaAjoutee = sc.next();
+
 		// tester si le code est pris
 		boolean codePris = false;
 		for (int i = 0 ; i < pizzas.length ; i++) {
-			if (pizzas[i].code.equals(codeNouveau)) {
-				System.out.println("Erreur : le code " + codeNouveau + " est déjà pris.");
+			if (pizzas[i].code.equals(codePizzaAjoutee)) {
+				System.out.println("Erreur : le code " + codePizzaAjoutee + " est déjà pris.");
 				codePris = true;
 				break;
 			}
 		}
 		
-		// s'il n'est pas pris, ajouter la pizza
+		
+		// s'il n'est pas pris, saisir les informations supplémentaires et ajouter la pizza
 		if (!codePris) {
-			Pizza nouvellePizza = new Pizza (codeNouveau, nomNouveau, prixNouveau);
-			Pizza[] nouvelleListePizzas = new Pizza[pizzas.length+1];
+			
+			System.out.print("Veuillez saisir le nom : ");
+			String nomPizzaAjoutee = sc.next();
+			
+			System.out.print("Veuillez saisir le prix (utiliser , comme séparateur décimal) : ");
+			float prixPizzaAjoutee = sc.nextFloat();
+			
+			Pizza pizzaAjoutee = new Pizza (codePizzaAjoutee, nomPizzaAjoutee, prixPizzaAjoutee);
+			Pizza[] pizzasApresAjout = new Pizza[pizzas.length+1];
 			// copier le contenu de la vieille liste dans la nouvelle,
 			// puis mettre la nouvelle pizza à sa fin
 			for (int i = 0 ; i < pizzas.length ; i++) {
-				nouvelleListePizzas[i] = pizzas[i];
+				pizzasApresAjout[i] = pizzas[i];
 			}
-			nouvelleListePizzas[pizzas.length] = nouvellePizza;
-			pizzas = nouvelleListePizzas;
+			pizzasApresAjout[pizzas.length] = pizzaAjoutee;
+			pizzas = pizzasApresAjout;
 		}
 		
 	}
@@ -126,54 +131,55 @@ public class PizzeriaAdminConsoleApp {
 			// demander de sélectionner une pizza et lire la saisie clavier
 			System.out.println("Veuillez choisir la pizza à modifier.\n(99 pour abandonner).");
 			System.out.println("Code de la pizza à modifier : ");
-			String codeSelectionneMaj = sc.next();
+			String codePizzaAMaj = sc.next();
 			
 			// l'utilisateur abandonne la modification
-			if (codeSelectionneMaj.equals("99")) {
+			if (codePizzaAMaj.equals("99")) {
 				System.out.println("Abandon de la mise-à-jour.");
 				
 			// sinon continuer les saisies
 			} else {
 
 				// chercher l'index de la pizza à màj
-				int indexPizzaMaj = -1;
+				int indexPizzaAMaj = -1;
 				for (int i = 0 ; i < pizzas.length ; i++) {
-					if (pizzas[i].code.equals(codeSelectionneMaj)) {
-						indexPizzaMaj = i;
+					if (pizzas[i].code.equals(codePizzaAMaj)) {
+						indexPizzaAMaj = i;
 						break;
 					}
 				}
 				
 				// cas d'erreur : code introuvable
-				if (indexPizzaMaj == -1) {
-					System.out.println("Erreur : le code " + codeSelectionneMaj + " est introuvable.");
+				if (indexPizzaAMaj == -1) {
+					System.out.println("Erreur : le code " + codePizzaAMaj + " est introuvable.");
 				} else {
 					
 					// màj des infos
 					System.out.print("Veuillez saisir le nouveau code : ");
-					String codeMaj = sc.next();
+					String codePizzaApresMaj = sc.next();
 					
-					System.out.print("Veuillez saisir le nouveau nom : ");
-					String nomMaj = sc.next();
-					
-					System.out.print("Veuillez saisir le nouveau prix (utiliser , comme séparateur décimal) : ");
-					float prixMaj = sc.nextFloat();
-					
+
 					// cas d'erreur : code déjà pris
 					boolean codePris = false;
-					if (!codeSelectionneMaj.equals(codeMaj)) {
+					if (!codePizzaAMaj.equals(codePizzaApresMaj)) {
 						for (int i = 0 ; i < pizzas.length ; i++) {
-							if (pizzas[i].code.equals(codeMaj)) {
-								System.out.println("Erreur : le code " + codeMaj + " est déjà pris.");
+							if (pizzas[i].code.equals(codePizzaApresMaj)) {
+								System.out.println("Erreur : le code " + codePizzaApresMaj + " est déjà pris.");
 								codePris = true;
 								break;
 							}
 						}
 					}
 					
-					// succès : màj de la pizza
+					// succès : saisie des autres infos et màj de la pizza
 					if (!codePris) {
-						pizzas[indexPizzaMaj] = new Pizza (codeMaj, nomMaj, prixMaj);
+						System.out.print("Veuillez saisir le nouveau nom : ");
+						String nomPizzaApresMaj = sc.next();
+						
+						System.out.print("Veuillez saisir le nouveau prix (utiliser , comme séparateur décimal) : ");
+						float prixPizzaApresMaj = sc.nextFloat();
+						
+						pizzas[indexPizzaAMaj] = new Pizza (codePizzaApresMaj, nomPizzaApresMaj, prixPizzaApresMaj);
 					}
 					
 				}
@@ -195,10 +201,10 @@ public class PizzeriaAdminConsoleApp {
 			// demander de sélectionner une pizza et lire la saisie clavier
 			System.out.println("Veuillez choisir la pizza à supprimer.\n(99 pour abandonner).");
 			System.out.println("Code de la pizza à supprimer : ");
-			String codeSelectionneSuppr = sc.next();
+			String codePizzaASupprimer = sc.next();
 			
 			// l'utilisateur abandonne la modification
-			if (codeSelectionneSuppr.equals("99")) {
+			if (codePizzaASupprimer.equals("99")) {
 				System.out.println("Abandon de la suppression.");
 				
 			// sinon continuer les saisies
@@ -206,29 +212,29 @@ public class PizzeriaAdminConsoleApp {
 
 				
 				// chercher l'index de la pizza à supprimer
-				int indexPizzaSuppr = -1;
+				int indexPizzaASupprimer = -1;
 				for (int i = 0 ; i < pizzas.length ; i++) {
-					if (pizzas[i].code.equals(codeSelectionneSuppr)) {
-						indexPizzaSuppr = i;
+					if (pizzas[i].code.equals(codePizzaASupprimer)) {
+						indexPizzaASupprimer = i;
 						break;
 					}
 				}
 				
 				// cas d'erreur : code introuvable
-				if (indexPizzaSuppr == -1) {
-					System.out.println("Erreur : le code " + codeSelectionneSuppr + " est introuvable.");
+				if (indexPizzaASupprimer == -1) {
+					System.out.println("Erreur : le code " + codePizzaASupprimer + " est introuvable.");
 				} else {
 
 					Pizza[] pizzasApresSuppression = new Pizza[pizzas.length-1];
 					
 					// créer un nouveau tableau qui ne contient pas l'élément supprimé
-					if (indexPizzaSuppr == 0) { // cas début de liste
+					if (indexPizzaASupprimer == 0) { // cas début de liste
 						
 						for (int i = 1 ; i < pizzas.length ; i++) {
 							pizzasApresSuppression[i-1] = pizzas[i];
 						}
 						
-					} else if (indexPizzaSuppr == (pizzas.length - 1)) { // cas fin de liste
+					} else if (indexPizzaASupprimer == (pizzas.length - 1)) { // cas fin de liste
 
 						for (int i = 0 ; i < pizzas.length-1 ; i++) {
 							pizzasApresSuppression[i] = pizzas[i];
@@ -237,12 +243,12 @@ public class PizzeriaAdminConsoleApp {
 					} else { // cas milieu de liste
 						
 						// avant l'index de la pizza supprimée
-						for (int i = 0 ; i < indexPizzaSuppr ; i++) {
+						for (int i = 0 ; i < indexPizzaASupprimer ; i++) {
 							pizzasApresSuppression[i] = pizzas[i];
 						}
 						
 						// après l'index
-						for (int i = indexPizzaSuppr+1 ; i < pizzas.length ; i++) {
+						for (int i = indexPizzaASupprimer+1 ; i < pizzas.length ; i++) {
 							pizzasApresSuppression[i-1] = pizzas[i];
 						}
 						
@@ -257,7 +263,7 @@ public class PizzeriaAdminConsoleApp {
 		
 	}
 	
-
+	
 	/**
 	 * Méthode principale.
 	 * @param args Arguments du programme.
