@@ -1,5 +1,10 @@
 package fr.pizzeria.model;
 
+/**
+ * Classe utilisée pour stocker les informations de pizza.
+ * @author oleflohic
+ * 
+ */
 public class Pizza {
 
 	public static int nbPizzas;

@@ -5,9 +5,10 @@ import fr.pizzeria.model.Pizza;
 
 /**
  * @author oleflohic
- * Classe exécutable.
  */
 public class PizzeriaAdminConsoleApp {
+	
+	// VARIABLES STATIQUES
 	
 	// lecteur d'entrées clavier
 	protected static Scanner sc;
@@ -24,6 +25,13 @@ public class PizzeriaAdminConsoleApp {
 		new Pizza ("IND", "L'indienne", 14),
 	};
 	
+	
+	// METHODES STATIQUES
+
+	/**
+	 * afficher le menu principale ET demander à l'utilisateur de choisir une valeur.
+	 * @return l'entier saisi par l'utilisateur, qui correspond à l'action choisie.
+	 */
 	public static int menuPrincipal () {
 
 		// menu principal et lecture du choix
@@ -41,7 +49,10 @@ public class PizzeriaAdminConsoleApp {
 		return sc.nextInt();
 		
 	}
-	
+
+	/**
+	 * afficher les pizzas existantes
+	 */
 	public static void listerPizzas () {
 		
 		System.out.println();
@@ -98,7 +109,10 @@ public class PizzeriaAdminConsoleApp {
 		}
 		
 	}
-	
+
+	/**
+	 * mettre-à-jour (màj) une pizza en demandant à l'utilisateur de saisir les informations requises
+	 */
 	public static void majPizza () {
 
 		// aucune pizza : message d'information et sortie immédiate
@@ -243,7 +257,7 @@ public class PizzeriaAdminConsoleApp {
 		
 	}
 	
-	
+
 	/**
 	 * Méthode principale.
 	 * @param args Arguments du programme.
