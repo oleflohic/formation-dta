@@ -8,5 +8,10 @@ public interface IPizzaDao {
 	boolean ajouterPizza (Pizza newPizza);
 	boolean modifierPizza (String codePizza, Pizza updatePizza);
 	boolean supprimerPizza (String codePizza);
+
+	boolean codePizzaExiste (String codePizza);
+	int obtenirIndexCodePizza (String codePizza);
+	
+	Pizza trouverPizza (String codePizza);
 	
 }

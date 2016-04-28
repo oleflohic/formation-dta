@@ -1,5 +1,7 @@
 package fr.pizzeria.ihm.menu.option;
 
+import java.util.Scanner;
+
 import fr.pizzeria.dao.IPizzaDao;
 
 /**
@@ -13,6 +15,7 @@ public abstract class AbstractOptionMenu {
 	
 	private String libelle;
 	protected IPizzaDao pizzaDao;
+	protected Scanner scanner;
 	
 	
 	// CONSTRUCTEURS
@@ -25,6 +28,11 @@ public abstract class AbstractOptionMenu {
 	public AbstractOptionMenu(String libelle, IPizzaDao pizzaDao) {
 		this(libelle);
 		this.pizzaDao = pizzaDao;
+	}
+	
+	public AbstractOptionMenu(String libelle, IPizzaDao pizzaDao, Scanner scanner) {
+		this(libelle, pizzaDao);
+		this.scanner = scanner;
 	}
 	
 	

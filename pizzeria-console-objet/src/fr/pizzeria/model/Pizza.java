@@ -20,16 +20,34 @@ public class Pizza {
 	// CONSTRUCTEURS
 	
 	public Pizza (String code, String nom, double prix) {
-		this.id = nbPizzas;
-		this.code = code;
-		this.nom = nom;
-		this.prix = prix;
+		this (nbPizzas, code, nom, prix);
 		
 		nbPizzas++;
 	}
 	
+	public Pizza (int id, String code, String nom, double prix) {
+
+		this.id = id;
+		this.code = code;
+		this.nom = nom;
+		this.prix = prix;
+		
+	}
+	
+	// METHODES
+	
+	public Pizza clone () {
+		return new Pizza (id, code, nom, prix);
+		
+	}
+	
 	
 	// ACCESSEURS
+
+
+	public int getId() {
+		return id;
+	}
 
 	public String getCode() {
 		return code;
@@ -57,10 +75,6 @@ public class Pizza {
 
 	public static int getNbPizzas() {
 		return nbPizzas;
-	}
-
-	public int getId() {
-		return id;
 	}
 
 	
