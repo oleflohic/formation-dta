@@ -1,4 +1,4 @@
-package fr.pizzeria.console;
+package fr.pizzeria.ihm;
 
 import java.util.Scanner;
 import fr.pizzeria.model.Pizza;
@@ -26,12 +26,21 @@ public class MenuPizzeria {
 		this.scanner = scanner;
 		this.pizzas = pizzas;
 		
+		/*
 		options = new OptionMenu[] {
 				new ListerPizzasOptionMenu("Lister les pizzas"),
 				new AjouterPizzaOptionMenu("Ajouter une nouvelle pizza"),
 				new MajPizzaOptionMenu("Mettre à jour une pizza"),
 				new SupprimerPizzaOptionMenu("Supprimer une pizza"),
 			};
+			*/
+		
+		options = new OptionMenu[100];
+		options[1] = new ListerPizzasOptionMenu("Lister les pizzas");
+		options[2] = new AjouterPizzaOptionMenu("Ajouter une nouvelle pizza");
+		options[3] = new MajPizzaOptionMenu("Mettre à jour une pizza");
+		options[4] = new SupprimerPizzaOptionMenu("Supprimer une pizza");
+		//options[99] = new ListerPizzasOptionMenu("Lister les pizzas");
 	}
 	
 	// CLASSES

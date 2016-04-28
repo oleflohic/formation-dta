@@ -2,6 +2,8 @@ package fr.pizzeria.console;
 
 import java.util.Scanner;
 
+import fr.pizzeria.ihm.MenuPizzeria;
+
 /**
  * @author oleflohic
  */
