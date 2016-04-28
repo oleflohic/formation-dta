@@ -3,6 +3,7 @@ package fr.pizzeria.ihm.menu.option;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.exception.SupprimerPizzaException;
 import fr.pizzeria.model.Pizza;
 
 public class SupprimerPizzaOptionMenu extends AbstractOptionMenu {
@@ -22,7 +23,7 @@ public class SupprimerPizzaOptionMenu extends AbstractOptionMenu {
 	// ==== Méthodes ====
 
 	@Override
-	public boolean executer() {
+	public boolean executer() throws SupprimerPizzaException {
 		
 		Pizza[] pizzas = pizzaDao.listePizzas();
 		
@@ -47,13 +48,15 @@ public class SupprimerPizzaOptionMenu extends AbstractOptionMenu {
 				
 			// sinon continuer les saisies
 			} else {
-				
-				// cas d'erreur : code introuvable
-				if (! pizzaDao.codePizzaExiste(codePizzaASupprimer)) {
-					System.out.println("Erreur : le code " + codePizzaASupprimer + " est introuvable.");
-				} else {
+
+				pizzaDao.supprimerPizza(codePizzaASupprimer);
+				/*
+				try {
 					pizzaDao.supprimerPizza(codePizzaASupprimer);
+				} catch (DaoException e) {
+					System.out.println("Erreur : le code " + codePizzaASupprimer + " est introuvable.");
 				}
+				*/
 				
 			}
 		}

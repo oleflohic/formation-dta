@@ -1,5 +1,8 @@
 package fr.pizzeria.dao;
 
+import fr.pizzeria.exception.AjouterPizzaException;
+import fr.pizzeria.exception.ModifierPizzaException;
+import fr.pizzeria.exception.SupprimerPizzaException;
 import fr.pizzeria.model.Pizza;
 
 /**
@@ -17,24 +20,24 @@ public interface IPizzaDao {
 	/**
 	 * Insérer une nouvelle pizza dans la carte.
 	 * @param pizzaAjoutee
-	 * @return true si l'ajout réussi, false sinon.
+	 * @throws AjouterPizzaException
 	 */
-	boolean ajouterPizza (Pizza pizzaAjoutee);
+	public void ajouterPizza (Pizza pizzaAjoutee) throws AjouterPizzaException;
 
 	/**
 	 * Modifier la pizza portant le code donné pour qu'elle prenne les données fournies.
 	 * @param codePizza Ancien code de la pizza à modifier.
 	 * @param pizzaModifiee Nouvelle valeur de la pizza à modifier.
-	 * @return true si la modification a réussi, false sinon.
+	 * @throws ModifierPizzaException
 	 */
-	boolean modifierPizza (String codePizza, Pizza pizzaModifiee);
-	
+	public void modifierPizza (String codePizza, Pizza pizzaModifiee) throws ModifierPizzaException;
+
 	/**
 	 * Supprimer la pizza portant le code donné.
 	 * @param codePizza
-	 * @return true si la suppression a réussi, false sinon.
+	 * @throws SupprimerPizzaException
 	 */
-	boolean supprimerPizza (String codePizza);
+	public void supprimerPizza (String codePizza) throws SupprimerPizzaException;
 	
 	
 	// ajouts : actions utilitaires permettant de tester ou obtenir des valeurs en lecture seule

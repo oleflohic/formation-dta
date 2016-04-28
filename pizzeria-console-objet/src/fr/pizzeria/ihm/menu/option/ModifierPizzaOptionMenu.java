@@ -3,6 +3,7 @@ package fr.pizzeria.ihm.menu.option;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.exception.ModifierPizzaException;
 import fr.pizzeria.model.Pizza;
 
 public class ModifierPizzaOptionMenu extends AbstractOptionMenu {
@@ -22,7 +23,7 @@ public class ModifierPizzaOptionMenu extends AbstractOptionMenu {
 	// ==== Méthodes ====
 
 	@Override
-	public boolean executer() {
+	public boolean executer() throws ModifierPizzaException {
 		
 		Pizza[] pizzas = pizzaDao.listePizzas();
 		
@@ -72,10 +73,25 @@ public class ModifierPizzaOptionMenu extends AbstractOptionMenu {
 						System.out.print("Veuillez saisir le nouveau prix (utiliser , comme séparateur décimal) : ");
 						float prixPizzaApresMaj = scanner.nextFloat();
 						
+
 						// TODO TEMPORAIRE ; peu efficace, mais permet d'être sûr que la pizza modifiée aura le même id
 						// et n'augmentera pas le nombre de pizzas créées (valeur Pizza.nbPizzas)
 						Pizza pizzaAModifier = pizzaDao.trouverPizza(codePizzaAMaj);
 						pizzaDao.modifierPizza(codePizzaAMaj, new Pizza (pizzaAModifier.getId(), codePizzaApresMaj, nomPizzaApresMaj, prixPizzaApresMaj));
+						
+						/*
+						try {
+
+							// TODO TEMPORAIRE ; peu efficace, mais permet d'être sûr que la pizza modifiée aura le même id
+							// et n'augmentera pas le nombre de pizzas créées (valeur Pizza.nbPizzas)
+							Pizza pizzaAModifier = pizzaDao.trouverPizza(codePizzaAMaj);
+							pizzaDao.modifierPizza(codePizzaAMaj, new Pizza (pizzaAModifier.getId(), codePizzaApresMaj, nomPizzaApresMaj, prixPizzaApresMaj));
+							
+						} catch (DaoException e) {
+							System.out.println("Erreur : la pizza de code " + codePizzaAMaj + " n'a pas pu être ajoutée.");
+						}
+						*/
+						
 						
 					}
 					

@@ -4,6 +4,10 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDaoImpl;
+import fr.pizzeria.exception.AjouterPizzaException;
+import fr.pizzeria.exception.DaoException;
+import fr.pizzeria.exception.ModifierPizzaException;
+import fr.pizzeria.exception.SupprimerPizzaException;
 import fr.pizzeria.ihm.menu.option.AbstractOptionMenu;
 import fr.pizzeria.ihm.menu.option.AjouterPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.ListerPizzasOptionMenu;
@@ -78,8 +82,18 @@ public class Menu {
 				System.out.println("" + i + ". " + options[i].getLibelle());
 			}
 			
-			int saisie = scanner.nextInt();
-			continuer = options[saisie].executer();			
+			try {
+				int saisie = scanner.nextInt();
+				continuer = options[saisie].executer();
+			} catch (AjouterPizzaException e) {
+				System.out.println("Échec de l'ajout de pizza : " + e.getMessage());
+			} catch (ModifierPizzaException e) {
+				System.out.println("Échec de la modification de pizza : " + e.getMessage());
+			} catch (SupprimerPizzaException e) {
+				System.out.println("Échec de la suppression de pizza : " + e.getMessage());
+			} catch (DaoException e) {
+				System.out.println("Échec de l'opération : " + e.getMessage());
+			}
 		}
 		
 	}

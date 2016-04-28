@@ -3,6 +3,7 @@ package fr.pizzeria.ihm.menu.option;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.exception.DaoException;
 import fr.pizzeria.model.Pizza;
 
 /**
@@ -26,16 +27,13 @@ public class AjouterPizzaOptionMenu extends AbstractOptionMenu {
 	// ==== Méthodes ====
 	
 	@Override
-	public boolean executer() {
+	public boolean executer() throws DaoException {
 		
 		System.out.print("Veuillez saisir le code : ");
 		String codePizza = scanner.next();
 
-		// tester si le code est pris
-		boolean codePris = pizzaDao.codePizzaExiste(codePizza);
-		
-		// s'il n'est pas pris, saisir les informations supplémentaires et ajouter la pizza
-		if (!codePris) {
+		// si le code n'est pas déjà pris, saisir les informations supplémentaires et ajouter la pizza
+		if (! pizzaDao.codePizzaExiste(codePizza)) {
 			
 			System.out.print("Veuillez saisir le nom : ");
 			String nomPizzaAjoutee = scanner.next();
@@ -44,13 +42,19 @@ public class AjouterPizzaOptionMenu extends AbstractOptionMenu {
 			float prixPizzaAjoutee = scanner.nextFloat();
 			
 			Pizza pizzaAjoutee = new Pizza (codePizza, nomPizzaAjoutee, prixPizzaAjoutee);
+
+			pizzaDao.ajouterPizza(pizzaAjoutee);
+			System.out.println("La pizza de code " + codePizza + " a été ajoutée.");
 			
-			boolean succes = pizzaDao.ajouterPizza(pizzaAjoutee);
-			if (succes) {
+			/*
+			try {
+				pizzaDao.ajouterPizza(pizzaAjoutee);
 				System.out.println("La pizza de code " + codePizza + " a été ajoutée.");
-			} else {
+				
+			} catch (DaoException e) {
 				System.out.println("Erreur : la pizza de code " + codePizza + " n'a pas pu être ajoutée.");
 			}
+			*/
 			
 			
 		} else {

@@ -3,6 +3,7 @@ package fr.pizzeria.ihm.menu.option;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.exception.DaoException;
 
 /**
  * Option de menu avec un libellé et une action exécutable (via méthode).
@@ -66,8 +67,9 @@ public abstract class AbstractOptionMenu {
 	/**
 	 * Action exécutée quand cette option est sélectionnée.
 	 * @return false si cette option provoque la sortie du programme.
+	 * @throws DaoException
 	 */
-	public abstract boolean executer ();
+	public abstract boolean executer () throws DaoException;
 	
 	
 	// ==== Accesseurs ====

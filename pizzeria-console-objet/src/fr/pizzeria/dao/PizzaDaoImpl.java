@@ -1,5 +1,8 @@
 package fr.pizzeria.dao;
 
+import fr.pizzeria.exception.AjouterPizzaException;
+import fr.pizzeria.exception.ModifierPizzaException;
+import fr.pizzeria.exception.SupprimerPizzaException;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoImpl implements IPizzaDao {
@@ -47,14 +50,15 @@ public class PizzaDaoImpl implements IPizzaDao {
 		System.arraycopy(pizzas, 0, copie, 0, pizzas.length);
 		return copie;
 	}
-
+	
 	/**
 	 * Insérer une nouvelle pizza dans la carte.
 	 * @param pizzaAjoutee
 	 * @return true si l'ajout réussi, false sinon.
+	 * @throws AjouterPizzaException 
 	 */
 	@Override
-	public boolean ajouterPizza(Pizza nouvellePizza) {
+	public void ajouterPizza(Pizza nouvellePizza) throws AjouterPizzaException {
 		
 		// le code n'est pas encore pris : ajouter la pizza
 		if (! codePizzaExiste (nouvellePizza.getCode())) {
@@ -67,31 +71,31 @@ public class PizzaDaoImpl implements IPizzaDao {
 			}
 			pizzasApresAjout[pizzas.length] = nouvellePizza;
 			pizzas = pizzasApresAjout;
-			return true;
 			
 		} else {
-			
-			return false;
+			throw new AjouterPizzaException ("Le code pizza " + nouvellePizza.getCode() + " est introuvable.");
 		}
 		
 	}
-
+	
 	/**
 	 * Modifier la pizza portant le code donné pour qu'elle prenne les données fournies.
 	 * @param codePizza Ancien code de la pizza à modifier.
 	 * @param pizzaModifiee Nouvelle valeur de la pizza à modifier.
 	 * @return true si la modification a réussi, false sinon.
+	 * @throws ModifierPizzaException 
 	 */
 	@Override
-	public boolean modifierPizza(String codePizza, Pizza pizzaApresModification) {
+	public void modifierPizza(String codePizza, Pizza pizzaApresModification) throws ModifierPizzaException {
 		
 		// trouver l'index de la pizza à modifier dans le tableau et la remplacer si l'index est valide 
 		int indexTableau = obtenirIndexCodePizza(codePizza);
 		if (indexTableau != -1) {
 			pizzas[indexTableau] = pizzaApresModification;
-			return true;
+			//return true;
 		} else {
-			return false;
+			//return false;
+			throw new ModifierPizzaException ("Le code pizza " + codePizza + " est introuvable.");
 		}
 		
 	}
@@ -100,45 +104,52 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 * Supprimer la pizza portant le code donné.
 	 * @param codePizza
 	 * @return true si la suppression a réussi, false sinon.
+	 * @throws SupprimerPizzaException 
 	 */
 	@Override
-	public boolean supprimerPizza(String codePizza) {
+	public void supprimerPizza(String codePizza) throws SupprimerPizzaException {
 		
 		Pizza[] pizzasApresSuppression = new Pizza[pizzas.length-1];
 		int indexPizzaASupprimer = obtenirIndexCodePizza(codePizza);
 		
-		// créer un nouveau tableau qui ne contient pas l'élément supprimé
-		if (indexPizzaASupprimer == 0) { // cas début de liste
+		if (indexPizzaASupprimer != -1) {
 			
-			for (int i = 1 ; i < pizzas.length ; i++) {
-				pizzasApresSuppression[i-1] = pizzas[i];
+			// créer un nouveau tableau qui ne contient pas l'élément supprimé
+			if (indexPizzaASupprimer == 0) { // cas début de liste
+				
+				for (int i = 1 ; i < pizzas.length ; i++) {
+					pizzasApresSuppression[i-1] = pizzas[i];
+				}
+				
+			} else if (indexPizzaASupprimer == (pizzas.length - 1)) { // cas fin de liste
+	
+				for (int i = 0 ; i < pizzas.length-1 ; i++) {
+					pizzasApresSuppression[i] = pizzas[i];
+				}
+				
+			} else { // cas milieu de liste
+				
+				// avant l'index de la pizza supprimée
+				for (int i = 0 ; i < indexPizzaASupprimer ; i++) {
+					pizzasApresSuppression[i] = pizzas[i];
+				}
+				
+				// après l'index
+				for (int i = indexPizzaASupprimer+1 ; i < pizzas.length ; i++) {
+					pizzasApresSuppression[i-1] = pizzas[i];
+				}
+				
 			}
 			
-		} else if (indexPizzaASupprimer == (pizzas.length - 1)) { // cas fin de liste
-
-			for (int i = 0 ; i < pizzas.length-1 ; i++) {
-				pizzasApresSuppression[i] = pizzas[i];
-			}
+			// remplacement de la liste
+			pizzas = pizzasApresSuppression;
 			
-		} else { // cas milieu de liste
-			
-			// avant l'index de la pizza supprimée
-			for (int i = 0 ; i < indexPizzaASupprimer ; i++) {
-				pizzasApresSuppression[i] = pizzas[i];
-			}
-			
-			// après l'index
-			for (int i = indexPizzaASupprimer+1 ; i < pizzas.length ; i++) {
-				pizzasApresSuppression[i-1] = pizzas[i];
-			}
-			
+		} else {
+			throw new SupprimerPizzaException ("Le code pizza " + codePizza + " est introuvable.");
 		}
 		
-		// remplacement de la liste
-		pizzas = pizzasApresSuppression;
 		
-		
-		return true;
+		//return true;
 	}
 
 	/**
