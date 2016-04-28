@@ -7,19 +7,19 @@ import fr.pizzeria.model.Pizza;
 
 public class ModifierPizzaOptionMenu extends AbstractOptionMenu {
 
-	// CONSTANTES
+	// ==== Constantes ====
 	
 	private static final String MODIFIER_PIZZA_LIBELLE_MENU = "Modifier une pizza";
 
 
-	// CONSTRUCTEURS
+	// ==== Constructeurs ====
 	
 	public ModifierPizzaOptionMenu(IPizzaDao pizzaDao, Scanner scanner) {
 		super(MODIFIER_PIZZA_LIBELLE_MENU, pizzaDao, scanner);
 	}
 
 
-	// METHODES
+	// ==== Méthodes ====
 
 	@Override
 	public boolean executer() {

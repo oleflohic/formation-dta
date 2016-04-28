@@ -5,13 +5,19 @@ import fr.pizzeria.model.Pizza;
 public class PizzaDaoImpl implements IPizzaDao {
 	
 	
-	// VARIABLES
+	// ==== Variables ====
 	
+	/**
+	 * Pizzas affichées à la carte.
+	 */
 	private Pizza[] pizzas;
 	
 	
-	// CONSTRUCTEURS
+	// ==== Constructeurs ====
 	
+	/**
+	 * Créer un DAO gérant une carte de pizzas pré-remplie.
+	 */
 	public PizzaDaoImpl() {
 
 		// pizzas existantes
@@ -29,50 +35,72 @@ public class PizzaDaoImpl implements IPizzaDao {
 	}
 	
 	
-	// METHODES
-	
+	// ==== Méthodes ====
+
+	/**
+	 * Récupérer la liste des pizzas à la carte.
+	 * @return Tableau de Pizza, qui est une copie des pizzas à la carte. 
+	 */
 	@Override
 	public Pizza[] listePizzas() {
 		Pizza[] copie = new Pizza[pizzas.length];
 		System.arraycopy(pizzas, 0, copie, 0, pizzas.length);
 		return copie;
 	}
-	
+
+	/**
+	 * Insérer une nouvelle pizza dans la carte.
+	 * @param pizzaAjoutee
+	 * @return true si l'ajout réussi, false sinon.
+	 */
 	@Override
 	public boolean ajouterPizza(Pizza nouvellePizza) {
 		
-		boolean codePris = codePizzaExiste (nouvellePizza.getCode());
-		
-		if (!codePris) {
-			
-			Pizza[] pizzasApresAjout = new Pizza[pizzas.length+1];
+		// le code n'est pas encore pris : ajouter la pizza
+		if (! codePizzaExiste (nouvellePizza.getCode())) {
+
 			// copier le contenu de la vieille liste dans la nouvelle,
 			// puis mettre la nouvelle pizza à sa fin
+			Pizza[] pizzasApresAjout = new Pizza[pizzas.length+1];
 			for (int i = 0 ; i < pizzas.length ; i++) {
 				pizzasApresAjout[i] = pizzas[i];
 			}
 			pizzasApresAjout[pizzas.length] = nouvellePizza;
 			pizzas = pizzasApresAjout;
+			return true;
 			
+		} else {
+			
+			return false;
 		}
 		
-		
-		return !codePris;
 	}
-	
+
+	/**
+	 * Modifier la pizza portant le code donné pour qu'elle prenne les données fournies.
+	 * @param codePizza Ancien code de la pizza à modifier.
+	 * @param pizzaModifiee Nouvelle valeur de la pizza à modifier.
+	 * @return true si la modification a réussi, false sinon.
+	 */
 	@Override
 	public boolean modifierPizza(String codePizza, Pizza pizzaApresModification) {
 		
+		// trouver l'index de la pizza à modifier dans le tableau et la remplacer si l'index est valide 
 		int indexTableau = obtenirIndexCodePizza(codePizza);
-		
-		if (indexTableau == -1) {
-			return false;
-		} else {
+		if (indexTableau != -1) {
 			pizzas[indexTableau] = pizzaApresModification;
 			return true;
+		} else {
+			return false;
 		}
+		
 	}
-	
+
+	/**
+	 * Supprimer la pizza portant le code donné.
+	 * @param codePizza
+	 * @return true si la suppression a réussi, false sinon.
+	 */
 	@Override
 	public boolean supprimerPizza(String codePizza) {
 		
@@ -113,14 +141,23 @@ public class PizzaDaoImpl implements IPizzaDao {
 		return true;
 	}
 
-	
-
+	/**
+	 * Tester si le code pizza fourni existe déjà dans la carte.
+	 * @param codePizza
+	 * @return true si le code a été trouvé, false sinon.
+	 */
 	@Override
 	public boolean codePizzaExiste(String codePizza) {
 		return (obtenirIndexCodePizza(codePizza) != -1);
 	}
 
 
+	/**
+	 * Obtenir l'index de la pizza portant le code fourni.
+	 * Important : Différent de la valeur Pizza.id
+	 * @param codePizza
+	 * @return L'index dans tableau où se trouve la pizza, ou -1 si le code n'a pas été trouvé.
+	 */
 	@Override
 	public int obtenirIndexCodePizza(String codePizza) {
 		for (int i = 0 ; i < pizzas.length ; i++) {
@@ -131,7 +168,12 @@ public class PizzaDaoImpl implements IPizzaDao {
 		return -1;
 	}
 	
-	
+
+	/**
+	 * Obtenir la pizza portant le code fourni. 
+	 * @param codePizza
+	 * @return La pizza portant le code donné, ou null si le code est introuvable.
+	 */
 	@Override
 	public Pizza trouverPizza(String codePizza) {
 		int index = obtenirIndexCodePizza(codePizza);

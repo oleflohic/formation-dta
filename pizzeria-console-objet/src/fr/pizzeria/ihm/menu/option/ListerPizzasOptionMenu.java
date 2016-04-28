@@ -5,19 +5,19 @@ import fr.pizzeria.model.Pizza;
 
 public class ListerPizzasOptionMenu extends AbstractOptionMenu {
 
-	// CONSTANTES
+	// ==== Constantes ====
 	
 	public static final String LISTER_PIZZAS_LIBELLE_MENU = "Lister les pizzas";
 	
 
-	// CONSTRUCTEURS
+	// ==== Constructeurs ====
 	
 	public ListerPizzasOptionMenu(IPizzaDao pizzaDao) {
 		super(LISTER_PIZZAS_LIBELLE_MENU, pizzaDao);
 	}
 
 	
-	// METHODES
+	// ==== Méthodes ====
 
 	@Override
 	public boolean executer() {

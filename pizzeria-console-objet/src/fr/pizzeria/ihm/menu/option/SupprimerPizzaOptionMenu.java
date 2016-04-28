@@ -7,19 +7,19 @@ import fr.pizzeria.model.Pizza;
 
 public class SupprimerPizzaOptionMenu extends AbstractOptionMenu {
 
-	// CONSTANTES
+	// ==== Constantes ====
 	
 	private static final String SUPPRIMER_PIZZA_LIBELLE_MENU = "Supprimer une pizza";
 
 	
-	// CONSTRUCTEURS
+	// ==== Constructeurs ====
 	
 	public SupprimerPizzaOptionMenu(IPizzaDao pizzaDao, Scanner scanner) {
 		super(SUPPRIMER_PIZZA_LIBELLE_MENU, pizzaDao, scanner);
 	}
 
 
-	// METHODES
+	// ==== Méthodes ====
 
 	@Override
 	public boolean executer() {

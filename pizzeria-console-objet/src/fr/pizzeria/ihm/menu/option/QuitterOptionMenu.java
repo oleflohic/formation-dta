@@ -2,19 +2,19 @@ package fr.pizzeria.ihm.menu.option;
 
 public class QuitterOptionMenu extends AbstractOptionMenu {
 	
-	// CONSTANTES
+	// ==== Constantes ====
 	
 	public static final String QUITTER_LIBELLE_MENU = "Quitter";
 
 	
-	// CONSTRUCTEURS
+	// ==== Constructeurs ====
 	
 	public QuitterOptionMenu() {
 		super(QUITTER_LIBELLE_MENU);
 	}
 	
 	
-	// METHODES
+	// ==== Méthodes ====
 
 	@Override
 	public boolean executer() {

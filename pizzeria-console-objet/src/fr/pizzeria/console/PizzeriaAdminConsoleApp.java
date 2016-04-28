@@ -6,11 +6,10 @@ import java.util.Scanner;
 import fr.pizzeria.ihm.menu.Menu;
 
 /**
+ * classe de point d'entrée de l'application
  * @author oleflohic
  */
 public class PizzeriaAdminConsoleApp {
-
-	// METHODES STATIQUES
 	
 	/**
 	 * Méthode principale.
@@ -18,28 +17,11 @@ public class PizzeriaAdminConsoleApp {
 	 */
 	public static void main(String[] args) {
 		
-		// initialisations
 		Scanner sc = new Scanner(System.in);
-		
-		/*
-		int choix;
-		MenuPizzeria menu = new MenuPizzeria (sc);
-
-		// poursuivre jusqu'à ce que l'utilisateur demande de sortir
-		do {
-
-			// menu principal et lecture du choix, puis exécuter ce choix
-			choix = menu.menuPrincipal ();
-			menu.executerChoix(choix);
-			
-		} while (choix != 99);
-		*/
 		
 		Menu menu = new Menu (sc);
 		menu.afficher();
 		
-		
-		// dernières opérations afin la fin du programme
 		sc.close();
 		
 

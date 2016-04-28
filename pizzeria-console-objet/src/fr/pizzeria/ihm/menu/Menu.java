@@ -11,28 +11,63 @@ import fr.pizzeria.ihm.menu.option.ModifierPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.QuitterOptionMenu;
 import fr.pizzeria.ihm.menu.option.SupprimerPizzaOptionMenu;
 
+/**
+ * Menu principal de l'application. Permet d'écouter les saisies clavier et d'exécuter les actions en conséquence.
+ * @author oleflohic
+ */
 public class Menu {
 	
-	public static final String MENU_TITRE_LIBELLE = "Application Pizzeria Console";
-	private AbstractOptionMenu[] options;
-	private Scanner sc;
+	// ==== Constantes =====
 	
-	public Menu (Scanner sc) {
-		IPizzaDao dao = new PizzaDaoImpl();
-		initialiserOptions (sc, dao);
-		this.sc = sc;
+	public static final String MENU_TITRE_LIBELLE = "Application Pizzeria Console";
+	
+	
+	// ==== Variables =====
+	
+	/**
+	 * Liste des options disponibles à l'utilisateur.
+	 */
+	private AbstractOptionMenu[] options;
+	
+	/**
+	 * Lecteur de saisies clavier.
+	 */
+	private Scanner scanner;
+	
+	
+	// ==== Constructeurs ====
+	
+	/**
+	 * Créer un menu console.
+	 * @param scanner
+	 */
+	public Menu (Scanner scanner) {
+		IPizzaDao pizzaDao = new PizzaDaoImpl();
+		initialiserOptions (scanner, pizzaDao);
+		this.scanner = scanner;
 	}
 	
-	public void initialiserOptions (Scanner sc, IPizzaDao pizzaDao) {
+	
+	// ==== Méthodes ====
+	
+	/**
+	 * Initialiser le menu en déifnissant des options.
+	 * @param scanner
+	 * @param pizzaDao
+	 */
+	public void initialiserOptions (Scanner scanner, IPizzaDao pizzaDao) {
 		options = new AbstractOptionMenu[] {
 				new ListerPizzasOptionMenu(pizzaDao),
-				new AjouterPizzaOptionMenu(pizzaDao, sc),
-				new ModifierPizzaOptionMenu(pizzaDao, sc),
-				new SupprimerPizzaOptionMenu(pizzaDao, sc),
+				new AjouterPizzaOptionMenu(pizzaDao, scanner),
+				new ModifierPizzaOptionMenu(pizzaDao, scanner),
+				new SupprimerPizzaOptionMenu(pizzaDao, scanner),
 				new QuitterOptionMenu()
 		};
 	}
 	
+	/**
+	 * Afficher les options disponibles.
+	 */
 	public void afficher () {
 		boolean continuer = true;
 		
@@ -43,7 +78,7 @@ public class Menu {
 				System.out.println("" + i + ". " + options[i].getLibelle());
 			}
 			
-			int saisie = sc.nextInt();
+			int saisie = scanner.nextInt();
 			continuer = options[saisie].executer();			
 		}
 		
