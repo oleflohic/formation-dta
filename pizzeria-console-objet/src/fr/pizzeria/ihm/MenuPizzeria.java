@@ -7,6 +7,7 @@ import fr.pizzeria.model.Pizza;
  * Utilisé pour gérer un menu de pizzeria. (affichage d'information, opérations de création/édition/suppression/màj.
  * @author oleflohic
  */
+@Deprecated
 public class MenuPizzeria {
 	
 	// VARIABLES
@@ -52,7 +53,7 @@ public class MenuPizzeria {
 		}
 		abstract boolean executer ();
 	}
-
+	
 	
 	private static class ListerPizzasOptionMenu extends OptionMenu {
 		public ListerPizzasOptionMenu(String libelle) {
@@ -224,7 +225,7 @@ public class MenuPizzeria {
 		} else {
 			
 			for (int i = 0 ; i < pizzas.length ; i++) {
-				System.out.println("" + pizzas[i].code + " -> " + pizzas[i].nom + " (" + pizzas[i].prix + "€)");
+				System.out.println("" + pizzas[i].getCode() + " -> " + pizzas[i].getNom() + " (" + pizzas[i].getPrix() + "€)");
 			}
 			
 			// afficher le nombre de pizzas crées depuis le début. grammaire en bonus.
@@ -249,7 +250,7 @@ public class MenuPizzeria {
 		// tester si le code est pris
 		boolean codePris = false;
 		for (int i = 0 ; i < pizzas.length ; i++) {
-			if (pizzas[i].code.equals(codePizzaAjoutee)) {
+			if (pizzas[i].getCode().equals(codePizzaAjoutee)) {
 				System.out.println("Erreur : le code " + codePizzaAjoutee + " est déjà pris.");
 				codePris = true;
 				break;
@@ -307,7 +308,7 @@ public class MenuPizzeria {
 				// chercher l'index de la pizza à màj
 				int indexPizzaAMaj = -1;
 				for (int i = 0 ; i < pizzas.length ; i++) {
-					if (pizzas[i].code.equals(codePizzaAMaj)) {
+					if (pizzas[i].getCode().equals(codePizzaAMaj)) {
 						indexPizzaAMaj = i;
 						break;
 					}
@@ -327,7 +328,7 @@ public class MenuPizzeria {
 					boolean codePris = false;
 					if (!codePizzaAMaj.equals(codePizzaApresMaj)) {
 						for (int i = 0 ; i < pizzas.length ; i++) {
-							if (pizzas[i].code.equals(codePizzaApresMaj)) {
+							if (pizzas[i].getCode().equals(codePizzaApresMaj)) {
 								System.out.println("Erreur : le code " + codePizzaApresMaj + " est déjà pris.");
 								codePris = true;
 								break;
@@ -381,7 +382,7 @@ public class MenuPizzeria {
 				// chercher l'index de la pizza à supprimer
 				int indexPizzaASupprimer = -1;
 				for (int i = 0 ; i < pizzas.length ; i++) {
-					if (pizzas[i].code.equals(codePizzaASupprimer)) {
+					if (pizzas[i].getCode().equals(codePizzaASupprimer)) {
 						indexPizzaASupprimer = i;
 						break;
 					}

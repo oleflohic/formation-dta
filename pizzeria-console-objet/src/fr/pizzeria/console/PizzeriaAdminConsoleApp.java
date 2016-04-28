@@ -2,7 +2,8 @@ package fr.pizzeria.console;
 
 import java.util.Scanner;
 
-import fr.pizzeria.ihm.MenuPizzeria;
+//import fr.pizzeria.ihm.MenuPizzeria;
+import fr.pizzeria.ihm.menu.Menu;
 
 /**
  * @author oleflohic
@@ -19,8 +20,10 @@ public class PizzeriaAdminConsoleApp {
 		
 		// initialisations
 		Scanner sc = new Scanner(System.in);
-		MenuPizzeria menu = new MenuPizzeria (sc);
+		
+		/*
 		int choix;
+		MenuPizzeria menu = new MenuPizzeria (sc);
 
 		// poursuivre jusqu'à ce que l'utilisateur demande de sortir
 		do {
@@ -30,9 +33,15 @@ public class PizzeriaAdminConsoleApp {
 			menu.executerChoix(choix);
 			
 		} while (choix != 99);
+		*/
+		
+		Menu menu = new Menu (sc);
+		menu.afficher();
+		
 		
 		// dernières opérations afin la fin du programme
 		sc.close();
+		
 
 	}
 
