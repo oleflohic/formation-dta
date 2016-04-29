@@ -7,7 +7,6 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaDaoImpl;
 import fr.pizzeria.exception.dao.AjouterPizzaException;
 import fr.pizzeria.exception.dao.DaoException;
 import fr.pizzeria.exception.dao.ModifierPizzaException;
@@ -51,8 +50,8 @@ public class Menu {
 	 * Créer un menu console.
 	 * @param scanner
 	 */
-	public Menu (Scanner scanner) {
-		IPizzaDao pizzaDao = new PizzaDaoImpl();
+	public Menu (Scanner scanner, IPizzaDao pizzaDao) {
+		//IPizzaDao pizzaDao = new PizzaDaoImpl();
 		initialiserOptions (scanner, pizzaDao);
 		this.scanner = scanner;
 	}

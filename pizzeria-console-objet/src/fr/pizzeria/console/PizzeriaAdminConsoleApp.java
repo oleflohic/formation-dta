@@ -2,7 +2,7 @@ package fr.pizzeria.console;
 
 import java.util.Scanner;
 
-//import fr.pizzeria.ihm.MenuPizzeria;
+import fr.pizzeria.dao.PizzaDaoImpl;
 import fr.pizzeria.ihm.menu.Menu;
 
 /**
@@ -19,7 +19,7 @@ public class PizzeriaAdminConsoleApp {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		Menu menu = new Menu (sc);
+		Menu menu = new Menu (sc, new PizzaDaoImpl());
 		menu.afficher();
 		
 		sc.close();
