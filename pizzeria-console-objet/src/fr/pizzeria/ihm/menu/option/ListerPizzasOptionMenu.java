@@ -1,5 +1,7 @@
 package fr.pizzeria.ihm.menu.option;
 
+import java.util.List;
+
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.model.Pizza;
 
@@ -25,10 +27,10 @@ public class ListerPizzasOptionMenu extends AbstractOptionMenu {
 		System.out.println();
 		System.out.println("Liste des pizzas :");
 		
-		Pizza[] pizzas = pizzaDao.listePizzas();
+		List<Pizza> pizzas = pizzaDao.listePizzas();
 		
 		// aucune pizza : message d'information
-		if (pizzas.length == 0) {
+		if (pizzas.size() == 0) {
 			System.out.println("Il n'y a aucune pizza dans la base.");
 		} else {
 			

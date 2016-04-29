@@ -32,6 +32,20 @@ public class AjouterPizzaOptionMenu extends AbstractOptionMenu {
 		System.out.print("Veuillez saisir le code : ");
 		String codePizza = scanner.next();
 
+
+		System.out.print("Veuillez saisir le nom : ");
+		String nomPizzaAjoutee = scanner.next();
+		
+		System.out.print("Veuillez saisir le prix (utiliser , comme séparateur décimal) : ");
+		float prixPizzaAjoutee = scanner.nextFloat();
+		
+		Pizza pizzaAjoutee = new Pizza (codePizza, nomPizzaAjoutee, prixPizzaAjoutee);
+
+		pizzaDao.ajouterPizza(pizzaAjoutee);
+		System.out.println("La pizza de code " + codePizza + " a été ajoutée.");
+		
+		/*
+		
 		// si le code n'est pas déjà pris, saisir les informations supplémentaires et ajouter la pizza
 		if (! pizzaDao.codePizzaExiste(codePizza)) {
 			
@@ -46,20 +60,10 @@ public class AjouterPizzaOptionMenu extends AbstractOptionMenu {
 			pizzaDao.ajouterPizza(pizzaAjoutee);
 			System.out.println("La pizza de code " + codePizza + " a été ajoutée.");
 			
-			/*
-			try {
-				pizzaDao.ajouterPizza(pizzaAjoutee);
-				System.out.println("La pizza de code " + codePizza + " a été ajoutée.");
-				
-			} catch (DaoException e) {
-				System.out.println("Erreur : la pizza de code " + codePizza + " n'a pas pu être ajoutée.");
-			}
-			*/
-			
-			
 		} else {
 			System.out.println("Erreur : le code " + codePizza + " est déjà pris.");
 		}
+		*/
 		
 		System.out.println();
 

@@ -70,7 +70,18 @@ public class Pizza {
 		return new Pizza (id, code, nom, prix);
 		
 	}
-	
+
+	/*
+	@Override
+	public int compareTo(Object arg0) {
+		if (arg0 instanceof Pizza) {
+			Pizza autre = (Pizza)arg0;
+			return autre.code.compareTo(this.code);
+		} else {
+			return 0;
+		}
+	}
+	*/
 	
 	// ==== Accesseurs ====
 

@@ -1,5 +1,6 @@
 package fr.pizzeria.ihm.menu.option;
 
+import java.util.List;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
@@ -25,10 +26,10 @@ public class ModifierPizzaOptionMenu extends AbstractOptionMenu {
 	@Override
 	public boolean executer() throws ModifierPizzaException {
 		
-		Pizza[] pizzas = pizzaDao.listePizzas();
+		List<Pizza> pizzas = pizzaDao.listePizzas();
 		
 		// aucune pizza : message d'information et sortie immédiate
-		if (pizzas.length == 0) {
+		if (pizzas.size() == 0) {
 			System.out.println("Il n'y a aucune pizza dans la base ; pas de mise-à-jour possible.");
 			
 		} else {

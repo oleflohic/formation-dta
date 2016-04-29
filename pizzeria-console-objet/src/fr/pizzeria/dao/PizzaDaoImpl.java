@@ -1,5 +1,10 @@
 package fr.pizzeria.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import fr.pizzeria.exception.AjouterPizzaException;
 import fr.pizzeria.exception.ModifierPizzaException;
 import fr.pizzeria.exception.SupprimerPizzaException;
@@ -13,8 +18,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 	/**
 	 * Pizzas affichées à la carte.
 	 */
-	private Pizza[] pizzas;
-	
+	private Map<String, Pizza> pizzas;
 	
 	// ==== Constructeurs ====
 	
@@ -24,7 +28,10 @@ public class PizzaDaoImpl implements IPizzaDao {
 	public PizzaDaoImpl() {
 
 		// pizzas existantes
-		pizzas = new Pizza[] {
+		
+		pizzas = new HashMap<String, Pizza> ();
+		
+		Pizza[] pizzasParDefaut = new Pizza[] {
 				new Pizza ("PEP", "Peperoni", 10),
 				new Pizza ("MAR", "Margherita", 14),
 				new Pizza ("REI", "La Reine", 11.5),
@@ -34,6 +41,11 @@ public class PizzaDaoImpl implements IPizzaDao {
 				new Pizza ("ORI", "L'orientale", 13.5),
 				new Pizza ("IND", "L'indienne", 14),
 			};
+		
+		for (Pizza p : pizzasParDefaut) {
+			pizzas.put(p.getCode(), p);
+		}
+		
 		
 	}
 	
@@ -45,10 +57,12 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 * @return Tableau de Pizza, qui est une copie des pizzas à la carte. 
 	 */
 	@Override
-	public Pizza[] listePizzas() {
-		Pizza[] copie = new Pizza[pizzas.length];
-		System.arraycopy(pizzas, 0, copie, 0, pizzas.length);
+	public List<Pizza> listePizzas() {
+		
+		ArrayList<Pizza> copie = new ArrayList<Pizza>();
+		copie.addAll(pizzas.values());
 		return copie;
+		
 	}
 	
 	/**
@@ -61,19 +75,10 @@ public class PizzaDaoImpl implements IPizzaDao {
 	public void ajouterPizza(Pizza nouvellePizza) throws AjouterPizzaException {
 		
 		// le code n'est pas encore pris : ajouter la pizza
-		if (! codePizzaExiste (nouvellePizza.getCode())) {
-
-			// copier le contenu de la vieille liste dans la nouvelle,
-			// puis mettre la nouvelle pizza à sa fin
-			Pizza[] pizzasApresAjout = new Pizza[pizzas.length+1];
-			for (int i = 0 ; i < pizzas.length ; i++) {
-				pizzasApresAjout[i] = pizzas[i];
-			}
-			pizzasApresAjout[pizzas.length] = nouvellePizza;
-			pizzas = pizzasApresAjout;
-			
+		if (! pizzas.containsKey(nouvellePizza.getCode())) {
+			pizzas.put(nouvellePizza.getCode(), nouvellePizza);
 		} else {
-			throw new AjouterPizzaException ("Le code pizza " + nouvellePizza.getCode() + " est introuvable.");
+			throw new AjouterPizzaException ("Le code pizza " + nouvellePizza.getCode() + " est déjà pris.");
 		}
 		
 	}
@@ -88,15 +93,18 @@ public class PizzaDaoImpl implements IPizzaDao {
 	@Override
 	public void modifierPizza(String codePizza, Pizza pizzaApresModification) throws ModifierPizzaException {
 		
-		// trouver l'index de la pizza à modifier dans le tableau et la remplacer si l'index est valide 
-		int indexTableau = obtenirIndexCodePizza(codePizza);
-		if (indexTableau != -1) {
-			pizzas[indexTableau] = pizzaApresModification;
-			//return true;
+		if (pizzas.containsKey(codePizza)) {
+			// changement de clé : supprimer l'ancienne instance
+			if (! codePizza.equals(pizzaApresModification.getCode())) {
+				pizzas.remove(codePizza);
+			}
+			
+			// dans tous les cas, ajouter la nouvelle (écrase l'ancienne si même clé)
+			pizzas.put(pizzaApresModification.getCode(), pizzaApresModification);
 		} else {
-			//return false;
 			throw new ModifierPizzaException ("Le code pizza " + codePizza + " est introuvable.");
 		}
+		
 		
 	}
 
@@ -109,49 +117,13 @@ public class PizzaDaoImpl implements IPizzaDao {
 	@Override
 	public void supprimerPizza(String codePizza) throws SupprimerPizzaException {
 		
-		Pizza[] pizzasApresSuppression = new Pizza[pizzas.length-1];
-		int indexPizzaASupprimer = obtenirIndexCodePizza(codePizza);
-		
-		if (indexPizzaASupprimer != -1) {
-			
-			// créer un nouveau tableau qui ne contient pas l'élément supprimé
-			if (indexPizzaASupprimer == 0) { // cas début de liste
-				
-				for (int i = 1 ; i < pizzas.length ; i++) {
-					pizzasApresSuppression[i-1] = pizzas[i];
-				}
-				
-			} else if (indexPizzaASupprimer == (pizzas.length - 1)) { // cas fin de liste
-	
-				for (int i = 0 ; i < pizzas.length-1 ; i++) {
-					pizzasApresSuppression[i] = pizzas[i];
-				}
-				
-			} else { // cas milieu de liste
-				
-				// avant l'index de la pizza supprimée
-				for (int i = 0 ; i < indexPizzaASupprimer ; i++) {
-					pizzasApresSuppression[i] = pizzas[i];
-				}
-				
-				// après l'index
-				for (int i = indexPizzaASupprimer+1 ; i < pizzas.length ; i++) {
-					pizzasApresSuppression[i-1] = pizzas[i];
-				}
-				
-			}
-			
-			// remplacement de la liste
-			pizzas = pizzasApresSuppression;
-			
-		} else {
+		// tenter de supprimer la pizza ; en cas d'échec, lancer l'exception
+		if (pizzas.remove(codePizza) == null) {
 			throw new SupprimerPizzaException ("Le code pizza " + codePizza + " est introuvable.");
 		}
 		
-		
-		//return true;
 	}
-
+	
 	/**
 	 * Tester si le code pizza fourni existe déjà dans la carte.
 	 * @param codePizza
@@ -159,10 +131,10 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 */
 	@Override
 	public boolean codePizzaExiste(String codePizza) {
-		return (obtenirIndexCodePizza(codePizza) != -1);
+		return pizzas.containsKey(codePizza);
 	}
-
-
+	 
+	
 	/**
 	 * Obtenir l'index de la pizza portant le code fourni.
 	 * Important : Différent de la valeur Pizza.id
@@ -170,13 +142,10 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 * @return L'index dans tableau où se trouve la pizza, ou -1 si le code n'a pas été trouvé.
 	 */
 	@Override
+	@Deprecated
 	public int obtenirIndexCodePizza(String codePizza) {
-		for (int i = 0 ; i < pizzas.length ; i++) {
-			if (pizzas[i].getCode().equals(codePizza)) {
-				return i;
-			}
-		}
 		return -1;
+		
 	}
 	
 
@@ -187,12 +156,8 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 */
 	@Override
 	public Pizza trouverPizza(String codePizza) {
-		int index = obtenirIndexCodePizza(codePizza);
-		if (index == -1) {
-			return null;	
-		} else {
-			return pizzas[index].clone();
-		}
+		return pizzas.get(codePizza);
+		
 	}
 	
 

@@ -1,5 +1,7 @@
 package fr.pizzeria.dao;
 
+import java.util.List;
+
 import fr.pizzeria.exception.AjouterPizzaException;
 import fr.pizzeria.exception.ModifierPizzaException;
 import fr.pizzeria.exception.SupprimerPizzaException;
@@ -15,7 +17,7 @@ public interface IPizzaDao {
 	 * Récupérer la liste des pizzas à la carte.
 	 * @return Tableau de Pizza, qui est une copie des pizzas à la carte. 
 	 */
-	public Pizza[] listePizzas ();
+	public List<Pizza> listePizzas ();
 	
 	/**
 	 * Insérer une nouvelle pizza dans la carte.
@@ -46,7 +48,7 @@ public interface IPizzaDao {
 	 * @param codePizza
 	 * @return true si le code a été trouvé, false sinon.
 	 */
-	boolean codePizzaExiste (String codePizza);
+	public boolean codePizzaExiste (String codePizza);
 	
 	/**
 	 * Obtenir l'index de la pizza portant le code fourni.
@@ -54,13 +56,14 @@ public interface IPizzaDao {
 	 * @param codePizza
 	 * @return L'index dans tableau où se trouve la pizza, ou -1 si le code n'a pas été trouvé.
 	 */
-	int obtenirIndexCodePizza (String codePizza);
+	@Deprecated
+	public int obtenirIndexCodePizza (String codePizza);
 	
 	/**
 	 * Obtenir la pizza portant le code fourni. 
 	 * @param codePizza
 	 * @return La pizza portant le code donné, ou null si le code est introuvable.
 	 */
-	Pizza trouverPizza (String codePizza);
+	public Pizza trouverPizza (String codePizza);
 	
 }
