@@ -35,7 +35,8 @@ public class ListerPizzasOptionMenu extends AbstractOptionMenu {
 		} else {
 			
 			for (Pizza p : pizzas) {
-				System.out.println("" + p.getCode() + " -> " + p.getNom() + " (" + p.getPrix() + "€)");
+				//System.out.println("" + p.getCode() + " -> " + p.getNom() + " (" + p.getPrix() + "€)");
+				System.out.println(p);
 			}
 			
 			// afficher le nombre de pizzas crées depuis le début. grammaire en bonus.

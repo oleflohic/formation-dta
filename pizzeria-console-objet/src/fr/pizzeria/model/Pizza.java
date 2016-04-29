@@ -33,6 +33,8 @@ public class Pizza {
 	 */
 	private double prix;
 	
+	private CategoriePizza categorie;
+	
 	
 	// ==== Constructeurs ====
 	
@@ -41,9 +43,10 @@ public class Pizza {
 	 * @param code
 	 * @param nom 
 	 * @param prix
+	 * @param categorie
 	 */
-	public Pizza (String code, String nom, double prix) {
-		this (nbPizzas, code, nom, prix);
+	public Pizza (String code, String nom, double prix, CategoriePizza categorie) {
+		this (nbPizzas, code, nom, prix, categorie);
 		nbPizzas++;
 	}
 	
@@ -53,12 +56,14 @@ public class Pizza {
 	 * @param code
 	 * @param nom
 	 * @param prix
+	 * @param categorie
 	 */
-	public Pizza (int id, String code, String nom, double prix) {
+	public Pizza (int id, String code, String nom, double prix, CategoriePizza categorie) {
 		this.id = id;
 		this.code = code;
 		this.nom = nom;
 		this.prix = prix;
+		this.categorie = categorie;
 	}
 	
 	// ==== Méthodes ====
@@ -67,21 +72,17 @@ public class Pizza {
 	 * Cloner cette pizza.
 	 */
 	public Pizza clone () {
-		return new Pizza (id, code, nom, prix);
+		return new Pizza (id, code, nom, prix, categorie);
 		
 	}
-
-	/*
+	
+	/**
+	 * Informations de la pizza affichées
+	 */
 	@Override
-	public int compareTo(Object arg0) {
-		if (arg0 instanceof Pizza) {
-			Pizza autre = (Pizza)arg0;
-			return autre.code.compareTo(this.code);
-		} else {
-			return 0;
-		}
+	public String toString () {
+		return "" + code + " -> " + nom + " (" + prix + "€) (" + categorie.getLibelle() + ")";
 	}
-	*/
 	
 	// ==== Accesseurs ====
 

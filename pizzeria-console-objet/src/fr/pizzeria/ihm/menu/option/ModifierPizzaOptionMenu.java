@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.dao.ModifierPizzaException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class ModifierPizzaOptionMenu extends AbstractOptionMenu {
@@ -78,20 +79,29 @@ public class ModifierPizzaOptionMenu extends AbstractOptionMenu {
 						// TODO TEMPORAIRE ; peu efficace, mais permet d'être sûr que la pizza modifiée aura le même id
 						// et n'augmentera pas le nombre de pizzas créées (valeur Pizza.nbPizzas)
 						Pizza pizzaAModifier = pizzaDao.trouverPizza(codePizzaAMaj);
-						pizzaDao.modifierPizza(codePizzaAMaj, new Pizza (pizzaAModifier.getId(), codePizzaApresMaj, nomPizzaApresMaj, prixPizzaApresMaj));
 						
-						/*
-						try {
 
-							// TODO TEMPORAIRE ; peu efficace, mais permet d'être sûr que la pizza modifiée aura le même id
-							// et n'augmentera pas le nombre de pizzas créées (valeur Pizza.nbPizzas)
-							Pizza pizzaAModifier = pizzaDao.trouverPizza(codePizzaAMaj);
-							pizzaDao.modifierPizza(codePizzaAMaj, new Pizza (pizzaAModifier.getId(), codePizzaApresMaj, nomPizzaApresMaj, prixPizzaApresMaj));
-							
-						} catch (DaoException e) {
-							System.out.println("Erreur : la pizza de code " + codePizzaAMaj + " n'a pas pu être ajoutée.");
+						System.out.println("Veuillez saisir la catégorie parmi les options suivantes (saisir le code) : ");
+						CategoriePizza[] categoriesPizza = CategoriePizza.values();
+						for (CategoriePizza c : categoriesPizza) {
+							System.out.println("" + c + " -> " + c.getLibelle());
 						}
-						*/
+						System.out.print("Choix : ");
+						String categoriePizzaApresMaj = scanner.next();
+					
+						try {
+							CategoriePizza categorieApresMaj = CategoriePizza.valueOf(categoriePizzaApresMaj);
+
+							pizzaDao.modifierPizza(codePizzaAMaj, new Pizza (pizzaAModifier.getId(), codePizzaApresMaj, nomPizzaApresMaj, prixPizzaApresMaj, categorieApresMaj));
+							
+							System.out.println();
+					
+						} catch (IllegalArgumentException e) {
+							throw new ModifierPizzaException ("Catégorie \"" + categoriePizzaApresMaj + "\" invalide.");
+						}
+
+						throw new RuntimeException("NON IMPLÉMENTÉ");
+						//pizzaDao.modifierPizza(codePizzaAMaj, new Pizza (pizzaAModifier.getId(), codePizzaApresMaj, nomPizzaApresMaj, prixPizzaApresMaj));
 						
 						
 					}

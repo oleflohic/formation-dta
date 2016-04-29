@@ -3,7 +3,9 @@ package fr.pizzeria.ihm.menu.option;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.exception.dao.AjouterPizzaException;
 import fr.pizzeria.exception.dao.DaoException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 /**
@@ -32,40 +34,32 @@ public class AjouterPizzaOptionMenu extends AbstractOptionMenu {
 		System.out.print("Veuillez saisir le code : ");
 		String codePizza = scanner.next();
 
-
 		System.out.print("Veuillez saisir le nom : ");
 		String nomPizzaAjoutee = scanner.next();
 		
 		System.out.print("Veuillez saisir le prix (utiliser , comme séparateur décimal) : ");
 		float prixPizzaAjoutee = scanner.nextFloat();
-		
-		Pizza pizzaAjoutee = new Pizza (codePizza, nomPizzaAjoutee, prixPizzaAjoutee);
 
-		pizzaDao.ajouterPizza(pizzaAjoutee);
-		System.out.println("La pizza de code " + codePizza + " a été ajoutée.");
-		
-		/*
-		
-		// si le code n'est pas déjà pris, saisir les informations supplémentaires et ajouter la pizza
-		if (! pizzaDao.codePizzaExiste(codePizza)) {
-			
-			System.out.print("Veuillez saisir le nom : ");
-			String nomPizzaAjoutee = scanner.next();
-			
-			System.out.print("Veuillez saisir le prix (utiliser , comme séparateur décimal) : ");
-			float prixPizzaAjoutee = scanner.nextFloat();
-			
-			Pizza pizzaAjoutee = new Pizza (codePizza, nomPizzaAjoutee, prixPizzaAjoutee);
-
+		System.out.println("Veuillez saisir la catégorie parmi les options suivantes (saisir le code) : ");
+		CategoriePizza[] categoriesPizza = CategoriePizza.values();
+		for (CategoriePizza c : categoriesPizza) {
+			System.out.println("" + c + " -> " + c.getLibelle());
+		}
+		System.out.print("Choix : ");
+		String categoriePizzaAjoutee = scanner.next();
+	
+		try {
+			CategoriePizza categorie = CategoriePizza.valueOf(categoriePizzaAjoutee);
+			Pizza pizzaAjoutee = new Pizza (codePizza, nomPizzaAjoutee, prixPizzaAjoutee, categorie);
+	
 			pizzaDao.ajouterPizza(pizzaAjoutee);
 			System.out.println("La pizza de code " + codePizza + " a été ajoutée.");
 			
-		} else {
-			System.out.println("Erreur : le code " + codePizza + " est déjà pris.");
+			System.out.println();
+	
+		} catch (IllegalArgumentException e) {
+			throw new AjouterPizzaException ("Catégorie \"" + categoriePizzaAjoutee + "\" invalide.");
 		}
-		*/
-		
-		System.out.println();
 
 		return true;
 		

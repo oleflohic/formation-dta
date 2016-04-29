@@ -110,6 +110,7 @@ public class Menu {
 			} catch (ChoixMenuException e) {
 				System.out.println(e.getMessage());
 			}
+			System.out.println();
 		}
 		
 	}

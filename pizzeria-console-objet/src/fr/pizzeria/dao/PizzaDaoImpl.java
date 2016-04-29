@@ -8,6 +8,7 @@ import java.util.Map;
 import fr.pizzeria.exception.dao.AjouterPizzaException;
 import fr.pizzeria.exception.dao.ModifierPizzaException;
 import fr.pizzeria.exception.dao.SupprimerPizzaException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoImpl implements IPizzaDao {
@@ -32,20 +33,20 @@ public class PizzaDaoImpl implements IPizzaDao {
 		pizzas = new HashMap<String, Pizza> ();
 		
 		Pizza[] pizzasParDefaut = new Pizza[] {
-				new Pizza ("PEP", "Peperoni", 10),
-				new Pizza ("MAR", "Margherita", 14),
-				new Pizza ("REI", "La Reine", 11.5),
-				new Pizza ("FRO", "La 4 fromages", 12),
-				new Pizza ("CAN", "La cannibale", 12.5),
-				new Pizza ("SAV", "La savoyarde", 13),
-				new Pizza ("ORI", "L'orientale", 13.5),
-				new Pizza ("IND", "L'indienne", 14),
+				new Pizza ("PEP", "Peperoni", 10, CategoriePizza.VIANDE),
+				new Pizza ("MAR", "Margherita", 14, CategoriePizza.SANS_VIANDE),
+				new Pizza ("REI", "La Reine", 11.5, CategoriePizza.VIANDE),
+				new Pizza ("FRO", "La 4 fromages", 12, CategoriePizza.SANS_VIANDE),
+				new Pizza ("CAN", "La cannibale", 12.5, CategoriePizza.VIANDE),
+				new Pizza ("SAV", "La savoyarde", 13, CategoriePizza.VIANDE),
+				new Pizza ("ORI", "L'orientale", 13.5, CategoriePizza.VIANDE),
+				new Pizza ("IND", "L'indienne", 14, CategoriePizza.VIANDE),
+				new Pizza ("SAU", "La saumoneta", 14, CategoriePizza.POISSON),
 			};
 		
 		for (Pizza p : pizzasParDefaut) {
 			pizzas.put(p.getCode(), p);
 		}
-		
 		
 	}
 	
@@ -104,7 +105,6 @@ public class PizzaDaoImpl implements IPizzaDao {
 		} else {
 			throw new ModifierPizzaException ("Le code pizza " + codePizza + " est introuvable.");
 		}
-		
 		
 	}
 
