@@ -51,15 +51,6 @@ public interface IPizzaDao {
 	public boolean codePizzaExiste (String codePizza);
 	
 	/**
-	 * Obtenir l'index de la pizza portant le code fourni.
-	 * Important : Différent de la valeur Pizza.id
-	 * @param codePizza
-	 * @return L'index dans tableau où se trouve la pizza, ou -1 si le code n'a pas été trouvé.
-	 */
-	@Deprecated
-	public int obtenirIndexCodePizza (String codePizza);
-	
-	/**
 	 * Obtenir la pizza portant le code fourni. 
 	 * @param codePizza
 	 * @return La pizza portant le code donné, ou null si le code est introuvable.

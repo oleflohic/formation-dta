@@ -133,22 +133,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 	public boolean codePizzaExiste(String codePizza) {
 		return pizzas.containsKey(codePizza);
 	}
-	 
 	
-	/**
-	 * Obtenir l'index de la pizza portant le code fourni.
-	 * Important : Différent de la valeur Pizza.id
-	 * @param codePizza
-	 * @return L'index dans tableau où se trouve la pizza, ou -1 si le code n'a pas été trouvé.
-	 */
-	@Override
-	@Deprecated
-	public int obtenirIndexCodePizza(String codePizza) {
-		return -1;
-		
-	}
-	
-
 	/**
 	 * Obtenir la pizza portant le code fourni. 
 	 * @param codePizza
