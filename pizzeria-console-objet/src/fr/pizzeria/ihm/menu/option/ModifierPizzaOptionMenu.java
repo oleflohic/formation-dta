@@ -84,7 +84,7 @@ public class ModifierPizzaOptionMenu extends AbstractOptionMenu {
 						System.out.println("Veuillez saisir la catégorie parmi les options suivantes (saisir le code) : ");
 						CategoriePizza[] categoriesPizza = CategoriePizza.values();
 						for (CategoriePizza c : categoriesPizza) {
-							System.out.println("" + c + " -> " + c.getLibelle());
+							System.out.println(c);
 						}
 						System.out.print("Choix : ");
 						String categoriePizzaApresMaj = scanner.next();
@@ -100,10 +100,6 @@ public class ModifierPizzaOptionMenu extends AbstractOptionMenu {
 							throw new ModifierPizzaException ("Catégorie \"" + categoriePizzaApresMaj + "\" invalide.");
 						}
 
-						throw new RuntimeException("NON IMPLÉMENTÉ");
-						//pizzaDao.modifierPizza(codePizzaAMaj, new Pizza (pizzaAModifier.getId(), codePizzaApresMaj, nomPizzaApresMaj, prixPizzaApresMaj));
-						
-						
 					}
 					
 					

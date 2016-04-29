@@ -24,6 +24,13 @@ public enum CategoriePizza {
 	}
 	
 	
+	// ==== Méthodes ====
+	
+	@Override
+	public String toString () {
+		return name() + " -> " + libelle;
+	}
+	
 	// ==== Accesseurs ====
 	
 	public String getLibelle() {
@@ -33,27 +40,6 @@ public enum CategoriePizza {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
-	
-	/*
-	public static CategoriePizza convertirChaine(String categoriePizza) throws CategoriePizzaException {
-		
-		switch (categoriePizza) {
-		case "VIANDE":
-			return VIANDE;
-		case "SANS_VIANDE":
-			return SANS_VIANDE;
-		case "POISSON":
-			return POISSON;
-		default:
-			throw new CategoriePizzaException("Catégorie de pizza \"" + categoriePizza + "\" inconnue.");
-		}
-		
-	}
-	*/
-	
-	
-	
-	
 	
 
 }

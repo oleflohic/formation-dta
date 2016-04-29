@@ -43,7 +43,7 @@ public class AjouterPizzaOptionMenu extends AbstractOptionMenu {
 		System.out.println("Veuillez saisir la catégorie parmi les options suivantes (saisir le code) : ");
 		CategoriePizza[] categoriesPizza = CategoriePizza.values();
 		for (CategoriePizza c : categoriesPizza) {
-			System.out.println("" + c + " -> " + c.getLibelle());
+			System.out.println(c);
 		}
 		System.out.print("Choix : ");
 		String categoriePizzaAjoutee = scanner.next();
