@@ -1,5 +1,7 @@
 package fr.pizzeria.model;
 
+import java.lang.reflect.Field;
+
 /**
  * Classe utilisée pour stocker les informations de pizza.
  * @author oleflohic
@@ -21,18 +23,25 @@ public class Pizza {
 	/**
 	 * Code pizza en 3 caractères. Unique.
 	 */
+	@ToString
 	private String code;
 	
 	/**
 	 * Nom affiché de la pizza.
 	 */
+	@ToString
 	private String nom;
 	
 	/**
 	 * Prix de la pizza.
 	 */
+	@ToString
 	private double prix;
 	
+	/**
+	 * Catégorie de la pizza.
+	 */
+	@ToString
 	private CategoriePizza categorie;
 	
 	
@@ -81,7 +90,51 @@ public class Pizza {
 	 */
 	@Override
 	public String toString () {
-		return "" + code + " -> " + nom + " (" + prix + "€) (" + categorie.getLibelle() + ")";
+		
+		//return "" + code + " -> " + nom + " (" + prix + "€) (" + categorie.getLibelle() + ")";
+		
+		Field[] variablesDeLaClasse = getClass().getDeclaredFields();
+		String resultat = "";
+		for (Field variableActuelle : variablesDeLaClasse) {
+			
+			// extraire l'annotation de classe ToString attachée à la variable actuelle ;
+			// obtient null si cette annotation n'est pas attaché à cette variable.
+			ToString annotationActuelle = variableActuelle.getAnnotation(ToString.class);
+			
+			// annotation trouvée : on peut afficher la valeur de cette variable 
+			if (annotationActuelle != null) {
+				try {
+					
+					String texteVariable;
+					
+					// la variable actuelle est une CategoriePizza : traitement spécifique
+					if (variableActuelle.get(this) instanceof CategoriePizza) {
+						texteVariable = ((CategoriePizza)variableActuelle.get(this)).getLibelle();
+					} else {
+						texteVariable = variableActuelle.get(this).toString();
+					}
+					
+					
+					// propriété de l'annotation : si "uppercase" est vrai, alors mettre en majuscule la valeur de la variable actuelle
+					if (annotationActuelle.uppercase()) {
+						//resultat += variableActuelle.get(this).toString().toUpperCase() + " ";
+						resultat += texteVariable.toUpperCase() + " ";
+						
+					// sinon, aucune altération
+					} else {
+						resultat += texteVariable + " ";
+					}
+					
+				} catch (IllegalArgumentException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				}
+			}
+			
+		}
+		return resultat;
+		
 	}
 	
 	// ==== Accesseurs ====
