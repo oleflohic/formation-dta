@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import fr.pizzeria.exception.AjouterPizzaException;
-import fr.pizzeria.exception.ModifierPizzaException;
-import fr.pizzeria.exception.SupprimerPizzaException;
+import fr.pizzeria.exception.dao.AjouterPizzaException;
+import fr.pizzeria.exception.dao.ModifierPizzaException;
+import fr.pizzeria.exception.dao.SupprimerPizzaException;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoImpl implements IPizzaDao {

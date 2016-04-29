@@ -1,4 +1,4 @@
-package fr.pizzeria.exception;
+package fr.pizzeria.exception.dao;
 
 public class ModifierPizzaException extends DaoException {
 

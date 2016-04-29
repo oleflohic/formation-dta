@@ -1,13 +1,18 @@
 package fr.pizzeria.ihm.menu;
 
+import java.util.Comparator;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeMap;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDaoImpl;
-import fr.pizzeria.exception.AjouterPizzaException;
-import fr.pizzeria.exception.DaoException;
-import fr.pizzeria.exception.ModifierPizzaException;
-import fr.pizzeria.exception.SupprimerPizzaException;
+import fr.pizzeria.exception.dao.AjouterPizzaException;
+import fr.pizzeria.exception.dao.DaoException;
+import fr.pizzeria.exception.dao.ModifierPizzaException;
+import fr.pizzeria.exception.dao.SupprimerPizzaException;
+import fr.pizzeria.exception.ihm.ChoixMenuException;
 import fr.pizzeria.ihm.menu.option.AbstractOptionMenu;
 import fr.pizzeria.ihm.menu.option.AjouterPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.ListerPizzasOptionMenu;
@@ -31,7 +36,8 @@ public class Menu {
 	/**
 	 * Liste des options disponibles à l'utilisateur.
 	 */
-	private AbstractOptionMenu[] options;
+	//private AbstractOptionMenu[] options;
+	private Map<Integer,AbstractOptionMenu> options;
 	
 	/**
 	 * Lecteur de saisies clavier.
@@ -60,13 +66,18 @@ public class Menu {
 	 * @param pizzaDao
 	 */
 	public void initialiserOptions (Scanner scanner, IPizzaDao pizzaDao) {
-		options = new AbstractOptionMenu[] {
-				new ListerPizzasOptionMenu(pizzaDao),
-				new AjouterPizzaOptionMenu(pizzaDao, scanner),
-				new ModifierPizzaOptionMenu(pizzaDao, scanner),
-				new SupprimerPizzaOptionMenu(pizzaDao, scanner),
-				new QuitterOptionMenu()
-		};
+		options = new TreeMap<Integer, AbstractOptionMenu> (new Comparator<Integer>() {
+			@Override
+			public int compare(Integer o1, Integer o2) {
+				return o1.compareTo(o2);
+			}
+		});
+		
+		options.put (1, new ListerPizzasOptionMenu(pizzaDao));
+		options.put (2, new AjouterPizzaOptionMenu(pizzaDao, scanner));
+		options.put (3, new ModifierPizzaOptionMenu(pizzaDao, scanner));
+		options.put (4, new SupprimerPizzaOptionMenu(pizzaDao, scanner));
+		options.put (99, new QuitterOptionMenu());
 	}
 	
 	/**
@@ -78,13 +89,18 @@ public class Menu {
 		while (continuer) {
 			System.out.println("**** " + MENU_TITRE_LIBELLE + " ****");
 			
-			for (int i = 0 ; i < options.length ; i++) {
-				System.out.println("" + i + ". " + options[i].getLibelle());
+			Set<Integer> ks = options.keySet();
+			for (int i : ks) {
+				System.out.println("" + i + ". " + options.get(i).getLibelle());
 			}
 			
 			try {
 				int saisie = scanner.nextInt();
-				continuer = options[saisie].executer();
+				if (options.containsKey(saisie)) {
+					continuer = options.get(saisie).executer();
+				} else {
+					throw new ChoixMenuException ("Erreur : Le choix " + saisie + " n'est pas reconnu.");
+				}
 			} catch (AjouterPizzaException e) {
 				System.out.println("Échec de l'ajout de pizza : " + e.getMessage());
 			} catch (ModifierPizzaException e) {
@@ -93,6 +109,8 @@ public class Menu {
 				System.out.println("Échec de la suppression de pizza : " + e.getMessage());
 			} catch (DaoException e) {
 				System.out.println("Échec de l'opération : " + e.getMessage());
+			} catch (ChoixMenuException e) {
+				System.out.println(e.getMessage());
 			}
 		}
 		

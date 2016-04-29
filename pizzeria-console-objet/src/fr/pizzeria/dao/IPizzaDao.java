@@ -2,9 +2,9 @@ package fr.pizzeria.dao;
 
 import java.util.List;
 
-import fr.pizzeria.exception.AjouterPizzaException;
-import fr.pizzeria.exception.ModifierPizzaException;
-import fr.pizzeria.exception.SupprimerPizzaException;
+import fr.pizzeria.exception.dao.AjouterPizzaException;
+import fr.pizzeria.exception.dao.ModifierPizzaException;
+import fr.pizzeria.exception.dao.SupprimerPizzaException;
 import fr.pizzeria.model.Pizza;
 
 /**
