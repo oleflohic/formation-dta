@@ -55,7 +55,7 @@ public class Menu {
 	// ==== Méthodes ====
 	
 	/**
-	 * Initialiser le menu en déifnissant des options.
+	 * Initialiser le menu en définissant des options.
 	 * @param scanner
 	 * @param pizzaDao
 	 */
