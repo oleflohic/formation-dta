@@ -2,6 +2,7 @@ package fr.pizzeria.ihm.menu;
 
 import java.util.Comparator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeMap;
@@ -35,7 +36,6 @@ public class Menu {
 	/**
 	 * Liste des options disponibles à l'utilisateur.
 	 */
-	//private AbstractOptionMenu[] options;
 	private Map<Integer,AbstractOptionMenu> options;
 	
 	/**
@@ -51,7 +51,6 @@ public class Menu {
 	 * @param scanner
 	 */
 	public Menu (Scanner scanner, IPizzaDao pizzaDao) {
-		//IPizzaDao pizzaDao = new PizzaDaoImpl();
 		initialiserOptions (scanner, pizzaDao);
 		this.scanner = scanner;
 	}
@@ -88,9 +87,9 @@ public class Menu {
 		while (continuer) {
 			System.out.println("**** " + MENU_TITRE_LIBELLE + " ****");
 			
-			Set<Integer> ks = options.keySet();
-			for (int i : ks) {
-				System.out.println("" + i + ". " + options.get(i).getLibelle());
+			Set<Entry<Integer, AbstractOptionMenu>> es = options.entrySet();
+			for (Entry<Integer, AbstractOptionMenu> e : es) {
+				System.out.println("" + e.getKey() + ". " + e.getValue().getLibelle());
 			}
 			
 			try {
