@@ -33,10 +33,12 @@ public class TestClient {
 	
 		// creation des clients
 		List<Client> listClient =  new ArrayList<>();
+		/*
 		listClient.add(new Client(1,"GUIBERT", "Fabien", listCompteCourant1, listCompteEpargne1));
 		listClient.add(new Client(2,"TOTO", "Titi", listCompteCourant2, listCompteEpargne2));
 		listClient.add(new Client(3,"DURAND", "Jacques", listCompteCourant3,new ArrayList<>()));
-				
+		*/
+		
 		for(Client myClient : listClient) {
 			System.out.println();
 			System.out.println(myClient.toString());
