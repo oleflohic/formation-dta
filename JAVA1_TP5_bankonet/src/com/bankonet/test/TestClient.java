@@ -1,10 +1,11 @@
 package com.bankonet.test;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-import com.bankonet.model.BankonetException;
+import com.bankonet.CompteException;
+import com.bankonet.CreditException;
+import com.bankonet.DebitException;
 import com.bankonet.model.Client;
 import com.bankonet.model.CompteCourant;
 import com.bankonet.model.CompteEpargne;
@@ -12,7 +13,7 @@ import com.bankonet.model.CompteEpargne;
 
 public class TestClient {
 
-	 public static void main(String[] args) {
+	public static void main(String[] args) {
 		 
 		
 		// Utilisation d'une collection : création de la liste des comptes courants/epargne
@@ -35,21 +36,34 @@ public class TestClient {
 		listClient.add(new Client(1,"GUIBERT", "Fabien", listCompteCourant1, listCompteEpargne1));
 		listClient.add(new Client(2,"TOTO", "Titi", listCompteCourant2, listCompteEpargne2));
 		listClient.add(new Client(3,"DURAND", "Jacques", listCompteCourant3,new ArrayList<>()));
+				
+		for(Client myClient : listClient) {
+			System.out.println();
+			System.out.println(myClient.toString());
+			System.out.println("Avoir global : "+myClient.calculerAvoirGLobal()+" €");
+			for(Object myCompte : myClient.getComptes()) {
+				System.out.println(myCompte.toString());
+			}
 		
-		 for(Client myClient : listClient) {
-			 	System.out.println();
-			    System.out.println(myClient.toString());
-			    System.out.println("Avoir global : "+myClient.calculerAvoirGLobal()+" €");
-			    for(Object myCompte : myClient.getComptes()) {
-			    	System.out.println(myCompte.toString());
-			    }
-			    
-//			    for(Object myCE : myClient.getComptesEpargne()) {
-//		    		System.out.println(myCE.toString2());
-//			    }
-			    
+			//			    for(Object myCE : myClient.getComptesEpargne()) {
+			//		    		System.out.println(myCE.toString2());
+			//			    }
+				    
 		 }
 		 
+		try {
+			listCompteCourant1.get(0)
+				.effectuerVirement(listCompteEpargne1.get(0), 42f);
+		/*} catch (DebitException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (CreditException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();*/
+		} catch (CompteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		 
 		 
 		 

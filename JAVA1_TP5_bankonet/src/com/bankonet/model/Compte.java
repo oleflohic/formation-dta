@@ -1,5 +1,7 @@
 package com.bankonet.model;
 
+import com.bankonet.CreditException;
+import com.bankonet.DebitException;
 import com.bankonet.ICompteStat;
 
 /**
@@ -23,14 +25,30 @@ public abstract class Compte implements ICompteStat {
 		    		" Solde : "+this.getSolde()+"€";
 	}
 
-	public void crediter(float montant) {
+	public void crediter(float montant) throws CreditException {
 		this.setSolde( this.getSolde() + montant);
 	}
 	
-	public void debiter(float montant) {
+	public void debiter(float montant) throws DebitException {
+		if (montant > this.getSolde()) {
+			throw new DebitException("Montant du débit (" + montant + ") supérieur au solde (" + getSolde() + ").");
+		}
 		this.setSolde( this.getSolde() - montant);
 	}
 	
+	public void effectuerVirement (Compte compte, float montant)
+			throws DebitException, CreditException {
+		
+		debiter(montant);
+		try {
+			compte.crediter(montant);
+		} catch (CreditException e) {
+			// rendre le montant si l'opération de crédit a échoué
+			crediter(montant);
+			// propager l'erreur de nouveau
+			throw e;
+		}
+	}
 	
 	
 	

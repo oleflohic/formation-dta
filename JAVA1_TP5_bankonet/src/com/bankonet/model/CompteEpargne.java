@@ -1,5 +1,6 @@
 package com.bankonet.model;
 
+import com.bankonet.CreditException;
 
 /**
  * @author fguibert
@@ -24,7 +25,21 @@ public final class CompteEpargne extends Compte {
         this.plafond = plafond;
         nombreComptesEpargnes++;
     }
-
+    
+    
+    @Override
+    public void crediter (float montant) throws CreditException {
+    	try {
+    		creditAutorise(montant); // génère une exception si non
+    		super.crediter(montant);
+    		
+    	} catch (BankonetException e) {
+    		throw new CreditException();
+    	}
+    	
+    }
+    
+    
     /**
      * Le montant ne doit pas etre superieur au plafond de credit autorise
      * en une fois

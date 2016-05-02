@@ -14,7 +14,8 @@ public class TestAutomate {
 			somme += c.getSolde();
 		}
 		
-		System.out.println("Somme : " + somme);
+		// rq : on part du principe qu'il y a au moins un compte
+		System.out.println("Moyenne : " + somme / comptes.length);
 		
 	}
 

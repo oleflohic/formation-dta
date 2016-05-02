@@ -1,8 +1,6 @@
 package com.bankonet.test;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
+import com.bankonet.DebitException;
 import com.bankonet.model.BankonetException;
 import com.bankonet.model.CompteCourant;
 
@@ -19,6 +17,8 @@ public class TestDebitCompte {
 		} catch (BankonetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (DebitException e) {
+			System.err.println(e.getMessage());
 		}
 		 
 		
