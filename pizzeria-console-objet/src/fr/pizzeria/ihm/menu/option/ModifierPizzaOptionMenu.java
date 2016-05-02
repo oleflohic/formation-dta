@@ -76,11 +76,6 @@ public class ModifierPizzaOptionMenu extends AbstractOptionMenu {
 						float prixPizzaApresMaj = scanner.nextFloat();
 						
 
-						// TODO TEMPORAIRE ; peu efficace, mais permet d'être sûr que la pizza modifiée aura le même id
-						// et n'augmentera pas le nombre de pizzas créées (valeur Pizza.nbPizzas)
-						Pizza pizzaAModifier = pizzaDao.trouverPizza(codePizzaAMaj);
-						
-
 						System.out.println("Veuillez saisir la catégorie parmi les options suivantes (saisir le code) : ");
 						CategoriePizza[] categoriesPizza = CategoriePizza.values();
 						for (CategoriePizza c : categoriesPizza) {
@@ -92,6 +87,8 @@ public class ModifierPizzaOptionMenu extends AbstractOptionMenu {
 						try {
 							CategoriePizza categorieApresMaj = CategoriePizza.valueOf(categoriePizzaApresMaj);
 
+							Pizza pizzaAModifier = pizzaDao.trouverPizza(codePizzaAMaj);
+							
 							pizzaDao.modifierPizza(codePizzaAMaj, new Pizza (pizzaAModifier.getId(), codePizzaApresMaj, nomPizzaApresMaj, prixPizzaApresMaj, categorieApresMaj));
 							
 							System.out.println();
