@@ -1,10 +1,11 @@
 package com.bankonet.model;
 
+import com.bankonet.ICompteStat;
 
 /**
  * @author fguibert
  */
-public abstract class Compte {
+public abstract class Compte implements ICompteStat {
 	private String libelle;
 	private int identifiant;
 	protected float solde;
