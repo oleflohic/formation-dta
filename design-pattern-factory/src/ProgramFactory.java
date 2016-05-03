@@ -13,6 +13,8 @@ public class ProgramFactory {
 			return new Program2();
 		case 3:
 			return new Program3();
+		case 4:
+			return new Program4();
 		default:
 			return null;
 		}

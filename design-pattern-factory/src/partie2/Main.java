@@ -1,4 +1,9 @@
+package partie2;
 public class Main {
+	
+	public static void main (String[] args) {
+		main_parse_filename(args[0]);
+	}
 	
 	public static void main_parse_filename (String path) {
 		
