@@ -6,18 +6,21 @@
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_tl2bcBHwEeaLF_iHffW9ng"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_wyZP8BHwEeaLF_iHffW9ng" value="*"/>
     </ownedAttribute>
+    <ownedOperation xmi:id="_FqyhgBH5EeaLF_iHffW9ng" name="accepteVisiteur"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_rhvgkBHuEeaLF_iHffW9ng" name="Noeud" isAbstract="true">
     <ownedAttribute xmi:id="_z7crkBHwEeaLF_iHffW9ng" name="parent" type="_rhvgkBHuEeaLF_iHffW9ng">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_25Tj0BHwEeaLF_iHffW9ng"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="_7vwf8BHxEeaLF_iHffW9ng" name="proprietaire" type="_XuLvIBHxEeaLF_iHffW9ng"/>
+    <ownedOperation xmi:id="_GCeowBH5EeaLF_iHffW9ng" name="accepteVisiteur"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_KEG2sBHvEeaLF_iHffW9ng" name="Fichier">
     <generalization xmi:id="_LgO2cBHvEeaLF_iHffW9ng" general="_rhvgkBHuEeaLF_iHffW9ng"/>
     <ownedAttribute xmi:id="_jjHLMBHwEeaLF_iHffW9ng" name="taille">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
     </ownedAttribute>
+    <ownedOperation xmi:id="_FlSWcBH5EeaLF_iHffW9ng" name="accepteVisiteur"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_XuLvIBHxEeaLF_iHffW9ng" name="Utilisateur"/>
   <packagedElement xmi:type="uml:Association" xmi:id="_axehABHxEeaLF_iHffW9ng" memberEnd="_axehARHxEeaLF_iHffW9ng _axoSAhHxEeaLF_iHffW9ng" navigableOwnedEnd="_axoSAhHxEeaLF_iHffW9ng">
@@ -33,6 +36,7 @@
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_hwbQIBHxEeaLF_iHffW9ng" name="SystemeFichier">
     <ownedAttribute xmi:id="_ov5jsBHxEeaLF_iHffW9ng" name="racine" type="_lbyO8BHuEeaLF_iHffW9ng"/>
+    <ownedOperation xmi:id="_DWN20BH5EeaLF_iHffW9ng" name="accepteVisiteur"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_k3g84BHxEeaLF_iHffW9ng" name="#racine" memberEnd="_k3g84RHxEeaLF_iHffW9ng _k3g85BHxEeaLF_iHffW9ng" navigableOwnedEnd="_k3g85BHxEeaLF_iHffW9ng">
     <ownedEnd xmi:id="_k3g84RHxEeaLF_iHffW9ng" name="systemeFichiers" type="_hwbQIBHxEeaLF_iHffW9ng" aggregation="composite" association="_k3g84BHxEeaLF_iHffW9ng">
@@ -54,5 +58,47 @@
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_A0bTthHyEeaLF_iHffW9ng" value="*"/>
     </ownedEnd>
   </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_Cfr0QBH1EeaLF_iHffW9ng" name="SystemeFichierVisite"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Cfr0QBH1EeaLF_iHffW9ng" name="VisiteurNoeud"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_o8IaIBH3EeaLF_iHffW9ng" name="VisisteurNombre">
+    <ownedAttribute xmi:id="_uyQgABH3EeaLF_iHffW9ng" name="nombreFichiers">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <qualifier xmi:id="_xc46QBH3EeaLF_iHffW9ng" name="racine" type="_lbyO8BHuEeaLF_iHffW9ng"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_zgcGYBH3EeaLF_iHffW9ng" name="nombreRepertoires">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zgcGYRH3EeaLF_iHffW9ng" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zgcGYhH3EeaLF_iHffW9ng" value="1"/>
+    </ownedAttribute>
+    <interfaceRealization xmi:id="_qx5zgBH4EeaLF_iHffW9ng" client="_o8IaIBH3EeaLF_iHffW9ng" supplier="_meF08BH4EeaLF_iHffW9ng" contract="_meF08BH4EeaLF_iHffW9ng"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_pRzIIBH3EeaLF_iHffW9ng" name="VisiteurTaille">
+    <ownedAttribute xmi:id="_yjJXsBH3EeaLF_iHffW9ng" name="taille">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <interfaceRealization xmi:id="_qZUUYBH4EeaLF_iHffW9ng" client="_pRzIIBH3EeaLF_iHffW9ng" supplier="_meF08BH4EeaLF_iHffW9ng" contract="_meF08BH4EeaLF_iHffW9ng"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_9KE6IBH3EeaLF_iHffW9ng" memberEnd="_9KE6IRH3EeaLF_iHffW9ng _9KOEEhH3EeaLF_iHffW9ng" navigableOwnedEnd="_9KOEEhH3EeaLF_iHffW9ng">
+    <ownedEnd xmi:id="_9KE6IRH3EeaLF_iHffW9ng" name="visisteurNombres" type="_o8IaIBH3EeaLF_iHffW9ng" association="_9KE6IBH3EeaLF_iHffW9ng">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_9KOEEBH3EeaLF_iHffW9ng"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_9KOEERH3EeaLF_iHffW9ng" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_9KOEEhH3EeaLF_iHffW9ng" name="visiteurNoeuds" type="_Cfr0QBH1EeaLF_iHffW9ng" association="_9KE6IBH3EeaLF_iHffW9ng">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_9KOEExH3EeaLF_iHffW9ng"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_9KOEFBH3EeaLF_iHffW9ng" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_9nkucBH3EeaLF_iHffW9ng" memberEnd="_9nkucRH3EeaLF_iHffW9ng _9nkudBH3EeaLF_iHffW9ng" navigableOwnedEnd="_9nkudBH3EeaLF_iHffW9ng">
+    <ownedEnd xmi:id="_9nkucRH3EeaLF_iHffW9ng" name="visiteurTailles" type="_pRzIIBH3EeaLF_iHffW9ng" association="_9nkucBH3EeaLF_iHffW9ng">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_9nkuchH3EeaLF_iHffW9ng"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_9nkucxH3EeaLF_iHffW9ng" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_9nkudBH3EeaLF_iHffW9ng" name="visiteurNoeuds" type="_Cfr0QBH1EeaLF_iHffW9ng" association="_9nkucBH3EeaLF_iHffW9ng">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_9nkudRH3EeaLF_iHffW9ng"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_9nkudhH3EeaLF_iHffW9ng" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_meF08BH4EeaLF_iHffW9ng" name="VisiteurNoeud">
+    <ownedOperation xmi:id="_l76xcBH3EeaLF_iHffW9ng" name="visiteFichier"/>
+    <ownedOperation xmi:id="_m-S0cBH3EeaLF_iHffW9ng" name="visiteRepertoire"/>
+  </packagedElement>
 </uml:Model>
