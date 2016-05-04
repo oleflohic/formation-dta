@@ -15,6 +15,7 @@
   <models xmi:type="ecore:EPackage" href="http://www.eclipse.org/uml2/5.0.0/Types#/"/>
   <models xmi:type="uml:Model" href="tp1.uml#_JCWWQBEUEeax-fsqYiFYpg"/>
   <models xmi:type="uml:Model" href="tp2.uml#_lD17ABEoEeax-fsqYiFYpg"/>
+  <models xmi:type="uml:Model" href="tp4.uml#_XsgpEBHOEeaLF_iHffW9ng"/>
   <ownedViews xmi:type="viewpoint:DRepresentationContainer" xmi:id="_P3EvMBEQEea99en6-lNV_Q" initialized="true">
     <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.obeonetwork.dsl.uml2.design/description/uml2.odesign#//@ownedViewpoints[name='Reused']"/>
   </ownedViews>
