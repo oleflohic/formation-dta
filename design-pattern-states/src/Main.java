@@ -10,11 +10,11 @@ public class Main {
 		Personne p2 = pf.creerPersonne("p2");
 		Personne p3 = pf.creerPersonne("p3");
 		
+		p1.etatSuivant();
 		*/
 		
 		
 		
-		//personne.etatSuivant();
 		
 	}
 
