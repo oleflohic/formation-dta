@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_C3G58BHuEeaLF_iHffW9ng" name="Système de fichiers">
+  <packagedElement xmi:type="uml:Class" xmi:id="_lbyO8BHuEeaLF_iHffW9ng" name="Repertoire">
+    <generalization xmi:id="_LQ9rYBHvEeaLF_iHffW9ng" general="_rhvgkBHuEeaLF_iHffW9ng"/>
+    <ownedAttribute xmi:id="_qVW7EBHwEeaLF_iHffW9ng" name="noeuds" type="_rhvgkBHuEeaLF_iHffW9ng">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_tl2bcBHwEeaLF_iHffW9ng"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_wyZP8BHwEeaLF_iHffW9ng" value="*"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_rhvgkBHuEeaLF_iHffW9ng" name="Noeud" isAbstract="true">
+    <ownedAttribute xmi:id="_z7crkBHwEeaLF_iHffW9ng" name="parent" type="_rhvgkBHuEeaLF_iHffW9ng">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_25Tj0BHwEeaLF_iHffW9ng"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_7vwf8BHxEeaLF_iHffW9ng" name="proprietaire" type="_XuLvIBHxEeaLF_iHffW9ng"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_KEG2sBHvEeaLF_iHffW9ng" name="Fichier">
+    <generalization xmi:id="_LgO2cBHvEeaLF_iHffW9ng" general="_rhvgkBHuEeaLF_iHffW9ng"/>
+    <ownedAttribute xmi:id="_jjHLMBHwEeaLF_iHffW9ng" name="taille">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_XuLvIBHxEeaLF_iHffW9ng" name="Utilisateur"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_axehABHxEeaLF_iHffW9ng" memberEnd="_axehARHxEeaLF_iHffW9ng _axoSAhHxEeaLF_iHffW9ng" navigableOwnedEnd="_axoSAhHxEeaLF_iHffW9ng">
+    <name xsi:nil="true"/>
+    <ownedEnd xmi:id="_axehARHxEeaLF_iHffW9ng" name="repertoires" type="_lbyO8BHuEeaLF_iHffW9ng" aggregation="composite" association="_axehABHxEeaLF_iHffW9ng">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_axoSABHxEeaLF_iHffW9ng"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_axoSARHxEeaLF_iHffW9ng" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_axoSAhHxEeaLF_iHffW9ng" name="noeuds" type="_rhvgkBHuEeaLF_iHffW9ng" association="_axehABHxEeaLF_iHffW9ng">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_axxb8BHxEeaLF_iHffW9ng"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_axxb8RHxEeaLF_iHffW9ng" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_hwbQIBHxEeaLF_iHffW9ng" name="SystemeFichier">
+    <ownedAttribute xmi:id="_ov5jsBHxEeaLF_iHffW9ng" name="racine" type="_lbyO8BHuEeaLF_iHffW9ng"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_k3g84BHxEeaLF_iHffW9ng" name="#racine" memberEnd="_k3g84RHxEeaLF_iHffW9ng _k3g85BHxEeaLF_iHffW9ng" navigableOwnedEnd="_k3g85BHxEeaLF_iHffW9ng">
+    <ownedEnd xmi:id="_k3g84RHxEeaLF_iHffW9ng" name="systemeFichiers" type="_hwbQIBHxEeaLF_iHffW9ng" aggregation="composite" association="_k3g84BHxEeaLF_iHffW9ng">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_k3g84hHxEeaLF_iHffW9ng"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_k3g84xHxEeaLF_iHffW9ng" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_k3g85BHxEeaLF_iHffW9ng" name="repertoires" type="_lbyO8BHuEeaLF_iHffW9ng" association="_k3g84BHxEeaLF_iHffW9ng">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_k3g85RHxEeaLF_iHffW9ng"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_k3g85hHxEeaLF_iHffW9ng" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_A0bTsBHyEeaLF_iHffW9ng" memberEnd="_A0bTsRHyEeaLF_iHffW9ng _A0bTtBHyEeaLF_iHffW9ng" navigableOwnedEnd="_A0bTtBHyEeaLF_iHffW9ng">
+    <ownedEnd xmi:id="_A0bTsRHyEeaLF_iHffW9ng" name="noeuds" type="_rhvgkBHuEeaLF_iHffW9ng" association="_A0bTsBHyEeaLF_iHffW9ng">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_A0bTshHyEeaLF_iHffW9ng"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_A0bTsxHyEeaLF_iHffW9ng" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_A0bTtBHyEeaLF_iHffW9ng" name="utilisateurs" type="_XuLvIBHxEeaLF_iHffW9ng" association="_A0bTsBHyEeaLF_iHffW9ng">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_A0bTtRHyEeaLF_iHffW9ng"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_A0bTthHyEeaLF_iHffW9ng" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Cfr0QBH1EeaLF_iHffW9ng" name="SystemeFichierVisite"/>
+</uml:Model>
