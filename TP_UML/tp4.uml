@@ -1,2 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_XsgpEBHOEeaLF_iHffW9ng" name="NewModel"/>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_XsgpEBHOEeaLF_iHffW9ng" name="Cartes de paiement">
+  <packagedElement xmi:type="uml:Class" xmi:id="_hFgYwBHOEeaLF_iHffW9ng" name="Client">
+    <ownedAttribute xmi:id="_VzZV4BHPEeaLF_iHffW9ng" name="nom">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_XnYcABHPEeaLF_iHffW9ng" name="prenom">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_yq3F4BHOEeaLF_iHffW9ng" name="cartePaiement" type="_idqegBHOEeaLF_iHffW9ng"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_idqegBHOEeaLF_iHffW9ng" name="Carte">
+    <nestedClassifier xmi:type="uml:Class" xmi:id="_3Ct28BHOEeaLF_iHffW9ng" name="Client"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_is3YIBHOEeaLF_iHffW9ng" name="CarteDebit">
+    <generalization xmi:id="_UkUToBHPEeaLF_iHffW9ng" general="_idqegBHOEeaLF_iHffW9ng"/>
+    <nestedClassifier xmi:type="uml:Class" xmi:id="_Rd6jYBHPEeaLF_iHffW9ng" name="Carte"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_3orqwBHOEeaLF_iHffW9ng" name="ClientFactory">
+    <ownedOperation xmi:id="_6AugMBHOEeaLF_iHffW9ng" name="creerClient">
+      <ownedParameter xmi:id="_C2XEIBHPEeaLF_iHffW9ng" type="_hFgYwBHOEeaLF_iHffW9ng" direction="return">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_h_k-4BHPEeaLF_iHffW9ng" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_h_k-4RHPEeaLF_iHffW9ng" value="1"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_8mvgMBHOEeaLF_iHffW9ng" name="nom">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_-bxvMBHOEeaLF_iHffW9ng" name="prenom">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="__4tAMBHOEeaLF_iHffW9ng" name="creditAutorise">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_SMaoIBHPEeaLF_iHffW9ng" name="CarteCredit">
+    <generalization xmi:id="_UPX-YBHPEeaLF_iHffW9ng" general="_idqegBHOEeaLF_iHffW9ng"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_TEnUEBHSEeaLF_iHffW9ng" name="CarteFactory"/>
+</uml:Model>
