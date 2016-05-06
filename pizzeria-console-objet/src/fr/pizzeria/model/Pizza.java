@@ -47,7 +47,11 @@ public class Pizza {
 	
 	
 	// ==== Constructeurs ====
-	
+
+	public Pizza () {
+		this.id = nbPizzas;
+		nbPizzas++;
+	}
 	/**
 	 * Crée une nouvelle instance de pizza avec id unique.
 	 * @param code
