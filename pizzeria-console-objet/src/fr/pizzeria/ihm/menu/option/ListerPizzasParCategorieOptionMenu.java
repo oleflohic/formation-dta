@@ -1,6 +1,8 @@
 package fr.pizzeria.ihm.menu.option;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.model.Pizza;
@@ -35,10 +37,22 @@ public class ListerPizzasParCategorieOptionMenu extends AbstractOptionMenu {
 			System.out.println("Il n'y a actuellement aucune pizza dans la base.");
 		} else {
 		
-		
+			
+			/*
 			pizzas.stream()
 				.sorted((pizza1, pizza2) -> pizza1.getCategorie().compareTo(pizza2.getCategorie()))
 				.forEach(pizzaActuelle -> System.out.println(pizzaActuelle));
+				*/
+			
+			pizzaDao.listePizzas().stream()
+				.collect(Collectors.groupingBy(Pizza::getCategorie))
+				.forEach((categorie,listePizzas) -> {
+					System.out.println("+++" + categorie.getLibelle().toUpperCase() + "+++");
+					listePizzas.stream()
+						.sorted(Comparator.comparing(Pizza::getCode))
+						.forEach(System.out::println);
+					System.out.println();
+				});
 			
 			/*
 			for (Pizza p : pizzas) {

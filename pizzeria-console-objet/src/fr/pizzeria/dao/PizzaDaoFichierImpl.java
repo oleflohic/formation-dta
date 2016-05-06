@@ -1,5 +1,7 @@
 package fr.pizzeria.dao;
 
+import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +13,7 @@ import fr.pizzeria.exception.dao.SupprimerPizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
-public class PizzaDaoImpl implements IPizzaDao {
+public class PizzaDaoFichierImpl implements IPizzaDao {
 	
 	
 	// ==== Variables ====
@@ -26,11 +28,56 @@ public class PizzaDaoImpl implements IPizzaDao {
 	/**
 	 * Créer un DAO gérant une carte de pizzas pré-remplie.
 	 */
-	public PizzaDaoImpl() {
+	public PizzaDaoFichierImpl() {
 
 		// pizzas existantes
 		
 		pizzas = new HashMap<String, Pizza> ();
+		
+		
+		File fichier;
+		fichier = new File("data");
+		
+		Path path = fichier.toPath();
+		System.out.println(path.getFileName());
+		
+		
+		/*
+		for (File f1 : f.listFiles()) {
+			
+			System.out.println("" + f1.getName());
+		}
+		*/
+		
+		/*
+		Path p;
+		p.
+		*/
+		
+		/*
+		Arrays.asList(fichier.listFiles()).stream()
+			.filter(f -> (f.isFile() && f.getName().endsWith(".txt")))
+			.forEach(
+				f -> {
+					//Pizza p = new Pizza(f.getName().split(File.pathSeparator)[0].;
+				}
+			);
+			*/
+		
+		//String code, String nom, double prix, CategoriePizza categorie
+					/*
+				new Function<String,Pizza> () {
+
+					@Override
+					public Pizza apply(String t) {
+						return null;
+					}
+					
+				}
+				*/
+		
+		
+		
 		
 		Pizza[] pizzasParDefaut = new Pizza[] {
 				new Pizza ("PEP", "Peperoni", 10, CategoriePizza.VIANDE),

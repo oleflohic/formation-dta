@@ -1,6 +1,8 @@
 package fr.pizzeria.ihm.menu.option;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.model.Pizza;
@@ -27,20 +29,22 @@ public class AfficherPizzaLaPlusChereOptionMenu extends AbstractOptionMenu {
 		System.out.println();
 		System.out.println("Pizza la plus chère :");
 		
-		
 		List<Pizza> pizzas = pizzaDao.listePizzas();
 		
 		// aucune pizza : message d'information
 		if (pizzas.size() == 0) {
 			System.out.println("Il n'y a actuellement aucune pizza dans la base.");
 		} else {
-		
-		
+			/*
 			pizzas.stream()
 				.sorted((pizza1, pizza2) -> { return - new Double(pizza1.getPrix()).compareTo(new Double(pizza2.getPrix())); }) // ordre inversé
 				.limit(1)
 				.forEach(pizzaActuelle -> System.out.println(pizzaActuelle));
+				*/
 			
+			pizzas.stream()
+				.collect(Collectors.maxBy(Comparator.comparing(Pizza::getPrix)))
+				.ifPresent(System.out::println);
 			
 		}
 
