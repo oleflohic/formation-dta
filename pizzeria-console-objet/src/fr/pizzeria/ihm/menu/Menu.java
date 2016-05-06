@@ -2,9 +2,7 @@ package fr.pizzeria.ihm.menu;
 
 import java.util.Comparator;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.TreeMap;
 
 import fr.pizzeria.dao.IPizzaDao;
@@ -14,8 +12,10 @@ import fr.pizzeria.exception.dao.ModifierPizzaException;
 import fr.pizzeria.exception.dao.SupprimerPizzaException;
 import fr.pizzeria.exception.ihm.ChoixMenuException;
 import fr.pizzeria.ihm.menu.option.AbstractOptionMenu;
+import fr.pizzeria.ihm.menu.option.AfficherPizzaLaPlusChereOptionMenu;
 import fr.pizzeria.ihm.menu.option.AjouterPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.ListerPizzasOptionMenu;
+import fr.pizzeria.ihm.menu.option.ListerPizzasParCategorieOptionMenu;
 import fr.pizzeria.ihm.menu.option.ModifierPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.QuitterOptionMenu;
 import fr.pizzeria.ihm.menu.option.SupprimerPizzaOptionMenu;
@@ -75,6 +75,10 @@ public class Menu {
 		options.put (2, new AjouterPizzaOptionMenu(pizzaDao, scanner));
 		options.put (3, new ModifierPizzaOptionMenu(pizzaDao, scanner));
 		options.put (4, new SupprimerPizzaOptionMenu(pizzaDao, scanner));
+
+		options.put (5, new ListerPizzasParCategorieOptionMenu(pizzaDao));
+		options.put (6, new AfficherPizzaLaPlusChereOptionMenu(pizzaDao));
+		
 		options.put (99, new QuitterOptionMenu());
 	}
 	
@@ -87,10 +91,24 @@ public class Menu {
 		while (continuer) {
 			System.out.println("**** " + MENU_TITRE_LIBELLE + " ****");
 			
+			/*
 			Set<Entry<Integer, AbstractOptionMenu>> es = options.entrySet();
 			for (Entry<Integer, AbstractOptionMenu> e : es) {
 				System.out.println("" + e.getKey() + ". " + e.getValue().getLibelle());
 			}
+			*/
+			
+			/*
+			options.entrySet().stream()
+				.forEach(
+					optionMenuEntry ->
+					System.out.println(optionMenuEntry.getKey() + ". " + optionMenuEntry.getValue().getLibelle())
+			);
+			*/
+
+			
+			options.forEach((cle, valeur) -> System.out.println(cle + ". " + valeur.getLibelle()));
+			
 			
 			try {
 				int saisie = scanner.nextInt();

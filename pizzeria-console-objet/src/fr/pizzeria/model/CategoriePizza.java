@@ -15,7 +15,7 @@ public enum CategoriePizza {
 	// ==== Variables ====
 	
 	private String libelle;
-
+	
 	
 	// ==== Constructeurs ====
 
@@ -30,6 +30,7 @@ public enum CategoriePizza {
 	public String toString () {
 		return name() + " -> " + libelle;
 	}
+	
 	
 	// ==== Accesseurs ====
 	

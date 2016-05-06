@@ -5,17 +5,17 @@ import java.util.List;
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.model.Pizza;
 
-public class ListerPizzasOptionMenu extends AbstractOptionMenu {
+public class ListerPizzasParCategorieOptionMenu extends AbstractOptionMenu {
 
 	// ==== Constantes ====
 	
-	public static final String LISTER_PIZZAS_LIBELLE_MENU = "Lister les pizzas";
+	public static final String LISTER_PIZZAS_PAR_CATEGORIE_LIBELLE_MENU = "Lister les pizzas par catégories";
 	
 
 	// ==== Constructeurs ====
 	
-	public ListerPizzasOptionMenu(IPizzaDao pizzaDao) {
-		super(LISTER_PIZZAS_LIBELLE_MENU, pizzaDao);
+	public ListerPizzasParCategorieOptionMenu(IPizzaDao pizzaDao) {
+		super(LISTER_PIZZAS_PAR_CATEGORIE_LIBELLE_MENU, pizzaDao);
 	}
 
 	
@@ -25,7 +25,7 @@ public class ListerPizzasOptionMenu extends AbstractOptionMenu {
 	public boolean executer() {
 		
 		System.out.println();
-		System.out.println("Liste des pizzas :");
+		System.out.println("Liste des pizzas (par catégorie) :");
 		
 		
 		List<Pizza> pizzas = pizzaDao.listePizzas();
@@ -36,7 +36,9 @@ public class ListerPizzasOptionMenu extends AbstractOptionMenu {
 		} else {
 		
 		
-			pizzas.stream().forEach(pizzaActuelle -> System.out.println(pizzaActuelle));
+			pizzas.stream()
+				.sorted((pizza1, pizza2) -> pizza1.getCategorie().compareTo(pizza2.getCategorie()))
+				.forEach(pizzaActuelle -> System.out.println(pizzaActuelle));
 			
 			/*
 			for (Pizza p : pizzas) {

@@ -1,6 +1,7 @@
 package fr.pizzeria.model;
 
-import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * Classe utilisée pour stocker les informations de pizza.
@@ -93,6 +94,22 @@ public class Pizza {
 		
 		//return "" + code + " -> " + nom + " (" + prix + "€) (" + categorie.getLibelle() + ")";
 		
+		return Arrays.asList(this.getClass().getDeclaredFields())
+				.stream()
+				.filter(field -> field.getAnnotation(ToString.class) != null)
+				.map(field -> {
+					try {
+						return field.getAnnotation(ToString.class).uppercase()
+								? field.get(this).toString().toUpperCase() : field.get(this).toString();
+					} catch (SecurityException | IllegalArgumentException | IllegalAccessException e1) {
+						e1.printStackTrace();
+						return "";
+					}
+				})
+				.collect(Collectors.joining(" ")
+		);
+		
+		/*
 		Field[] variablesDeLaClasse = getClass().getDeclaredFields();
 		String resultat = "";
 		for (Field variableActuelle : variablesDeLaClasse) {
@@ -134,6 +151,7 @@ public class Pizza {
 			
 		}
 		return resultat;
+		*/
 		
 	}
 	
@@ -166,6 +184,14 @@ public class Pizza {
 
 	public void setPrix(double prix) {
 		this.prix = prix;
+	}
+
+	public void setCategorie(CategoriePizza categorie) {
+		this.categorie = categorie;
+	}
+
+	public CategoriePizza getCategorie() {
+		return categorie;
 	}
 
 	public static int getNbPizzas() {

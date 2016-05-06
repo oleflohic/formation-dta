@@ -5,17 +5,17 @@ import java.util.List;
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.model.Pizza;
 
-public class ListerPizzasOptionMenu extends AbstractOptionMenu {
+public class AfficherPizzaLaPlusChereOptionMenu extends AbstractOptionMenu {
 
 	// ==== Constantes ====
 	
-	public static final String LISTER_PIZZAS_LIBELLE_MENU = "Lister les pizzas";
+	public static final String LISTER_PIZZAS_PAR_CATEGORIE_LIBELLE_MENU = "Afficher la pizza la plus chère";
 	
 
 	// ==== Constructeurs ====
 	
-	public ListerPizzasOptionMenu(IPizzaDao pizzaDao) {
-		super(LISTER_PIZZAS_LIBELLE_MENU, pizzaDao);
+	public AfficherPizzaLaPlusChereOptionMenu(IPizzaDao pizzaDao) {
+		super(LISTER_PIZZAS_PAR_CATEGORIE_LIBELLE_MENU, pizzaDao);
 	}
 
 	
@@ -25,7 +25,7 @@ public class ListerPizzasOptionMenu extends AbstractOptionMenu {
 	public boolean executer() {
 		
 		System.out.println();
-		System.out.println("Liste des pizzas :");
+		System.out.println("Pizza la plus chère :");
 		
 		
 		List<Pizza> pizzas = pizzaDao.listePizzas();
@@ -36,14 +36,11 @@ public class ListerPizzasOptionMenu extends AbstractOptionMenu {
 		} else {
 		
 		
-			pizzas.stream().forEach(pizzaActuelle -> System.out.println(pizzaActuelle));
+			pizzas.stream()
+				.sorted((pizza1, pizza2) -> { return - new Double(pizza1.getPrix()).compareTo(new Double(pizza2.getPrix())); }) // ordre inversé
+				.limit(1)
+				.forEach(pizzaActuelle -> System.out.println(pizzaActuelle));
 			
-			/*
-			for (Pizza p : pizzas) {
-				//System.out.println("" + p.getCode() + " -> " + p.getNom() + " (" + p.getPrix() + "€)");
-				System.out.println(p);
-			}
-			*/
 			
 		}
 
