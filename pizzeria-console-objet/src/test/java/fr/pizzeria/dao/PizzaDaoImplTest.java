@@ -1,4 +1,4 @@
-package fr.pizzeria.test;
+package fr.pizzeria.dao;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import fr.pizzeria.exception.dao.SupprimerPizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
-public class TestPizzaDaoImpl {
+public class PizzaDaoImplTest {
 	
 	protected PizzaDaoImpl instance;
 	

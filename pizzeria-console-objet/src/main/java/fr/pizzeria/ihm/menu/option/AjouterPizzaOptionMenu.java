@@ -31,13 +31,13 @@ public class AjouterPizzaOptionMenu extends AbstractOptionMenu {
 	@Override
 	public boolean executer() throws DaoException {
 		
-		System.out.print("Veuillez saisir le code : ");
+		System.out.println("Veuillez saisir le code : ");
 		String codePizza = scanner.next();
 
-		System.out.print("Veuillez saisir le nom : ");
+		System.out.println("Veuillez saisir le nom : ");
 		String nomPizzaAjoutee = scanner.next();
 		
-		System.out.print("Veuillez saisir le prix (utiliser , comme séparateur décimal) : ");
+		System.out.println("Veuillez saisir le prix (utiliser , comme séparateur décimal) : ");
 		float prixPizzaAjoutee = scanner.nextFloat();
 
 		System.out.println("Veuillez saisir la catégorie parmi les options suivantes (saisir le code) : ");
@@ -45,7 +45,7 @@ public class AjouterPizzaOptionMenu extends AbstractOptionMenu {
 		for (CategoriePizza c : categoriesPizza) {
 			System.out.println(c);
 		}
-		System.out.print("Choix : ");
+		System.out.println("Choix : ");
 		String categoriePizzaAjoutee = scanner.next();
 	
 		try {
