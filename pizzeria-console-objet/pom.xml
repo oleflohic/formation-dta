@@ -6,7 +6,13 @@
 	<artifactId>pizzeria-console-objet</artifactId>
 	<version>1.0.0</version>
 	
+	<properties>
+		<!-- mettre encodage ici -->
+	</properties>
+	
 	<build>
+		<finalName>pizzeria</finalName>
+		
 		<pluginManagement>
 			<plugins>
 				<plugin>
