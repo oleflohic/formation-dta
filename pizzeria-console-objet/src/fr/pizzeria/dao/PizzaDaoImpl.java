@@ -21,6 +21,24 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 */
 	private Map<String, Pizza> pizzas;
 	
+	
+	// ==== Méthodes statiques ====
+	
+	public static Pizza[] pizzasParDefaut () {
+		return new Pizza[] {
+				new Pizza ("PEP", "Peperoni", 10, CategoriePizza.VIANDE),
+				new Pizza ("MAR", "Margherita", 14, CategoriePizza.SANS_VIANDE),
+				new Pizza ("REI", "La Reine", 11.5, CategoriePizza.VIANDE),
+				new Pizza ("FRO", "La 4 fromages", 12, CategoriePizza.SANS_VIANDE),
+				new Pizza ("CAN", "La cannibale", 12.5, CategoriePizza.VIANDE),
+				new Pizza ("SAV", "La savoyarde", 13, CategoriePizza.VIANDE),
+				new Pizza ("ORI", "L'orientale", 13.5, CategoriePizza.VIANDE),
+				new Pizza ("IND", "L'indienne", 14, CategoriePizza.VIANDE),
+				new Pizza ("SAU", "La saumoneta", 14, CategoriePizza.POISSON),
+			};
+	}
+	
+	
 	// ==== Constructeurs ====
 	
 	/**
@@ -32,20 +50,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 		
 		pizzas = new HashMap<String, Pizza> ();
 		
-		Pizza[] pizzasParDefaut = new Pizza[] {
-				new Pizza ("PEP", "Peperoni", 10, CategoriePizza.VIANDE),
-				new Pizza ("MAR", "Margherita", 14, CategoriePizza.SANS_VIANDE),
-				new Pizza ("REI", "La Reine", 11.5, CategoriePizza.VIANDE),
-				new Pizza ("FRO", "La 4 fromages", 12, CategoriePizza.SANS_VIANDE),
-				new Pizza ("CAN", "La cannibale", 12.5, CategoriePizza.VIANDE),
-				new Pizza ("SAV", "La savoyarde", 13, CategoriePizza.VIANDE),
-				new Pizza ("ORI", "L'orientale", 13.5, CategoriePizza.VIANDE),
-				new Pizza ("IND", "L'indienne", 14, CategoriePizza.VIANDE),
-				new Pizza ("SAU", "La saumoneta", 14, CategoriePizza.POISSON),
-			};
-			
-		
-		for (Pizza p : pizzasParDefaut) {
+		for (Pizza p : pizzasParDefaut()) {
 			pizzas.put(p.getCode(), p);
 		}
 		
@@ -60,12 +65,8 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 * @return Tableau de Pizza, qui est une copie des pizzas à la carte. 
 	 */
 	@Override
-	public List<Pizza> listePizzas() {
-		
-		ArrayList<Pizza> copie = new ArrayList<Pizza>();
-		copie.addAll(pizzas.values());
-		return copie;
-		
+	public List<Pizza> listePizzas() { // equivalent correction : findAllPizzas
+		return new ArrayList<Pizza>(pizzas.values());
 	}
 	
 	/**
@@ -75,7 +76,12 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 * @throws AjouterPizzaException 
 	 */
 	@Override
-	public void ajouterPizza(Pizza nouvellePizza) throws AjouterPizzaException {
+	public void ajouterPizza(Pizza nouvellePizza) throws AjouterPizzaException { // equivalent correction : savePizza
+		
+		// code de longueur invalide : exception
+		if (nouvellePizza.getCode().length() != 3) {
+			throw new AjouterPizzaException ("Le code pizza " + nouvellePizza.getCode() + " est de longueur invalide (doit contenir 3 caractères).");
+		}
 		
 		// le code n'est pas encore pris : ajouter la pizza
 		if (! pizzas.containsKey(nouvellePizza.getCode())) {
@@ -94,7 +100,21 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 * @throws ModifierPizzaException 
 	 */
 	@Override
-	public void modifierPizza(String codePizza, Pizza pizzaApresModification) throws ModifierPizzaException {
+	public void modifierPizza(String codePizza, Pizza pizzaApresModification) throws ModifierPizzaException { // equivalent correction : updatePizza
+		
+		// code différent de l'original : tester si le nouveau n'est pas déjà pris
+		if (! codePizza.equals(pizzaApresModification.getCode())) {
+			
+			if (pizzas.containsKey(pizzaApresModification.getCode())) {
+				throw new ModifierPizzaException ("Le code pizza " + pizzaApresModification.getCode() + " est déjà pris.");
+			}
+			
+		}
+		
+		// nouveau code de longueur invalide
+		if (pizzaApresModification.getCode().length() != 3) {
+			throw new ModifierPizzaException ("Le nouveau code pizza " + pizzaApresModification.getCode() + " est de longueur invalide (doit contenir 3 caractères).");			
+		}
 		
 		if (pizzas.containsKey(codePizza)) {
 			// changement de clé : supprimer l'ancienne instance
@@ -117,7 +137,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 * @throws SupprimerPizzaException 
 	 */
 	@Override
-	public void supprimerPizza(String codePizza) throws SupprimerPizzaException {
+	public void supprimerPizza(String codePizza) throws SupprimerPizzaException { // equivalent correction : deletePizza
 		
 		// tenter de supprimer la pizza ; en cas d'échec, lancer l'exception
 		if (pizzas.remove(codePizza) == null) {
@@ -132,7 +152,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 * @return true si le code a été trouvé, false sinon.
 	 */
 	@Override
-	public boolean codePizzaExiste(String codePizza) {
+	public boolean codePizzaExiste(String codePizza) { // pas dans la correction
 		return pizzas.containsKey(codePizza);
 	}
 	
@@ -142,10 +162,11 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 * @return La pizza portant le code donné, ou null si le code est introuvable.
 	 */
 	@Override
-	public Pizza trouverPizza(String codePizza) {
+	public Pizza trouverPizza(String codePizza) { // pas dans la correction
 		return pizzas.get(codePizza);
-		
 	}
+	
+	
 	
 
 }
