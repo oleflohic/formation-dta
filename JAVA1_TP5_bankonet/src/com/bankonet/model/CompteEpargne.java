@@ -7,7 +7,8 @@ import com.bankonet.CreditException;
  */
 public final class CompteEpargne extends Compte {
     private float tauxInteret;
-    private static int nombreComptesEpargnes = 0;
+    @SuppressWarnings("unused")
+	private static int nombreComptesEpargnes = 0;
 
     private float plafond;
 

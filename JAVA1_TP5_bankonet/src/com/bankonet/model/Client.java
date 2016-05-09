@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author fguibert
  */
-public class Client implements Comparable {
+public class Client implements Comparable<Object> {
 	private int identifiant;
 	private String nom;
 	private String prenom;
@@ -194,6 +194,7 @@ public class Client implements Comparable {
 		}
 		// TODO
 		//Integer anotherId = ((Client)o).
-		return 0;
+		throw new UnsupportedOperationException("à faire");
+		//return 0;
 	}
 }

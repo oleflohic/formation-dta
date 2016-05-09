@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bankonet.CompteException;
-import com.bankonet.CreditException;
-import com.bankonet.DebitException;
 import com.bankonet.model.Client;
 import com.bankonet.model.CompteCourant;
 import com.bankonet.model.CompteEpargne;

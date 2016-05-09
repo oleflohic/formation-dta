@@ -8,6 +8,11 @@ package com.bankonet.model;
  */
 public class BankonetException extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8179813305563241451L;
+
 	public BankonetException()
 	{
 		super();
