@@ -41,7 +41,7 @@ public class PizzaDaoFichierImpl implements IPizzaDao {
 		// charger à partir du contenu du répertoire "data"
 		try {
 			
-			Files.list(Paths.get("data"))
+			Files.list(Paths.get("src/main/resources/data"))
 				.map(path -> {
 					Pizza p = new Pizza();
 					p.setCode(path.getFileName().toString().replaceAll(".txt",  ""));
