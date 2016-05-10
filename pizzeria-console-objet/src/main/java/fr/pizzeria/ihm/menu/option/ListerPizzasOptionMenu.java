@@ -20,7 +20,7 @@ public class ListerPizzasOptionMenu extends AbstractOptionMenu {
 	}
 
 	
-	// ==== Méthodes ====
+	// ==== Mï¿½thodes ====
 
 	@Override
 	public boolean executer() {
@@ -41,11 +41,11 @@ public class ListerPizzasOptionMenu extends AbstractOptionMenu {
 			
 		}
 
-		// afficher le nombre de pizzas crées depuis le début. grammaire en bonus.
+		// afficher le nombre de pizzas crÃ©Ã©Ã©es depuis le dÃ©but. grammaire en bonus.
 		if (Pizza.nbPizzas > 1) {
-			System.out.println("------- " + Pizza.nbPizzas + " pizzas créées depuis l’initialisation du programme");
+			System.out.println("------- " + Pizza.nbPizzas + " pizzas crÃ©Ã©es depuis l'initialisation du programme");
 		} else {
-			System.out.println("------- " + Pizza.nbPizzas + " pizza créée depuis l’initialisation du programme");
+			System.out.println("------- " + Pizza.nbPizzas + " pizza crÃ©Ã©e depuis l'initialisation du programme");
 		}
 		System.out.println();
 		

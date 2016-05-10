@@ -17,17 +17,6 @@ public class PizzaDaoImplTest {
 	
 	protected PizzaDaoImpl instance;
 	
-	/*
-	@Parameters
-	public static Collection<Object[]> datas() {
-		List<Object[]> data = new ArrayList<Object[]>();
-		data.add(new Object[] {"PEP", "Peperoni", 10, CategoriePizza.VIANDE});
-		data.add(new Object[] {"MAR", "Margherita", 14, CategoriePizza.VIANDE});
-		return data;
-	};
-	*/
-	
-	
 	@Before
 	public void setUp () {
 		instance = new PizzaDaoImpl ();
@@ -44,26 +33,26 @@ public class PizzaDaoImplTest {
 		
 	}
 	
-	// ajouterPizza
+	// ajouterPizza()
 	
 	@Test (expected = AjouterPizzaException.class)
 	public void testAjouterPizzaCodeDejaPris () throws AjouterPizzaException {
-		// code déjà pris
+		// code dï¿½jï¿½ pris
 		instance.ajouterPizza(new Pizza("PEP", "Peperoni", 10, CategoriePizza.VIANDE));
-		Assert.fail("code accepté bien que déjà pris");
+		Assert.fail("code acceptÃ© bien que dÃ©jÃ  pris");
 	}
 	
 	@Test (expected = AjouterPizzaException.class)
 	public void testAjouterPizzaCodeLongueurInvalide1 () throws AjouterPizzaException {
 		// code de longueur invalide
 		instance.ajouterPizza(new Pizza("AA", "---", 0, CategoriePizza.SANS_VIANDE));
-		Assert.fail("code pizza de taille incorrected (doit faire 3 caractères de long)");
+		Assert.fail("code pizza de taille incorrected (doit faire 3 caractÃ¨res de long)");
 	}
 	
 	@Test (expected = AjouterPizzaException.class)
 	public void testAjouterPizzaCodeLongueurInvalide2 () throws AjouterPizzaException {
 		instance.ajouterPizza(new Pizza("AAAA", "---", 0, CategoriePizza.SANS_VIANDE));
-		Assert.fail("code pizza de taille incorrected (doit faire 3 caractères de long)");
+		Assert.fail("code pizza de taille incorrecte (doit faire 3 caractÃ¨res de long)");
 	}
 	
 	@Test
@@ -85,19 +74,19 @@ public class PizzaDaoImplTest {
 	@Test(expected = ModifierPizzaException.class)
 	public void testModifierPizzaVersCodeDejaPris () throws ModifierPizzaException {
 		instance.modifierPizza("PEP", new Pizza("MAR", "---", 0, CategoriePizza.SANS_VIANDE));
-		Assert.fail("modification autorisée vers code déjà pris");
+		Assert.fail("modification autorisÃ©e vers code dÃ©jÃ  pris");
 	}
 
 	@Test(expected = ModifierPizzaException.class)
 	public void testModifierPizzaDontCodeIntrouvable () throws ModifierPizzaException {
 		instance.modifierPizza("AAA", new Pizza("AAAA", "---", 0, CategoriePizza.SANS_VIANDE));
-		Assert.fail("code non existant, mais modification autorisée ?");
+		Assert.fail("code non existant, mais modification autorisÃ©e ?");
 	}
 
 	@Test(expected = ModifierPizzaException.class)
 	public void testModifierPizzaVersCodeLongueurInvalide () throws ModifierPizzaException {
 		instance.modifierPizza("PEP", new Pizza("PEPE", "---", 0, CategoriePizza.SANS_VIANDE));
-		Assert.fail("modification autorisée vers code de longueur incorrecte");
+		Assert.fail("modification autorisÃ©e vers code de longueur incorrecte");
 	}
 	
 	@Test
