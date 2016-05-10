@@ -17,12 +17,12 @@ public class PizzaDaoImpl implements IPizzaDao {
 	// ==== Variables ====
 	
 	/**
-	 * Pizzas affichÈes ‡ la carte.
+	 * Pizzas affich√©es √† la carte.
 	 */
 	private Map<String, Pizza> pizzas;
 	
 	
-	// ==== MÈthodes statiques ====
+	// ==== M√©thodes statiques ====
 	
 	public static Pizza[] pizzasParDefaut () {
 		return new Pizza[] {
@@ -42,7 +42,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 	// ==== Constructeurs ====
 	
 	/**
-	 * CrÈer un DAO gÈrant une carte de pizzas prÈ-remplie.
+	 * Cr√©er un DAO g√©rant une carte de pizzas pr√©-remplie.
 	 */
 	public PizzaDaoImpl() {
 
@@ -58,11 +58,11 @@ public class PizzaDaoImpl implements IPizzaDao {
 	}
 	
 	
-	// ==== MÈthodes ====
+	// ==== M√©thodes ====
 
 	/**
-	 * RÈcupÈrer la liste des pizzas ‡ la carte.
-	 * @return Tableau de Pizza, qui est une copie des pizzas ‡ la carte. 
+	 * R√©cup√©rer la liste des pizzas √† la carte.
+	 * @return Tableau de Pizza, qui est une copie des pizzas √† la carte. 
 	 */
 	@Override
 	public List<Pizza> listePizzas() { // equivalent correction : findAllPizzas
@@ -70,9 +70,9 @@ public class PizzaDaoImpl implements IPizzaDao {
 	}
 	
 	/**
-	 * InsÈrer une nouvelle pizza dans la carte.
+	 * Ins√©rer une nouvelle pizza dans la carte.
 	 * @param pizzaAjoutee
-	 * @return true si l'ajout rÈussi, false sinon.
+	 * @return true si l'ajout r√©ussi, false sinon.
 	 * @throws AjouterPizzaException 
 	 */
 	@Override
@@ -80,49 +80,49 @@ public class PizzaDaoImpl implements IPizzaDao {
 		
 		// code de longueur invalide : exception
 		if (nouvellePizza.getCode().length() != 3) {
-			throw new AjouterPizzaException ("Le code pizza " + nouvellePizza.getCode() + " est de longueur invalide (doit contenir 3 caractËres).");
+			throw new AjouterPizzaException ("Le code pizza " + nouvellePizza.getCode() + " est de longueur invalide (doit contenir 3 caract√®res).");
 		}
 		
 		// le code n'est pas encore pris : ajouter la pizza
 		if (! pizzas.containsKey(nouvellePizza.getCode())) {
 			pizzas.put(nouvellePizza.getCode(), nouvellePizza);
 		} else {
-			throw new AjouterPizzaException ("Le code pizza " + nouvellePizza.getCode() + " est dÈj‡ pris.");
+			throw new AjouterPizzaException ("Le code pizza " + nouvellePizza.getCode() + " est d√©j√† pris.");
 		}
 		
 	}
 	
 	/**
-	 * Modifier la pizza portant le code donnÈ pour qu'elle prenne les donnÈes fournies.
-	 * @param codePizza Ancien code de la pizza ‡ modifier.
-	 * @param pizzaModifiee Nouvelle valeur de la pizza ‡ modifier.
-	 * @return true si la modification a rÈussi, false sinon.
+	 * Modifier la pizza portant le code donn√© pour qu'elle prenne les donn√©es fournies.
+	 * @param codePizza Ancien code de la pizza √† modifier.
+	 * @param pizzaModifiee Nouvelle valeur de la pizza √† modifier.
+	 * @return true si la modification a r√©ussi, false sinon.
 	 * @throws ModifierPizzaException 
 	 */
 	@Override
 	public void modifierPizza(String codePizza, Pizza pizzaApresModification) throws ModifierPizzaException { // equivalent correction : updatePizza
 		
-		// code diffÈrent de l'original : tester si le nouveau n'est pas dÈj‡ pris
+		// code diff√©rent de l'original : tester si le nouveau n'est pas d√©j√† pris
 		if (! codePizza.equals(pizzaApresModification.getCode())) {
 			
 			if (pizzas.containsKey(pizzaApresModification.getCode())) {
-				throw new ModifierPizzaException ("Le code pizza " + pizzaApresModification.getCode() + " est dÈj‡ pris.");
+				throw new ModifierPizzaException ("Le code pizza " + pizzaApresModification.getCode() + " est d√©j√† pris.");
 			}
 			
 		}
 		
 		// nouveau code de longueur invalide
 		if (pizzaApresModification.getCode().length() != 3) {
-			throw new ModifierPizzaException ("Le nouveau code pizza " + pizzaApresModification.getCode() + " est de longueur invalide (doit contenir 3 caractËres).");			
+			throw new ModifierPizzaException ("Le nouveau code pizza " + pizzaApresModification.getCode() + " est de longueur invalide (doit contenir 3 caract√®res).");			
 		}
 		
 		if (pizzas.containsKey(codePizza)) {
-			// changement de clÈ : supprimer l'ancienne instance
+			// changement de cl√© : supprimer l'ancienne instance
 			if (! codePizza.equals(pizzaApresModification.getCode())) {
 				pizzas.remove(codePizza);
 			}
 			
-			// dans tous les cas, ajouter la nouvelle (Ècrase l'ancienne si mÍme clÈ)
+			// dans tous les cas, ajouter la nouvelle (√©crase l'ancienne si m√™me cl√©)
 			pizzas.put(pizzaApresModification.getCode(), pizzaApresModification);
 		} else {
 			throw new ModifierPizzaException ("Le code pizza " + codePizza + " est introuvable.");
@@ -131,15 +131,15 @@ public class PizzaDaoImpl implements IPizzaDao {
 	}
 
 	/**
-	 * Supprimer la pizza portant le code donnÈ.
+	 * Supprimer la pizza portant le code donn√©.
 	 * @param codePizza
-	 * @return true si la suppression a rÈussi, false sinon.
+	 * @return true si la suppression a r√©ussi, false sinon.
 	 * @throws SupprimerPizzaException 
 	 */
 	@Override
 	public void supprimerPizza(String codePizza) throws SupprimerPizzaException { // equivalent correction : deletePizza
 		
-		// tenter de supprimer la pizza ; en cas d'Èchec, lancer l'exception
+		// tenter de supprimer la pizza ; en cas d'√©chec, lancer l'exception
 		if (pizzas.remove(codePizza) == null) {
 			throw new SupprimerPizzaException ("Le code pizza " + codePizza + " est introuvable.");
 		}
@@ -147,9 +147,9 @@ public class PizzaDaoImpl implements IPizzaDao {
 	}
 	
 	/**
-	 * Tester si le code pizza fourni existe dÈj‡ dans la carte.
+	 * Tester si le code pizza fourni existe d√©j√† dans la carte.
 	 * @param codePizza
-	 * @return true si le code a ÈtÈ trouvÈ, false sinon.
+	 * @return true si le code a √©t√© trouv√©, false sinon.
 	 */
 	@Override
 	public boolean codePizzaExiste(String codePizza) { // pas dans la correction
@@ -159,7 +159,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 	/**
 	 * Obtenir la pizza portant le code fourni. 
 	 * @param codePizza
-	 * @return La pizza portant le code donnÈ, ou null si le code est introuvable.
+	 * @return La pizza portant le code donn√©, ou null si le code est introuvable.
 	 */
 	@Override
 	public Pizza trouverPizza(String codePizza) { // pas dans la correction

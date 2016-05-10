@@ -6,13 +6,13 @@ import fr.pizzeria.dao.PizzaDaoFichierImpl;
 import fr.pizzeria.ihm.menu.Menu;
 
 /**
- * classe de point d'entrée de l'application
+ * classe de point d'entrÃ©e de l'application
  * @author oleflohic
  */
 public class PizzeriaAdminConsoleApp {
 	
 	/**
-	 * Méthode principale.
+	 * MÃ©thode principale.
 	 * @param args Arguments du programme.
 	 */
 	public static void main(String[] args) {

@@ -11,7 +11,7 @@ public class ListerPizzasParCategorieOptionMenu extends AbstractOptionMenu {
 
 	// ==== Constantes ====
 	
-	public static final String LISTER_PIZZAS_PAR_CATEGORIE_LIBELLE_MENU = "Lister les pizzas par catégories";
+	public static final String LISTER_PIZZAS_PAR_CATEGORIE_LIBELLE_MENU = "Lister les pizzas par catÃ©gories";
 	
 
 	// ==== Constructeurs ====
@@ -21,13 +21,13 @@ public class ListerPizzasParCategorieOptionMenu extends AbstractOptionMenu {
 	}
 
 	
-	// ==== Méthodes ====
+	// ==== MÃ©thodes ====
 
 	@Override
 	public boolean executer() {
 		
 		System.out.println();
-		System.out.println("Liste des pizzas (par catégorie) :");
+		System.out.println("Liste des pizzas (par catÃ©gorie) :");
 		
 		
 		List<Pizza> pizzas = pizzaDao.listePizzas();
@@ -56,18 +56,18 @@ public class ListerPizzasParCategorieOptionMenu extends AbstractOptionMenu {
 			
 			/*
 			for (Pizza p : pizzas) {
-				//System.out.println("" + p.getCode() + " -> " + p.getNom() + " (" + p.getPrix() + "€)");
+				//System.out.println("" + p.getCode() + " -> " + p.getNom() + " (" + p.getPrix() + "â‚¬)");
 				System.out.println(p);
 			}
 			*/
 			
 		}
 
-		// afficher le nombre de pizzas crées depuis le début. grammaire en bonus.
+		// afficher le nombre de pizzas crÃ©es depuis le dÃ©but. grammaire en bonus.
 		if (Pizza.nbPizzas > 1) {
-			System.out.println("------- " + Pizza.nbPizzas + " pizzas créées depuis l’initialisation du programme");
+			System.out.println("------- " + Pizza.nbPizzas + " pizzas crÃ©Ã©es depuis lâ€™initialisation du programme");
 		} else {
-			System.out.println("------- " + Pizza.nbPizzas + " pizza créée depuis l’initialisation du programme");
+			System.out.println("------- " + Pizza.nbPizzas + " pizza crÃ©Ã©e depuis lâ€™initialisation du programme");
 		}
 		System.out.println();
 		

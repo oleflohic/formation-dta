@@ -1,7 +1,7 @@
 package fr.pizzeria.exception.dao;
 
 /**
- * Exceptions générées par les DAO
+ * Exceptions gÃ©nÃ©rÃ©es par les DAO
  * @author oleflohic
  */
 public class DaoException extends Exception {

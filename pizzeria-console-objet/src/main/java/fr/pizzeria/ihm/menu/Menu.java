@@ -21,7 +21,7 @@ import fr.pizzeria.ihm.menu.option.QuitterOptionMenu;
 import fr.pizzeria.ihm.menu.option.SupprimerPizzaOptionMenu;
 
 /**
- * Menu principal de l'application. Permet d'écouter les saisies clavier et d'exécuter les actions en conséquence.
+ * Menu principal de l'application. Permet d'Ã©couter les saisies clavier et d'exÃ©cuter les actions en consÃ©quence.
  * @author oleflohic
  */
 public class Menu {
@@ -34,7 +34,7 @@ public class Menu {
 	// ==== Variables =====
 	
 	/**
-	 * Liste des options disponibles à l'utilisateur.
+	 * Liste des options disponibles Ã  l'utilisateur.
 	 */
 	private Map<Integer,AbstractOptionMenu> options;
 	
@@ -47,7 +47,7 @@ public class Menu {
 	// ==== Constructeurs ====
 	
 	/**
-	 * Créer un menu console.
+	 * CrÃ©er un menu console.
 	 * @param scanner
 	 */
 	public Menu (Scanner scanner, IPizzaDao pizzaDao) {
@@ -56,10 +56,10 @@ public class Menu {
 	}
 	
 	
-	// ==== Méthodes ====
+	// ==== MÃ©thodes ====
 	
 	/**
-	 * Initialiser le menu en définissant des options.
+	 * Initialiser le menu en dÃ©finissant des options.
 	 * @param scanner
 	 * @param pizzaDao
 	 */
@@ -118,13 +118,13 @@ public class Menu {
 					throw new ChoixMenuException ("Erreur : Le choix " + saisie + " n'est pas reconnu.");
 				}
 			} catch (AjouterPizzaException e) {
-				System.out.println("Échec de l'ajout de pizza : " + e.getMessage());
+				System.out.println("Ã‰chec de l'ajout de pizza : " + e.getMessage());
 			} catch (ModifierPizzaException e) {
-				System.out.println("Échec de la modification de pizza : " + e.getMessage());
+				System.out.println("Ã‰chec de la modification de pizza : " + e.getMessage());
 			} catch (SupprimerPizzaException e) {
-				System.out.println("Échec de la suppression de pizza : " + e.getMessage());
+				System.out.println("Ã‰chec de la suppression de pizza : " + e.getMessage());
 			} catch (DaoException e) {
-				System.out.println("Échec de l'opération : " + e.getMessage());
+				System.out.println("Ã‰chec de l'opÃ©ration : " + e.getMessage());
 			} catch (ChoixMenuException e) {
 				System.out.println(e.getMessage());
 			}

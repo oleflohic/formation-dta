@@ -11,7 +11,7 @@ public class AfficherPizzaLaPlusChereOptionMenu extends AbstractOptionMenu {
 
 	// ==== Constantes ====
 	
-	public static final String LISTER_PIZZAS_PAR_CATEGORIE_LIBELLE_MENU = "Afficher la pizza la plus chère";
+	public static final String LISTER_PIZZAS_PAR_CATEGORIE_LIBELLE_MENU = "Afficher la pizza la plus chÃ¨re";
 	
 
 	// ==== Constructeurs ====
@@ -21,13 +21,13 @@ public class AfficherPizzaLaPlusChereOptionMenu extends AbstractOptionMenu {
 	}
 
 	
-	// ==== Méthodes ====
+	// ==== MÃ©thodes ====
 
 	@Override
 	public boolean executer() {
 		
 		System.out.println();
-		System.out.println("Pizza la plus chère :");
+		System.out.println("Pizza la plus chÃ¨re :");
 		
 		List<Pizza> pizzas = pizzaDao.listePizzas();
 		
@@ -37,7 +37,7 @@ public class AfficherPizzaLaPlusChereOptionMenu extends AbstractOptionMenu {
 		} else {
 			/*
 			pizzas.stream()
-				.sorted((pizza1, pizza2) -> { return - new Double(pizza1.getPrix()).compareTo(new Double(pizza2.getPrix())); }) // ordre inversé
+				.sorted((pizza1, pizza2) -> { return - new Double(pizza1.getPrix()).compareTo(new Double(pizza2.getPrix())); }) // ordre inversÃ©
 				.limit(1)
 				.forEach(pizzaActuelle -> System.out.println(pizzaActuelle));
 				*/
@@ -48,11 +48,11 @@ public class AfficherPizzaLaPlusChereOptionMenu extends AbstractOptionMenu {
 			
 		}
 
-		// afficher le nombre de pizzas crées depuis le début. grammaire en bonus.
+		// afficher le nombre de pizzas crÃ©es depuis le dÃ©but. grammaire en bonus.
 		if (Pizza.nbPizzas > 1) {
-			System.out.println("------- " + Pizza.nbPizzas + " pizzas créées depuis l’initialisation du programme");
+			System.out.println("------- " + Pizza.nbPizzas + " pizzas crÃ©Ã©es depuis lâ€™initialisation du programme");
 		} else {
-			System.out.println("------- " + Pizza.nbPizzas + " pizza créée depuis l’initialisation du programme");
+			System.out.println("------- " + Pizza.nbPizzas + " pizza crÃ©Ã©e depuis lâ€™initialisation du programme");
 		}
 		System.out.println();
 		

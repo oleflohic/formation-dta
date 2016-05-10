@@ -14,28 +14,28 @@ import fr.pizzeria.model.Pizza;
 public interface IPizzaDao {
 	
 	/**
-	 * RÈcupÈrer la liste des pizzas ‡ la carte.
-	 * @return Tableau de Pizza, qui est une copie des pizzas ‡ la carte. 
+	 * R√©cup√©rer la liste des pizzas √† la carte.
+	 * @return Tableau de Pizza, qui est une copie des pizzas √† la carte. 
 	 */
 	public List<Pizza> listePizzas ();
 	
 	/**
-	 * InsÈrer une nouvelle pizza dans la carte.
+	 * Ins√©rer une nouvelle pizza dans la carte.
 	 * @param pizzaAjoutee
 	 * @throws AjouterPizzaException
 	 */
 	public void ajouterPizza (Pizza pizzaAjoutee) throws AjouterPizzaException;
 
 	/**
-	 * Modifier la pizza portant le code donnÈ pour qu'elle prenne les donnÈes fournies.
-	 * @param codePizza Ancien code de la pizza ‡ modifier.
-	 * @param pizzaModifiee Nouvelle valeur de la pizza ‡ modifier.
+	 * Modifier la pizza portant le code donn√© pour qu'elle prenne les donn√©es fournies.
+	 * @param codePizza Ancien code de la pizza √† modifier.
+	 * @param pizzaModifiee Nouvelle valeur de la pizza √† modifier.
 	 * @throws ModifierPizzaException
 	 */
 	public void modifierPizza (String codePizza, Pizza pizzaModifiee) throws ModifierPizzaException;
 
 	/**
-	 * Supprimer la pizza portant le code donnÈ.
+	 * Supprimer la pizza portant le code donn√©.
 	 * @param codePizza
 	 * @throws SupprimerPizzaException
 	 */
@@ -44,16 +44,16 @@ public interface IPizzaDao {
 	
 	// ajouts : actions utilitaires permettant de tester ou obtenir des valeurs en lecture seule
 	/**
-	 * Tester si le code pizza fourni existe dÈj‡ dans la carte.
+	 * Tester si le code pizza fourni existe d√©j√† dans la carte.
 	 * @param codePizza
-	 * @return true si le code a ÈtÈ trouvÈ, false sinon.
+	 * @return true si le code a √©t√© trouv√©, false sinon.
 	 */
 	public boolean codePizzaExiste (String codePizza);
 	
 	/**
 	 * Obtenir la pizza portant le code fourni. 
 	 * @param codePizza
-	 * @return La pizza portant le code donnÈ, ou null si le code est introuvable.
+	 * @return La pizza portant le code donn√©, ou null si le code est introuvable.
 	 */
 	public Pizza trouverPizza (String codePizza);
 	

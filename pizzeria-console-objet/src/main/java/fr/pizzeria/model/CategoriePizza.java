@@ -1,13 +1,13 @@
 package fr.pizzeria.model;
 
 /**
- * Utilisé pour définir les catégories de pizza.
+ * UtilisÃ© pour dÃ©finir les catÃ©gories de pizza.
  * @author oleflohic
  */
 public enum CategoriePizza {
 	
 	
-	// ==== Valeurs d'énumération ====
+	// ==== Valeurs d'Ã©numÃ©ration ====
 	
 	VIANDE("Viande"), POISSON("Poisson"), SANS_VIANDE("Sans viande");
 	
@@ -24,7 +24,7 @@ public enum CategoriePizza {
 	}
 	
 	
-	// ==== Méthodes ====
+	// ==== MÃ©thodes ====
 	
 	@Override
 	public String toString () {

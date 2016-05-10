@@ -7,7 +7,17 @@
 	<version>1.0.0</version>
 	
 	<properties>
-		<!-- mettre encodage ici -->
+		<!-- propriété reconnue par Maven : force l'encodage du programme -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		
+		<!-- autre propriété Maven -->
+		<java.source>1.8</java.source>
+		<java.target>1.8</java.target>
+		
+		<!-- définition de variables qui sont réutilisées dans le bloc <dependencies> -->
+		<junit.version>4.12</junit.version> 
+		<system.rules.version>1.16.0</system.rules.version>
+		
 	</properties>
 	
 	<build>
@@ -30,15 +40,21 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.12</version>
+			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.github.stefanbirkner</groupId>
 			<artifactId>system-rules</artifactId>
-			<version>1.16.0</version>
+			<version>${system.rules.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+		</dependency>
+		
 	</dependencies>
 	
 	

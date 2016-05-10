@@ -14,7 +14,7 @@ public class QuitterOptionMenu extends AbstractOptionMenu {
 	}
 	
 	
-	// ==== Méthodes ====
+	// ==== MÃ©thodes ====
 
 	@Override
 	public boolean executer() {

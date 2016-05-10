@@ -26,7 +26,7 @@ public class AjouterPizzaOptionMenu extends AbstractOptionMenu {
 	}
 
 	
-	// ==== Méthodes ====
+	// ==== MÃ©thodes ====
 	
 	@Override
 	public boolean executer() throws DaoException {
@@ -37,10 +37,10 @@ public class AjouterPizzaOptionMenu extends AbstractOptionMenu {
 		System.out.println("Veuillez saisir le nom : ");
 		String nomPizzaAjoutee = scanner.next();
 		
-		System.out.println("Veuillez saisir le prix (utiliser , comme séparateur décimal) : ");
+		System.out.println("Veuillez saisir le prix (utiliser , comme sÃ©parateur dÃ©cimal) : ");
 		float prixPizzaAjoutee = scanner.nextFloat();
 
-		System.out.println("Veuillez saisir la catégorie parmi les options suivantes (saisir le code) : ");
+		System.out.println("Veuillez saisir la catÃ©gorie parmi les options suivantes (saisir le code) : ");
 		CategoriePizza[] categoriesPizza = CategoriePizza.values();
 		for (CategoriePizza c : categoriesPizza) {
 			System.out.println(c);
@@ -53,12 +53,12 @@ public class AjouterPizzaOptionMenu extends AbstractOptionMenu {
 			Pizza pizzaAjoutee = new Pizza (codePizza, nomPizzaAjoutee, prixPizzaAjoutee, categorie);
 	
 			pizzaDao.ajouterPizza(pizzaAjoutee);
-			System.out.println("La pizza de code " + codePizza + " a été ajoutée.");
+			System.out.println("La pizza de code " + codePizza + " a Ã©tÃ© ajoutÃ©e.");
 			
 			System.out.println();
 	
 		} catch (IllegalArgumentException e) {
-			throw new AjouterPizzaException ("Catégorie \"" + categoriePizzaAjoutee + "\" invalide.");
+			throw new AjouterPizzaException ("CatÃ©gorie \"" + categoriePizzaAjoutee + "\" invalide.");
 		}
 
 		return true;

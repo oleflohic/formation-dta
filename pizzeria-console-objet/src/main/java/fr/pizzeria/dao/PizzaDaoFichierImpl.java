@@ -23,14 +23,14 @@ public class PizzaDaoFichierImpl implements IPizzaDao {
 	// ==== Variables ====
 	
 	/**
-	 * Pizzas affichées à la carte.
+	 * Pizzas affichÃ©es Ã  la carte.
 	 */
 	private Map<String, Pizza> pizzas;
 	
 	// ==== Constructeurs ====
 	
 	/**
-	 * Créer un DAO gérant une carte de pizzas pré-remplie.
+	 * CrÃ©er un DAO gÃ©rant une carte de pizzas prÃ©-remplie.
 	 */
 	public PizzaDaoFichierImpl() {
 
@@ -38,7 +38,7 @@ public class PizzaDaoFichierImpl implements IPizzaDao {
 		
 		pizzas = new HashMap<String, Pizza> ();
 		
-		// charger à partir du contenu du répertoire "data"
+		// charger Ã  partir du contenu du rÃ©pertoire "data"
 		try {
 			
 			Files.list(Paths.get("data"))
@@ -66,11 +66,11 @@ public class PizzaDaoFichierImpl implements IPizzaDao {
 	}
 	
 	
-	// ==== Méthodes ====
+	// ==== MÃ©thodes ====
 
 	/**
-	 * Récupérer la liste des pizzas à la carte.
-	 * @return Tableau de Pizza, qui est une copie des pizzas à la carte. 
+	 * RÃ©cupÃ©rer la liste des pizzas Ã  la carte.
+	 * @return Tableau de Pizza, qui est une copie des pizzas Ã  la carte. 
 	 */
 	@Override
 	public List<Pizza> listePizzas() {
@@ -82,9 +82,9 @@ public class PizzaDaoFichierImpl implements IPizzaDao {
 	}
 	
 	/**
-	 * Insérer une nouvelle pizza dans la carte.
+	 * InsÃ©rer une nouvelle pizza dans la carte.
 	 * @param pizzaAjoutee
-	 * @return true si l'ajout réussi, false sinon.
+	 * @return true si l'ajout rÃ©ussi, false sinon.
 	 * @throws AjouterPizzaException 
 	 */
 	@Override
@@ -94,7 +94,7 @@ public class PizzaDaoFichierImpl implements IPizzaDao {
 		if (! pizzas.containsKey(nouvellePizza.getCode())) {
 			pizzas.put(nouvellePizza.getCode(), nouvellePizza);
 			
-			// créer le fichier de pizza
+			// crÃ©er le fichier de pizza
 			File f = new File("data/" + nouvellePizza.getCode() + ".txt");
 			f.setWritable(true);
 			try {
@@ -109,23 +109,23 @@ public class PizzaDaoFichierImpl implements IPizzaDao {
 			}
 			
 		} else {
-			throw new AjouterPizzaException ("Le code pizza " + nouvellePizza.getCode() + " est déjà pris.");
+			throw new AjouterPizzaException ("Le code pizza " + nouvellePizza.getCode() + " est dÃ©jÃ  pris.");
 		}
 		
 	}
 	
 	/**
-	 * Modifier la pizza portant le code donné pour qu'elle prenne les données fournies.
-	 * @param codePizza Ancien code de la pizza à modifier.
-	 * @param pizzaModifiee Nouvelle valeur de la pizza à modifier.
-	 * @return true si la modification a réussi, false sinon.
+	 * Modifier la pizza portant le code donnÃ© pour qu'elle prenne les donnÃ©es fournies.
+	 * @param codePizza Ancien code de la pizza Ã  modifier.
+	 * @param pizzaModifiee Nouvelle valeur de la pizza Ã  modifier.
+	 * @return true si la modification a rÃ©ussi, false sinon.
 	 * @throws ModifierPizzaException 
 	 */
 	@Override
 	public void modifierPizza(String codePizza, Pizza pizzaApresModification) throws ModifierPizzaException {
 		
 		if (pizzas.containsKey(codePizza)) {
-			// changement de clé : supprimer l'ancienne instance
+			// changement de clÃ© : supprimer l'ancienne instance
 			if (! codePizza.equals(pizzaApresModification.getCode())) {
 				pizzas.remove(codePizza);
 				
@@ -134,10 +134,10 @@ public class PizzaDaoFichierImpl implements IPizzaDao {
 				
 			}
 			
-			// dans tous les cas, ajouter la nouvelle (écrase l'ancienne si même clé)
+			// dans tous les cas, ajouter la nouvelle (Ã©crase l'ancienne si mÃªme clÃ©)
 			pizzas.put(pizzaApresModification.getCode(), pizzaApresModification);
 
-			// créer le fichier de pizza
+			// crÃ©er le fichier de pizza
 			File f = new File("data/" + pizzaApresModification.getCode() + ".txt");
 			f.setWritable(true);
 			try {
@@ -159,15 +159,15 @@ public class PizzaDaoFichierImpl implements IPizzaDao {
 	}
 
 	/**
-	 * Supprimer la pizza portant le code donné.
+	 * Supprimer la pizza portant le code donnÃ©.
 	 * @param codePizza
-	 * @return true si la suppression a réussi, false sinon.
+	 * @return true si la suppression a rÃ©ussi, false sinon.
 	 * @throws SupprimerPizzaException 
 	 */
 	@Override
 	public void supprimerPizza(String codePizza) throws SupprimerPizzaException {
 		
-		// tenter de supprimer la pizza ; en cas d'échec, lancer l'exception
+		// tenter de supprimer la pizza ; en cas d'Ã©chec, lancer l'exception
 		if (pizzas.remove(codePizza) == null) {
 			throw new SupprimerPizzaException ("Le code pizza " + codePizza + " est introuvable.");
 		}
@@ -176,9 +176,9 @@ public class PizzaDaoFichierImpl implements IPizzaDao {
 	}
 	
 	/**
-	 * Tester si le code pizza fourni existe déjà dans la carte.
+	 * Tester si le code pizza fourni existe dÃ©jÃ  dans la carte.
 	 * @param codePizza
-	 * @return true si le code a été trouvé, false sinon.
+	 * @return true si le code a Ã©tÃ© trouvÃ©, false sinon.
 	 */
 	@Override
 	public boolean codePizzaExiste(String codePizza) {
@@ -188,7 +188,7 @@ public class PizzaDaoFichierImpl implements IPizzaDao {
 	/**
 	 * Obtenir la pizza portant le code fourni. 
 	 * @param codePizza
-	 * @return La pizza portant le code donné, ou null si le code est introuvable.
+	 * @return La pizza portant le code donnÃ©, ou null si le code est introuvable.
 	 */
 	@Override
 	public Pizza trouverPizza(String codePizza) {

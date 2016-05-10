@@ -22,32 +22,32 @@ public class ModifierPizzaOptionMenu extends AbstractOptionMenu {
 	}
 
 
-	// ==== MÈthodes ====
+	// ==== M√©thodes ====
 
 	@Override
 	public boolean executer() throws ModifierPizzaException {
 		
 		List<Pizza> pizzas = pizzaDao.listePizzas();
 		
-		// aucune pizza : message d'information et sortie immÈdiate
+		// aucune pizza : message d'information et sortie imm√©diate
 		if (pizzas.size() == 0) {
-			System.out.println("Il n'y a aucune pizza dans la base ; pas de mise-‡-jour possible.");
+			System.out.println("Il n'y a aucune pizza dans la base ; pas de mise-√†-jour possible.");
 			
 		} else {
 		
 			// afficher la liste des pizzas
 			for (Pizza p : pizzas) {
-				System.out.println("" + p.getCode() + " -> " + p.getNom() + " (" + p.getPrix() + "Ä)");
+				System.out.println("" + p.getCode() + " -> " + p.getNom() + " (" + p.getPrix() + "‚Ç¨)");
 			}
 			
-			// demander de sÈlectionner une pizza et lire la saisie clavier
-			System.out.println("Veuillez choisir la pizza ‡ modifier.\n(99 pour abandonner).");
-			System.out.println("Code de la pizza ‡ modifier : ");
+			// demander de s√©lectionner une pizza et lire la saisie clavier
+			System.out.println("Veuillez choisir la pizza √† modifier.\n(99 pour abandonner).");
+			System.out.println("Code de la pizza √† modifier : ");
 			String codePizzaAMaj = scanner.next();
 			
 			// l'utilisateur abandonne la modification
 			if (codePizzaAMaj.equals("99")) {
-				System.out.println("Abandon de la mise-‡-jour.");
+				System.out.println("Abandon de la mise-√†-jour.");
 				
 			// sinon continuer les saisies
 			} else {
@@ -58,25 +58,25 @@ public class ModifierPizzaOptionMenu extends AbstractOptionMenu {
 				} else {
 
 					
-					// m‡j des infos
+					// m√†j des infos
 					System.out.print("Veuillez saisir le nouveau code : ");
 					String codePizzaApresMaj = scanner.next();
 
-					// cas d'erreur : code dÈj‡ pris
+					// cas d'erreur : code d√©j√† pris
 					if (pizzaDao.codePizzaExiste((codePizzaApresMaj))) {
-						System.out.println("Erreur : le code " + codePizzaApresMaj + " est dÈj‡ pris.");
+						System.out.println("Erreur : le code " + codePizzaApresMaj + " est d√©j√† pris.");
 
-					// succËs : saisie des autres infos et m‡j de la pizza
+					// succ√®s : saisie des autres infos et m√†j de la pizza
 					} else {
 					
 						System.out.print("Veuillez saisir le nouveau nom : ");
 						String nomPizzaApresMaj = scanner.next();
 						
-						System.out.print("Veuillez saisir le nouveau prix (utiliser , comme sÈparateur dÈcimal) : ");
+						System.out.print("Veuillez saisir le nouveau prix (utiliser , comme s√©parateur d√©cimal) : ");
 						float prixPizzaApresMaj = scanner.nextFloat();
 						
 
-						System.out.println("Veuillez saisir la catÈgorie parmi les options suivantes (saisir le code) : ");
+						System.out.println("Veuillez saisir la cat√©gorie parmi les options suivantes (saisir le code) : ");
 						CategoriePizza[] categoriesPizza = CategoriePizza.values();
 						for (CategoriePizza c : categoriesPizza) {
 							System.out.println(c);
@@ -94,7 +94,7 @@ public class ModifierPizzaOptionMenu extends AbstractOptionMenu {
 							System.out.println();
 					
 						} catch (IllegalArgumentException e) {
-							throw new ModifierPizzaException ("CatÈgorie \"" + categoriePizzaApresMaj + "\" invalide.");
+							throw new ModifierPizzaException ("Cat√©gorie \"" + categoriePizzaApresMaj + "\" invalide.");
 						}
 
 					}

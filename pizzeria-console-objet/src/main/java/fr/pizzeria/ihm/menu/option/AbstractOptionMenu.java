@@ -6,7 +6,7 @@ import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.dao.DaoException;
 
 /**
- * Option de menu avec un libellé et une action exécutable (via méthode).
+ * Option de menu avec un libellÃ© et une action exÃ©cutable (via mÃ©thode).
  * @author oleflohic
  */
 public abstract class AbstractOptionMenu {
@@ -14,17 +14,17 @@ public abstract class AbstractOptionMenu {
 	// ==== Variables ====
 	
 	/**
-	 * Texte affiché pour décrire cette option.
+	 * Texte affichÃ© pour dÃ©crire cette option.
 	 */
 	private String libelle;
 	
 	/**
-	 * DAO gérant la carte à pizza. Peut être null.
+	 * DAO gÃ©rant la carte Ã  pizza. Peut Ãªtre null.
 	 */
 	protected IPizzaDao pizzaDao;
 	
 	/**
-	 * Lecteur d'entrées clavier. Peut être null.
+	 * Lecteur d'entrÃ©es clavier. Peut Ãªtre null.
 	 */
 	protected Scanner scanner;
 	
@@ -32,7 +32,7 @@ public abstract class AbstractOptionMenu {
 	// ==== Constructeurs ====
 	
 	/**
-	 * Créer une option "minimale" et qui n'a pas besoin de consulter la carte à pizza ou d'écouter les entrées clavier.
+	 * CrÃ©er une option "minimale" et qui n'a pas besoin de consulter la carte Ã  pizza ou d'Ã©couter les entrÃ©es clavier.
 	 * @param libelle
 	 */
 	public AbstractOptionMenu(String libelle) {
@@ -41,7 +41,7 @@ public abstract class AbstractOptionMenu {
 	}
 	
 	/**
-	 * Créer une option "passive", qui a accès à la carte à pizza, mais qui n'a pas besoin d'écouter les entrées clavier.
+	 * CrÃ©er une option "passive", qui a accÃ¨s Ã  la carte Ã  pizza, mais qui n'a pas besoin d'Ã©couter les entrÃ©es clavier.
 	 * @param libelle
 	 * @param pizzaDao
 	 */
@@ -51,7 +51,7 @@ public abstract class AbstractOptionMenu {
 	}
 	
 	/**
-	 * Créer une option "active", qui a accès à la carte et peut écouter les entrées clavier.
+	 * CrÃ©er une option "active", qui a accÃ¨s Ã  la carte et peut Ã©couter les entrÃ©es clavier.
 	 * @param libelle
 	 * @param pizzaDao
 	 * @param scanner
@@ -62,10 +62,10 @@ public abstract class AbstractOptionMenu {
 	}
 	
 	
-	// ==== Méthodes ====
+	// ==== MÃ©thodes ====
 	
 	/**
-	 * Action exécutée quand cette option est sélectionnée.
+	 * Action exÃ©cutÃ©e quand cette option est sÃ©lectionnÃ©e.
 	 * @return false si cette option provoque la sortie du programme.
 	 * @throws DaoException
 	 */

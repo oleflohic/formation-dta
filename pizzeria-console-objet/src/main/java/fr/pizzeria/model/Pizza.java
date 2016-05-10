@@ -4,31 +4,31 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /**
- * Classe utilisée pour stocker les informations de pizza.
+ * Classe utilisÃ©e pour stocker les informations de pizza.
  * @author oleflohic
  */
 public class Pizza {
 
 	/**
-	 * Nombre de (nouvelles) pizzas qui ont été créées depuis le début du programme.
+	 * Nombre de (nouvelles) pizzas qui ont Ã©tÃ© crÃ©Ã©es depuis le dÃ©but du programme.
 	 */
 	public static int nbPizzas;
 	
 	// ==== Variables ====
 	
 	/**
-	 * Identifiant unique de la pizza. N'est pas forcément égal à l'index de valeur si stocké dans un tableau.
+	 * Identifiant unique de la pizza. N'est pas forcÃ©ment Ã©gal Ã  l'index de valeur si stockÃ© dans un tableau.
 	 */
 	private int id;
 	
 	/**
-	 * Code pizza en 3 caractères. Unique.
+	 * Code pizza en 3 caractÃ¨res. Unique.
 	 */
 	@ToString
 	private String code;
 	
 	/**
-	 * Nom affiché de la pizza.
+	 * Nom affichÃ© de la pizza.
 	 */
 	@ToString
 	private String nom;
@@ -40,7 +40,7 @@ public class Pizza {
 	private double prix;
 	
 	/**
-	 * Catégorie de la pizza.
+	 * CatÃ©gorie de la pizza.
 	 */
 	@ToString
 	private CategoriePizza categorie;
@@ -53,7 +53,7 @@ public class Pizza {
 		nbPizzas++;
 	}
 	/**
-	 * Crée une nouvelle instance de pizza avec id unique.
+	 * CrÃ©e une nouvelle instance de pizza avec id unique.
 	 * @param code
 	 * @param nom 
 	 * @param prix
@@ -65,7 +65,7 @@ public class Pizza {
 	}
 	
 	/**
-	 * Crée une instance de pizza dont l'id a été précisé. N'incrémente pas nbPizzas.
+	 * CrÃ©e une instance de pizza dont l'id a Ã©tÃ© prÃ©cisÃ©. N'incrÃ©mente pas nbPizzas.
 	 * @param id
 	 * @param code
 	 * @param nom
@@ -80,7 +80,7 @@ public class Pizza {
 		this.categorie = categorie;
 	}
 	
-	// ==== Méthodes ====
+	// ==== MÃ©thodes ====
 	
 	/**
 	 * Cloner cette pizza.
@@ -91,12 +91,12 @@ public class Pizza {
 	}
 	
 	/**
-	 * Informations de la pizza affichées
+	 * Informations de la pizza affichÃ©es
 	 */
 	@Override
 	public String toString () {
 		
-		//return "" + code + " -> " + nom + " (" + prix + "€) (" + categorie.getLibelle() + ")";
+		//return "" + code + " -> " + nom + " (" + prix + "â‚¬) (" + categorie.getLibelle() + ")";
 		
 		return Arrays.asList(this.getClass().getDeclaredFields())
 				.stream()
@@ -118,17 +118,17 @@ public class Pizza {
 		String resultat = "";
 		for (Field variableActuelle : variablesDeLaClasse) {
 			
-			// extraire l'annotation de classe ToString attachée à la variable actuelle ;
-			// obtient null si cette annotation n'est pas attaché à cette variable.
+			// extraire l'annotation de classe ToString attachÃ©e Ã  la variable actuelle ;
+			// obtient null si cette annotation n'est pas attachÃ© Ã  cette variable.
 			ToString annotationActuelle = variableActuelle.getAnnotation(ToString.class);
 			
-			// annotation trouvée : on peut afficher la valeur de cette variable 
+			// annotation trouvÃ©e : on peut afficher la valeur de cette variable 
 			if (annotationActuelle != null) {
 				try {
 					
 					String texteVariable;
 					
-					// la variable actuelle est une CategoriePizza : traitement spécifique
+					// la variable actuelle est une CategoriePizza : traitement spÃ©cifique
 					if (variableActuelle.get(this) instanceof CategoriePizza) {
 						texteVariable = ((CategoriePizza)variableActuelle.get(this)).getLibelle();
 					} else {
@@ -136,12 +136,12 @@ public class Pizza {
 					}
 					
 					
-					// propriété de l'annotation : si "uppercase" est vrai, alors mettre en majuscule la valeur de la variable actuelle
+					// propriÃ©tÃ© de l'annotation : si "uppercase" est vrai, alors mettre en majuscule la valeur de la variable actuelle
 					if (annotationActuelle.uppercase()) {
 						//resultat += variableActuelle.get(this).toString().toUpperCase() + " ";
 						resultat += texteVariable.toUpperCase() + " ";
 						
-					// sinon, aucune altération
+					// sinon, aucune altÃ©ration
 					} else {
 						resultat += texteVariable + " ";
 					}

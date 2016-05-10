@@ -6,8 +6,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Annotation utilisée sur les variables de la classe Pizza.
- * Indique si la variable en question doit être incluse dans la méthode toString().
+ * Annotation utilisÃ©e sur les variables de la classe Pizza.
+ * Indique si la variable en question doit Ãªtre incluse dans la mÃ©thode toString().
  * @author oleflohic
  */
 @Retention(RetentionPolicy.RUNTIME)

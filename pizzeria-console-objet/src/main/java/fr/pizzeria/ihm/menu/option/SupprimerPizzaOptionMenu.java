@@ -21,26 +21,26 @@ public class SupprimerPizzaOptionMenu extends AbstractOptionMenu {
 	}
 
 
-	// ==== Méthodes ====
+	// ==== MÃ©thodes ====
 
 	@Override
 	public boolean executer() throws SupprimerPizzaException {
 		
 		List<Pizza> pizzas = pizzaDao.listePizzas();
 		
-		// aucune pizza : message d'information et sortie immédiate
+		// aucune pizza : message d'information et sortie immÃ©diate
 		if (pizzas.size() == 0) {
 			System.out.println("Il n'y a aucune pizza dans la base ; pas de suppression possible.");
 		} else {
 			
 			// afficher la liste des pizzas
 			for (Pizza p : pizzas) {
-				System.out.println("" + p.getCode() + " -> " + p.getNom() + " (" + p.getPrix() + "€)");
+				System.out.println("" + p.getCode() + " -> " + p.getNom() + " (" + p.getPrix() + "â‚¬)");
 			}
 			
-			// demander de sélectionner une pizza et lire la saisie clavier
-			System.out.println("Veuillez choisir la pizza à supprimer.\n(99 pour abandonner).");
-			System.out.println("Code de la pizza à supprimer : ");
+			// demander de sÃ©lectionner une pizza et lire la saisie clavier
+			System.out.println("Veuillez choisir la pizza Ã  supprimer.\n(99 pour abandonner).");
+			System.out.println("Code de la pizza Ã  supprimer : ");
 			String codePizzaASupprimer = scanner.next();
 			
 			// l'utilisateur abandonne la modification
