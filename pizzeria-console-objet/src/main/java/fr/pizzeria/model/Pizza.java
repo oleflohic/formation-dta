@@ -3,6 +3,9 @@ package fr.pizzeria.model;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 /**
  * Classe utilisée pour stocker les informations de pizza.
  * @author oleflohic
@@ -163,6 +166,9 @@ public class Pizza {
 
 	@Override
 	public int hashCode() {
+		return new HashCodeBuilder(17,37).append(code).toHashCode();
+		
+		/*
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((categorie == null) ? 0 : categorie.hashCode());
@@ -173,16 +179,28 @@ public class Pizza {
 		temp = Double.doubleToLongBits(prix);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
+		*/
 	}
 	@Override
 	public boolean equals(Object obj) {
+		
 		if (this == obj)
 			return true;
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
+
 		Pizza other = (Pizza) obj;
+		
+		return new EqualsBuilder()
+				.append(categorie, other.categorie)
+				.append(code,  other.code)
+				.append(id,  other.id)
+				.append(nom, other.nom)
+				.append(prix, other.prix)
+				.build();
+		/*
 		if (categorie != other.categorie)
 			return false;
 		if (code == null) {
@@ -200,6 +218,10 @@ public class Pizza {
 		if (Double.doubleToLongBits(prix) != Double.doubleToLongBits(other.prix))
 			return false;
 		return true;
+		*/
+		
+		
+		
 	}
 	
 
