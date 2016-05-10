@@ -5,22 +5,58 @@
 	<artifactId>pizzeria-console</artifactId>
 	<description>Console du projet pizzeria</description>
 	
+	
 	<parent>
 		<groupId>fr.pizzeria</groupId>
 		<artifactId>pizzeria-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../</relativePath>
 	</parent>
-	 
-	<build>
-		<finalName>pizzeria-dao</finalName>
-	</build>
+	
+	<properties>
+		<applicationPropertiesSrc>src/main/resources/application.properties</applicationPropertiesSrc>
+	</properties>
+	
+	
+	<profiles>
+
+		<!--
+		<profile>
+			<id>impl_memoire</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<file>
+					<exists>application.properties</exists>
+				</file>
+				<property>
+					<name>dao.impl</name>
+					<value>0</value>
+				</property>
+			</activation>
+		</profile>
+		 -->
+		
+		<profile>
+			<id>impl_memoire</id>
+			<properties>
+				<dao.impl>0</dao.impl>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+
+		<profile>
+			<id>impl_fichier</id>
+			<properties>
+				<dao.impl>1</dao.impl>
+			</properties>
+		</profile>
+		
+	</profiles>
+	
 	
 	<dependencies>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-		</dependency>
 		
 		<dependency>
 			<groupId>fr.pizzeria</groupId>
@@ -33,14 +69,13 @@
 		</dependency>
 		
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-		</dependency>
-		
-		
-		<dependency>
 			<groupId>com.github.stefanbirkner</groupId>
 			<artifactId>system-rules</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
 		</dependency>
 		
 	</dependencies>

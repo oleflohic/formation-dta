@@ -9,7 +9,7 @@
 	<!-- nom des REPERTOIRES de projets enfants -->
 		<module>pizzeria-model</module> 
 		<module>pizzeria-dao</module>
-		<module>pizzeria-console-objet</module>
+		<module>pizzeria-console</module>
 	</modules>
 	
 	<properties>
@@ -40,6 +40,11 @@
 			<dependency>
 				<groupId>fr.pizzeria</groupId>
 				<artifactId>pizzeria-dao</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>fr.pizzeria</groupId>
+				<artifactId>pizzeria-console</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			
@@ -74,7 +79,22 @@
 		<finalName>pizzeria-parent</finalName>
 		
 		<pluginManagement>
+		
 			<plugins>
+				
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>${java.source}</source>
+						<target>${java.target}</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>2.9</version>
+				</plugin>
+				
+				<!--
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
@@ -109,11 +129,28 @@
 						</execution>
 					</executions>
 				</plugin>
-				
+				-->
 			</plugins>
 			
-			
 		</pluginManagement>
+		
+		
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
 		
 		<!--
 		<plugins>
@@ -140,17 +177,4 @@
 		 -->
 		
 	</build>
-	
-	<!-- 
-	<dependencies>
-		<dependency>
-			<groupId>fr.pizzeria</groupId>
-			<artifactId>pizzeria-model</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>fr.pizzeria</groupId>
-			<artifactId>pizzeria-dao</artifactId>
-		</dependency>
-	</dependencies>
-	-->
 </project>

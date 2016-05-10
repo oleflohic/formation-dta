@@ -1,8 +1,10 @@
 package fr.pizzeria.console;
 
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDaoFichierImpl;
+import fr.pizzeria.dao.PizzaDaoImpl;
 import fr.pizzeria.ihm.menu.Menu;
 
 /**
@@ -17,10 +19,25 @@ public class PizzeriaAdminConsoleApp {
 	 */
 	public static void main(String[] args) {
 		
+		ResourceBundle bundle = ResourceBundle.getBundle("application");
+		String confString = bundle.getString("dao.impl");
+		Integer daoImplConf = Integer.valueOf(confString);
+		
 		Scanner sc = new Scanner(System.in);
 		
-		Menu menu = new Menu (sc, new PizzaDaoFichierImpl());
-		menu.afficher();
+		Menu menu;
+		switch (daoImplConf) {
+		case 0:
+			menu = new Menu (sc, new PizzaDaoImpl());
+			menu.afficher();
+			break;
+		case 1:
+			menu = new Menu (sc, new PizzaDaoFichierImpl());
+			menu.afficher();
+			break;
+		default:
+			System.err.println("Implémentation non reconnue dans le fichier \"application.properties\".");
+		}
 		
 		sc.close();
 		

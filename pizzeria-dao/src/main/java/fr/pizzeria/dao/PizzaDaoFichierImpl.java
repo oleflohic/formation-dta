@@ -95,7 +95,7 @@ public class PizzaDaoFichierImpl implements IPizzaDao {
 			pizzas.put(nouvellePizza.getCode(), nouvellePizza);
 			
 			// créer le fichier de pizza
-			File f = new File("data/" + nouvellePizza.getCode() + ".txt");
+			File f = new File("src/main/resources/data/" + nouvellePizza.getCode() + ".txt");
 			f.setWritable(true);
 			try {
 				f.createNewFile();
@@ -130,7 +130,7 @@ public class PizzaDaoFichierImpl implements IPizzaDao {
 				pizzas.remove(codePizza);
 				
 				// supprimer l'ancien fichier de pizza
-				Paths.get("data/" + codePizza + ".txt").toFile().delete();
+				Paths.get("src/main/resources/data/" + codePizza + ".txt").toFile().delete();
 				
 			}
 			
@@ -138,7 +138,7 @@ public class PizzaDaoFichierImpl implements IPizzaDao {
 			pizzas.put(pizzaApresModification.getCode(), pizzaApresModification);
 
 			// créer le fichier de pizza
-			File f = new File("data/" + pizzaApresModification.getCode() + ".txt");
+			File f = new File("src/main/resources/data/" + pizzaApresModification.getCode() + ".txt");
 			f.setWritable(true);
 			try {
 				f.createNewFile();
@@ -171,7 +171,7 @@ public class PizzaDaoFichierImpl implements IPizzaDao {
 		if (pizzas.remove(codePizza) == null) {
 			throw new SupprimerPizzaException ("Le code pizza " + codePizza + " est introuvable.");
 		}
-		Paths.get("data/" + codePizza + ".txt").toFile().delete();
+		Paths.get("src/main/resources/data/" + codePizza + ".txt").toFile().delete();
 		
 	}
 	
