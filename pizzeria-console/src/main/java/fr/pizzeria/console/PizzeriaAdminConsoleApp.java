@@ -25,6 +25,9 @@ public class PizzeriaAdminConsoleApp {
 		
 		Scanner sc = new Scanner(System.in);
 		
+		
+		erreur de compilation délibérée pour tester Jenkins
+		
 		Menu menu;
 		switch (daoImplConf) {
 		case 0:
