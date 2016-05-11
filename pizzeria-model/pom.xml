@@ -3,28 +3,18 @@
 	
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>pizzeria-model</artifactId>
-	<description>Modèles du projet pizzeria</description>
-	
+
 	<parent>
 		<groupId>fr.pizzeria</groupId>
 		<artifactId>pizzeria-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../</relativePath>
 	</parent>
-	
-	<build>
-		<finalName>pizzeria-model</finalName>
-	</build>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
 		</dependency>
 	</dependencies>
 	

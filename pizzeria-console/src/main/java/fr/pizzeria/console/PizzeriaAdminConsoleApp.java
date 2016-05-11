@@ -28,10 +28,12 @@ public class PizzeriaAdminConsoleApp {
 		Menu menu;
 		switch (daoImplConf) {
 		case 0:
+			System.out.println("Implémentation mémoire");
 			menu = new Menu (sc, new PizzaDaoImpl());
 			menu.afficher();
 			break;
 		case 1:
+			System.out.println("Implémentation fichier");
 			menu = new Menu (sc, new PizzaDaoFichierImpl());
 			menu.afficher();
 			break;

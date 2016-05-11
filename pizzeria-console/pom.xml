@@ -3,81 +3,94 @@
 	
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>pizzeria-console</artifactId>
-	<description>Console du projet pizzeria</description>
-	
-	
+
 	<parent>
 		<groupId>fr.pizzeria</groupId>
 		<artifactId>pizzeria-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../</relativePath>
 	</parent>
-	
-	<properties>
-		<applicationPropertiesSrc>src/main/resources/application.properties</applicationPropertiesSrc>
-	</properties>
-	
-	
-	<profiles>
 
-		<!--
-		<profile>
-			<id>impl_memoire</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-				<file>
-					<exists>application.properties</exists>
-				</file>
-				<property>
-					<name>dao.impl</name>
-					<value>0</value>
-				</property>
-			</activation>
-		</profile>
-		 -->
-		
-		<profile>
-			<id>impl_memoire</id>
-			<properties>
-				<dao.impl>0</dao.impl>
-			</properties>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-		</profile>
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<configuration>
+						<archive>
+							<manifest>
+								<addClasspath>true</addClasspath>
+								<mainClass>fr.pizzeria.console.PizzeriaAdminConsoleApp</mainClass>
+							</manifest>
+						</archive>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
-		<profile>
-			<id>impl_fichier</id>
-			<properties>
-				<dao.impl>1</dao.impl>
-			</properties>
-		</profile>
-		
-	</profiles>
-	
-	
 	<dependencies>
-		
 		<dependency>
 			<groupId>fr.pizzeria</groupId>
 			<artifactId>pizzeria-model</artifactId>
 		</dependency>
-		
 		<dependency>
 			<groupId>fr.pizzeria</groupId>
 			<artifactId>pizzeria-dao</artifactId>
 		</dependency>
-		
 		<dependency>
-			<groupId>com.github.stefanbirkner</groupId>
-			<artifactId>system-rules</artifactId>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
 		</dependency>
-		
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 		</dependency>
-		
+		<dependency>
+			<groupId>com.github.stefanbirkner</groupId>
+			<artifactId>system-rules</artifactId>
+		</dependency>
 	</dependencies>
+	
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<dao.impl>0</dao.impl>
+			</properties>
+		</profile>
+		
+		<profile>
+			<id>prod</id>
+			<properties>
+				<dao.impl>1</dao.impl>
+			</properties>
+		</profile>
+	
+	</profiles>
 	
 </project>
