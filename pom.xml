@@ -74,14 +74,12 @@
 				<scope>runtime</scope>
 			</dependency>
 	
-			<!-- 
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-collections4</artifactId>
 				<version>4.1</version>
-				<scope>runtime</scope>
+				<scope>compile</scope>
 			</dependency>
-			-->
 			
 		</dependencies>
 	</dependencyManagement>

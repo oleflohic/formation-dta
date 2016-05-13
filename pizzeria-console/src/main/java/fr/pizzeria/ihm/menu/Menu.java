@@ -14,6 +14,7 @@ import fr.pizzeria.exception.ihm.ChoixMenuException;
 import fr.pizzeria.ihm.menu.option.AbstractOptionMenu;
 import fr.pizzeria.ihm.menu.option.AfficherPizzaLaPlusChereOptionMenu;
 import fr.pizzeria.ihm.menu.option.AjouterPizzaOptionMenu;
+import fr.pizzeria.ihm.menu.option.ImporterDonneesOptionMenu;
 import fr.pizzeria.ihm.menu.option.ListerPizzasOptionMenu;
 import fr.pizzeria.ihm.menu.option.ListerPizzasParCategorieOptionMenu;
 import fr.pizzeria.ihm.menu.option.ModifierPizzaOptionMenu;
@@ -79,6 +80,8 @@ public class Menu {
 		options.put (5, new ListerPizzasParCategorieOptionMenu(pizzaDao));
 		options.put (6, new AfficherPizzaLaPlusChereOptionMenu(pizzaDao));
 		
+		options.put (7, new ImporterDonneesOptionMenu(pizzaDao));
+		
 		options.put (99, new QuitterOptionMenu());
 	}
 	
@@ -91,24 +94,7 @@ public class Menu {
 		while (continuer) {
 			System.out.println("**** " + MENU_TITRE_LIBELLE + " ****");
 			
-			/*
-			Set<Entry<Integer, AbstractOptionMenu>> es = options.entrySet();
-			for (Entry<Integer, AbstractOptionMenu> e : es) {
-				System.out.println("" + e.getKey() + ". " + e.getValue().getLibelle());
-			}
-			*/
-			
-			/*
-			options.entrySet().stream()
-				.forEach(
-					optionMenuEntry ->
-					System.out.println(optionMenuEntry.getKey() + ". " + optionMenuEntry.getValue().getLibelle())
-			);
-			*/
-
-			
 			options.forEach((cle, valeur) -> System.out.println(cle + ". " + valeur.getLibelle()));
-			
 			
 			try {
 				int saisie = scanner.nextInt();

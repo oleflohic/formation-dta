@@ -2,6 +2,7 @@ package fr.pizzeria.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -82,17 +83,14 @@ public class PizzaDaoBddImpl implements IPizzaDao {
 		try {
 			
 			Connection c = getConnection();
-			Statement s = c.createStatement();
-			s.executeUpdate(
-					"INSERT INTO pizza (code, libelle, prix, categorie) VALUES ("
-					+ "'" + pizzaAjoutee.getCode() + "'" + ","
-					+ "'" + pizzaAjoutee.getNom() + "'" + ","
-					+ "'" + pizzaAjoutee.getPrix() + "'" + ","
-					+ "'" + pizzaAjoutee.getCategorie().name() + "'"
-					+ ")"
-				);
+			PreparedStatement ps = c.prepareStatement("INSERT INTO pizza (code, libelle, prix, categorie) VALUES (?, ?, ?, ?)");
+			ps.setString(1, pizzaAjoutee.getCode());
+			ps.setString(2, pizzaAjoutee.getNom());
+			ps.setDouble(3, pizzaAjoutee.getPrix());
+			ps.setString(4, pizzaAjoutee.getCategorie().name());
+			ps.executeUpdate();
 			
-			s.close();
+			ps.close();
 			c.close();
 			
 		} catch (SQLException e) {
@@ -106,9 +104,9 @@ public class PizzaDaoBddImpl implements IPizzaDao {
 	public void modifierPizza(String codePizza, Pizza pizzaModifiee) throws ModifierPizzaException {
 
 		try {
-			
 			Connection c = getConnection();
 			Statement s = c.createStatement();
+			
 			s.executeUpdate(
 					"UPDATE pizza"
 					+ "SET"
@@ -157,7 +155,7 @@ public class PizzaDaoBddImpl implements IPizzaDao {
 
 	@Override
 	public boolean codePizzaExiste(String codePizza) {
-		return (trouverPizza(codePizza) != null);
+		return trouverPizza(codePizza) != null;
 	}
 
 	@Override
@@ -169,9 +167,7 @@ public class PizzaDaoBddImpl implements IPizzaDao {
 			ResultSet rs = s.executeQuery("SELECT * FROM pizza WHERE code = '" + codePizza + "'");
 			
 			while (rs.next()) {
-				
 				Pizza p = new Pizza(rs.getInt("id"), rs.getString("code"), rs.getString("libelle"), rs.getDouble("prix"), CategoriePizza.valueOf(rs.getString("categorie")));
-				
 				rs.close();
 				s.close();
 				c.close();
@@ -189,6 +185,42 @@ public class PizzaDaoBddImpl implements IPizzaDao {
 			System.out.println("Erreur : échec d'accès à la base.");
 			return null;
 		}
+	}
+	
+	
+	public void ajouterGroupePizzas (List<Pizza> pizzasAInserer) {
+		
+		try {
+			Connection c = getConnection();
+			c.setAutoCommit(false);
+			PreparedStatement ps = c.prepareStatement("INSERT INTO pizza (code, libelle, prix, categorie) VALUES (?, ?, ?, ?)");
+			
+			try {
+				for (Pizza p : pizzasAInserer) {
+					ps.setString(1, p.getCode());
+					ps.setString(2, p.getNom());
+					ps.setDouble(3, p.getPrix());
+					ps.setString(4, p.getCategorie().name());
+					ps.executeUpdate();
+				}
+				c.commit();
+				c.setAutoCommit(true);
+				ps.close();
+				c.close();
+				
+			} catch (SQLException e) {
+				c.rollback();
+				ps.close();
+				c.close();
+				throw e;	
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Erreur : échec d'accès à la base.");
+		}
+		
 	}
 	
 }

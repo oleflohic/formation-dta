@@ -72,16 +72,25 @@
 			<groupId>com.github.stefanbirkner</groupId>
 			<artifactId>system-rules</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+		</dependency>
 	</dependencies>
 	
 	<profiles>
+		<!-- Valeurs de dao.impl :
+		0 - implementation en memoire
+		1 - implementation fichier
+		2 - implementation SQL
+		-->
 		<profile>
 			<id>dev</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<dao.impl>0</dao.impl>
+				<dao.impl>2</dao.impl>
 			</properties>
 		</profile>
 		
@@ -89,13 +98,6 @@
 			<id>prod</id>
 			<properties>
 				<dao.impl>1</dao.impl>
-			</properties>
-		</profile>
-		
-		<profile>
-			<id>prod-sql</id>
-			<properties>
-				<dao.impl>2</dao.impl>
 			</properties>
 		</profile>
 	
