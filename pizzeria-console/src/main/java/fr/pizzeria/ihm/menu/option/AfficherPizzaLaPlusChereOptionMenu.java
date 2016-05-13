@@ -35,13 +35,6 @@ public class AfficherPizzaLaPlusChereOptionMenu extends AbstractOptionMenu {
 		if (pizzas.size() == 0) {
 			System.out.println("Il n'y a actuellement aucune pizza dans la base.");
 		} else {
-			/*
-			pizzas.stream()
-				.sorted((pizza1, pizza2) -> { return - new Double(pizza1.getPrix()).compareTo(new Double(pizza2.getPrix())); }) // ordre inversé
-				.limit(1)
-				.forEach(pizzaActuelle -> System.out.println(pizzaActuelle));
-				*/
-			
 			pizzas.stream()
 				.collect(Collectors.maxBy(Comparator.comparing(Pizza::getPrix)))
 				.ifPresent(System.out::println);

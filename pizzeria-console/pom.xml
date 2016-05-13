@@ -91,6 +91,13 @@
 				<dao.impl>1</dao.impl>
 			</properties>
 		</profile>
+		
+		<profile>
+			<id>prod-sql</id>
+			<properties>
+				<dao.impl>2</dao.impl>
+			</properties>
+		</profile>
 	
 	</profiles>
 	

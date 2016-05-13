@@ -36,13 +36,6 @@ public class ListerPizzasParCategorieOptionMenu extends AbstractOptionMenu {
 		if (pizzas.size() == 0) {
 			System.out.println("Il n'y a actuellement aucune pizza dans la base.");
 		} else {
-		
-			
-			/*
-			pizzas.stream()
-				.sorted((pizza1, pizza2) -> pizza1.getCategorie().compareTo(pizza2.getCategorie()))
-				.forEach(pizzaActuelle -> System.out.println(pizzaActuelle));
-				*/
 			
 			pizzaDao.listePizzas().stream()
 				.collect(Collectors.groupingBy(Pizza::getCategorie))
@@ -53,13 +46,6 @@ public class ListerPizzasParCategorieOptionMenu extends AbstractOptionMenu {
 						.forEach(System.out::println);
 					System.out.println();
 				});
-			
-			/*
-			for (Pizza p : pizzas) {
-				//System.out.println("" + p.getCode() + " -> " + p.getNom() + " (" + p.getPrix() + "€)");
-				System.out.println(p);
-			}
-			*/
 			
 		}
 
