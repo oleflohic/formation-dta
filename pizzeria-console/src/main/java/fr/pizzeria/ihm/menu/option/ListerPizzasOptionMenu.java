@@ -18,9 +18,9 @@ public class ListerPizzasOptionMenu extends AbstractOptionMenu {
 	public ListerPizzasOptionMenu(IPizzaDao pizzaDao) {
 		super(LISTER_PIZZAS_LIBELLE_MENU, pizzaDao);
 	}
-
 	
-	// ==== M�thodes ====
+	
+	// ==== Méthodes ====
 
 	@Override
 	public boolean executer() {
