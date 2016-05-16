@@ -1,5 +1,6 @@
 package fr.pizzeria.dao;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,15 +27,15 @@ public class PizzaDaoImpl implements IPizzaDao {
 	
 	public static Pizza[] pizzasParDefaut () {
 		return new Pizza[] {
-				new Pizza ("PEP", "Peperoni", 10, CategoriePizza.VIANDE),
-				new Pizza ("MAR", "Margherita", 14, CategoriePizza.SANS_VIANDE),
-				new Pizza ("REI", "La Reine", 11.5, CategoriePizza.VIANDE),
-				new Pizza ("FRO", "La 4 fromages", 12, CategoriePizza.SANS_VIANDE),
-				new Pizza ("CAN", "La cannibale", 12.5, CategoriePizza.VIANDE),
-				new Pizza ("SAV", "La savoyarde", 13, CategoriePizza.VIANDE),
-				new Pizza ("ORI", "L'orientale", 13.5, CategoriePizza.VIANDE),
-				new Pizza ("IND", "L'indienne", 14, CategoriePizza.VIANDE),
-				new Pizza ("SAU", "La saumoneta", 14, CategoriePizza.POISSON),
+				new Pizza ("PEP", "Peperoni", new BigDecimal("10"), CategoriePizza.VIANDE),
+				new Pizza ("MAR", "Margherita", new BigDecimal("14"), CategoriePizza.SANS_VIANDE),
+				new Pizza ("REI", "La Reine", new BigDecimal("11.5"), CategoriePizza.VIANDE),
+				new Pizza ("FRO", "La 4 fromages", new BigDecimal("12"), CategoriePizza.SANS_VIANDE),
+				new Pizza ("CAN", "La cannibale", new BigDecimal("12.5"), CategoriePizza.VIANDE),
+				new Pizza ("SAV", "La savoyarde", new BigDecimal("13"), CategoriePizza.VIANDE),
+				new Pizza ("ORI", "L'orientale", new BigDecimal("13.5"), CategoriePizza.VIANDE),
+				new Pizza ("IND", "L'indienne", new BigDecimal("14"), CategoriePizza.VIANDE),
+				new Pizza ("SAU", "La saumoneta", new BigDecimal("14"), CategoriePizza.POISSON),
 			};
 	}
 	

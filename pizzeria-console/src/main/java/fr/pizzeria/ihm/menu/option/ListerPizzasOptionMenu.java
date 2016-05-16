@@ -28,7 +28,6 @@ public class ListerPizzasOptionMenu extends AbstractOptionMenu {
 		System.out.println();
 		System.out.println("Liste des pizzas :");
 		
-		
 		List<Pizza> pizzas = pizzaDao.listePizzas();
 		
 		// aucune pizza : message d'information
@@ -38,7 +37,6 @@ public class ListerPizzasOptionMenu extends AbstractOptionMenu {
 			pizzas.stream()
 				.sorted(Comparator.comparing(Pizza::getCode))
 				.forEach(pizzaActuelle -> System.out.println(pizzaActuelle));
-			
 		}
 
 		// afficher le nombre de pizzas crééées depuis le début. grammaire en bonus.

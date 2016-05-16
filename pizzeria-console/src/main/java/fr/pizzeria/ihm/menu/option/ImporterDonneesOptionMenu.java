@@ -1,6 +1,7 @@
 package fr.pizzeria.ihm.menu.option;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -58,7 +59,7 @@ public class ImporterDonneesOptionMenu extends AbstractOptionMenu {
 							String ligne = Files.readAllLines(path).get(0);
 							String[] ligneTab = ligne.split(";");
 							p.setNom(ligneTab[0]);
-							p.setPrix(Double.valueOf(ligneTab[1]));
+							p.setPrix(new BigDecimal(ligneTab[1]));
 							p.setCategorie(CategoriePizza.valueOf(ligneTab[2]));
 						} catch (Exception e) {
 							e.printStackTrace();

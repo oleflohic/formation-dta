@@ -61,7 +61,7 @@ public class PizzeriaAdminConsoleApp {
 
 		case 3:
 			System.out.println("Implémentation JPA");
-			lancerMenu(sc, new PizzaDaoJpaImpl(Persistence.createEntityManagerFactory("pizzeria-console")));
+			lancerMenu(sc, new PizzaDaoJpaImpl(Persistence.createEntityManagerFactory("pizzeria-pu")));
 			break;
 			
 		default:

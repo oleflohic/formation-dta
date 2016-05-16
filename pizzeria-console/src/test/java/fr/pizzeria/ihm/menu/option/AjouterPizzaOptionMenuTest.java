@@ -1,6 +1,7 @@
 package fr.pizzeria.ihm.menu.option;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -52,7 +53,7 @@ public class AjouterPizzaOptionMenuTest {
 		Assert.assertTrue(pizzaOpt.isPresent());
 		Pizza pizza = pizzaOpt.get();
 		Assert.assertEquals("NewPizza", pizza.getNom());
-		Assert.assertTrue(12.5 == pizza.getPrix());
+		Assert.assertEquals(new BigDecimal("12.5"), pizza.getPrix());
 		Assert.assertEquals(CategoriePizza.VIANDE, pizza.getCategorie());
 		
 		String outAttendu = Files.lines(Paths.get("src/test/resources/resultatAjouterNouvellePizza.txt")).collect(Collectors.joining(System.lineSeparator()));

@@ -1,5 +1,6 @@
 package fr.pizzeria.dao;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -61,7 +62,7 @@ public class PizzaDaoBddImpl implements IPizzaDao {
 			ResultSet rs = s.executeQuery("SELECT * FROM pizza");
 			
 			while (rs.next()) {
-				resultat.add(new Pizza(rs.getInt("id"), rs.getString("code"), rs.getString("libelle"), rs.getDouble("prix"), CategoriePizza.valueOf(rs.getString("categorie"))));
+				resultat.add(new Pizza(rs.getInt("id"), rs.getString("code"), rs.getString("libelle"), new BigDecimal(rs.getDouble("prix")), CategoriePizza.valueOf(rs.getString("categorie"))));
 			}
 
 			rs.close();
@@ -79,23 +80,22 @@ public class PizzaDaoBddImpl implements IPizzaDao {
 
 	@Override
 	public void ajouterPizza(Pizza pizzaAjoutee) throws AjouterPizzaException {
-
+		
 		try {
-			
 			Connection c = getConnection();
 			PreparedStatement ps = c.prepareStatement("INSERT INTO pizza (code, libelle, prix, categorie) VALUES (?, ?, ?, ?)");
 			ps.setString(1, pizzaAjoutee.getCode());
 			ps.setString(2, pizzaAjoutee.getNom());
-			ps.setDouble(3, pizzaAjoutee.getPrix());
+			ps.setDouble(3, pizzaAjoutee.getPrix().longValueExact());
 			ps.setString(4, pizzaAjoutee.getCategorie().name());
 			ps.executeUpdate();
 			
 			ps.close();
 			c.close();
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Erreur : échec de l'opération (connexion ou insertion).");
+			throw new AjouterPizzaException ("Échec de l'opération ; le code \"" + pizzaAjoutee.getCode() + "\" serait déjà pris.");
+			//System.out.println("Erreur : échec de l'opération (connexion ou insertion).");
 		}
 		
 	}
@@ -167,7 +167,7 @@ public class PizzaDaoBddImpl implements IPizzaDao {
 			ResultSet rs = s.executeQuery("SELECT * FROM pizza WHERE code = '" + codePizza + "'");
 			
 			while (rs.next()) {
-				Pizza p = new Pizza(rs.getInt("id"), rs.getString("code"), rs.getString("libelle"), rs.getDouble("prix"), CategoriePizza.valueOf(rs.getString("categorie")));
+				Pizza p = new Pizza(rs.getInt("id"), rs.getString("code"), rs.getString("libelle"), new BigDecimal(rs.getDouble("prix")), CategoriePizza.valueOf(rs.getString("categorie")));
 				rs.close();
 				s.close();
 				c.close();
@@ -199,7 +199,7 @@ public class PizzaDaoBddImpl implements IPizzaDao {
 				for (Pizza p : pizzasAInserer) {
 					ps.setString(1, p.getCode());
 					ps.setString(2, p.getNom());
-					ps.setDouble(3, p.getPrix());
+					ps.setDouble(3, p.getPrix().longValueExact());
 					ps.setString(4, p.getCategorie().name());
 					ps.executeUpdate();
 				}

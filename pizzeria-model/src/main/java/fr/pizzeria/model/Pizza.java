@@ -1,13 +1,17 @@
 package fr.pizzeria.model;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -17,6 +21,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  * @author oleflohic
  */
 @Entity
+@Table(name="pizza")
 public class Pizza {
 	
 	/**
@@ -30,8 +35,9 @@ public class Pizza {
 	 * Identifiant unique de la pizza. N'est pas forcément égal à l'index de valeur si stocké dans un tableau.
 	 */
 	@Id
-	@GeneratedValue
-	private int id;
+	@GeneratedValue (strategy=GenerationType.IDENTITY)
+	//@Column (name="ID", unique=true)
+	private Integer id;
 	
 	/**
 	 * Code pizza en 3 caractères. Unique.
@@ -52,13 +58,13 @@ public class Pizza {
 	 */
 	@ToString
 	@Column (name="PRIX")
-	private double prix;
+	private BigDecimal prix;
 	
 	/**
 	 * Catégorie de la pizza.
 	 */
 	@ToString
-	@Enumerated
+	@Enumerated(EnumType.STRING)
 	@Column (name="CATEGORIE")
 	private CategoriePizza categorie;
 	
@@ -76,7 +82,7 @@ public class Pizza {
 	 * @param prix
 	 * @param categorie
 	 */
-	public Pizza (String code, String nom, double prix, CategoriePizza categorie) {
+	public Pizza (String code, String nom, BigDecimal prix, CategoriePizza categorie) {
 		this (nbPizzas, code, nom, prix, categorie);
 		nbPizzas++;
 	}
@@ -89,8 +95,8 @@ public class Pizza {
 	 * @param prix
 	 * @param categorie
 	 */
-	public Pizza (int id, String code, String nom, double prix, CategoriePizza categorie) {
-		this.id = id;
+	public Pizza (int id, String code, String nom, BigDecimal prix, CategoriePizza categorie) {
+		//this.id = id;
 		this.code = code;
 		this.nom = nom;
 		this.prix = prix;
@@ -104,7 +110,6 @@ public class Pizza {
 	 */
 	public Pizza clone () {
 		return new Pizza (id, code, nom, prix, categorie);
-		
 	}
 	
 	/**
@@ -112,9 +117,6 @@ public class Pizza {
 	 */
 	@Override
 	public String toString () {
-		
-		//return "" + code + " -> " + nom + " (" + prix + "€) (" + categorie.getLibelle() + ")";
-		
 		return Arrays.asList(this.getClass().getDeclaredFields())
 				.stream()
 				.filter(field -> field.getAnnotation(ToString.class) != null)
@@ -129,51 +131,6 @@ public class Pizza {
 				})
 				.collect(Collectors.joining(" ")
 		);
-		
-		/*
-		Field[] variablesDeLaClasse = getClass().getDeclaredFields();
-		String resultat = "";
-		for (Field variableActuelle : variablesDeLaClasse) {
-			
-			// extraire l'annotation de classe ToString attachée à la variable actuelle ;
-			// obtient null si cette annotation n'est pas attaché à cette variable.
-			ToString annotationActuelle = variableActuelle.getAnnotation(ToString.class);
-			
-			// annotation trouvée : on peut afficher la valeur de cette variable 
-			if (annotationActuelle != null) {
-				try {
-					
-					String texteVariable;
-					
-					// la variable actuelle est une CategoriePizza : traitement spécifique
-					if (variableActuelle.get(this) instanceof CategoriePizza) {
-						texteVariable = ((CategoriePizza)variableActuelle.get(this)).getLibelle();
-					} else {
-						texteVariable = variableActuelle.get(this).toString();
-					}
-					
-					
-					// propriété de l'annotation : si "uppercase" est vrai, alors mettre en majuscule la valeur de la variable actuelle
-					if (annotationActuelle.uppercase()) {
-						//resultat += variableActuelle.get(this).toString().toUpperCase() + " ";
-						resultat += texteVariable.toUpperCase() + " ";
-						
-					// sinon, aucune altération
-					} else {
-						resultat += texteVariable + " ";
-					}
-					
-				} catch (IllegalArgumentException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				}
-			}
-			
-		}
-		return resultat;
-		*/
-		
 	}
 	
 	
@@ -181,19 +138,6 @@ public class Pizza {
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder(17,37).append(code).toHashCode();
-		
-		/*
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((categorie == null) ? 0 : categorie.hashCode());
-		result = prime * result + ((code == null) ? 0 : code.hashCode());
-		result = prime * result + id;
-		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(prix);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		return result;
-		*/
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -214,35 +158,17 @@ public class Pizza {
 				.append(nom, other.nom)
 				.append(prix, other.prix)
 				.build();
-		/*
-		if (categorie != other.categorie)
-			return false;
-		if (code == null) {
-			if (other.code != null)
-				return false;
-		} else if (!code.equals(other.code))
-			return false;
-		if (id != other.id)
-			return false;
-		if (nom == null) {
-			if (other.nom != null)
-				return false;
-		} else if (!nom.equals(other.nom))
-			return false;
-		if (Double.doubleToLongBits(prix) != Double.doubleToLongBits(other.prix))
-			return false;
-		return true;
-		*/
-		
-		
-		
 	}
 	
 
 	// ==== Accesseurs ====
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getCode() {
@@ -261,18 +187,18 @@ public class Pizza {
 		this.nom = nom;
 	}
 
-	public double getPrix() {
+	public BigDecimal getPrix() {
 		return prix;
 	}
 
-	public void setPrix(double prix) {
+	public void setPrix(BigDecimal prix) {
 		this.prix = prix;
 	}
-
+	
 	public void setCategorie(CategoriePizza categorie) {
 		this.categorie = categorie;
 	}
-
+	
 	public CategoriePizza getCategorie() {
 		return categorie;
 	}

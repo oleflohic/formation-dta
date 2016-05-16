@@ -1,5 +1,6 @@
 package fr.pizzeria.ihm.menu.option;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
@@ -38,7 +39,7 @@ public class AjouterPizzaOptionMenu extends AbstractOptionMenu {
 		String nomPizzaAjoutee = scanner.next();
 		
 		System.out.println("Veuillez saisir le prix (utiliser , comme séparateur décimal) : ");
-		float prixPizzaAjoutee = scanner.nextFloat();
+		String prixPizzaAjoutee = scanner.next();
 
 		System.out.println("Veuillez saisir la catégorie parmi les options suivantes (saisir le code) : ");
 		CategoriePizza[] categoriesPizza = CategoriePizza.values();
@@ -50,7 +51,7 @@ public class AjouterPizzaOptionMenu extends AbstractOptionMenu {
 	
 		try {
 			CategoriePizza categorie = CategoriePizza.valueOf(categoriePizzaAjoutee);
-			Pizza pizzaAjoutee = new Pizza (codePizza, nomPizzaAjoutee, prixPizzaAjoutee, categorie);
+			Pizza pizzaAjoutee = new Pizza (codePizza, nomPizzaAjoutee, new BigDecimal(prixPizzaAjoutee), categorie);
 	
 			pizzaDao.ajouterPizza(pizzaAjoutee);
 			System.out.println("La pizza de code " + codePizza + " a été ajoutée.");
