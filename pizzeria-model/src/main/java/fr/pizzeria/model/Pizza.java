@@ -3,6 +3,11 @@ package fr.pizzeria.model;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -10,8 +15,9 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  * Classe utilisée pour stocker les informations de pizza.
  * @author oleflohic
  */
+@Entity
 public class Pizza {
-
+	
 	/**
 	 * Nombre de (nouvelles) pizzas qui ont été créées depuis le début du programme.
 	 */
@@ -22,6 +28,8 @@ public class Pizza {
 	/**
 	 * Identifiant unique de la pizza. N'est pas forcément égal à l'index de valeur si stocké dans un tableau.
 	 */
+	@Id
+	@GeneratedValue
 	private int id;
 	
 	/**
@@ -46,6 +54,7 @@ public class Pizza {
 	 * Catégorie de la pizza.
 	 */
 	@ToString
+	@Enumerated
 	private CategoriePizza categorie;
 	
 	

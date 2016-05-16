@@ -16,7 +16,6 @@ import fr.pizzeria.ihm.menu.Menu;
  */
 public class PizzeriaAdminConsoleApp {
 	
-	
 	/**
 	 * Méthode principale.
 	 * @param args Arguments du programme.
@@ -62,7 +61,7 @@ public class PizzeriaAdminConsoleApp {
 		
 	}
 	
-
+	
 	
 	public static void lancerMenu (Scanner sc, IPizzaDao dao) {
 		Menu menu = new Menu (sc, dao);

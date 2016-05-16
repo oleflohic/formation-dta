@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -33,6 +34,7 @@ public class AjouterPizzaOptionMenuTest {
 	
 	@Before
 	public void setUp() throws Exception {
+		Locale.setDefault(Locale.FRENCH);
 		Scanner scanner = new Scanner(System.in);
 		pizzaDao = new PizzaDaoImpl();
 		optionMenu = new AjouterPizzaOptionMenu (pizzaDao, scanner);	
