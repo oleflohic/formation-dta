@@ -34,7 +34,7 @@ public class AjouterPizzaOptionMenuTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		Locale.setDefault(Locale.FRENCH);
+		Locale.setDefault(Locale.FRENCH); // Forcer le test unitaire à utiliser le format français pour la saisie des nombres décimaux
 		Scanner scanner = new Scanner(System.in);
 		pizzaDao = new PizzaDaoImpl();
 		optionMenu = new AjouterPizzaOptionMenu (pizzaDao, scanner);	

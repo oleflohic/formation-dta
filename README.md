@@ -1,6 +1,8 @@
 # Formation DTA
 Ce dépôt contient les projets réalisés pendant la formation DTA.
 
+[![Build Status](http://ns377570.ip-5-196-89.eu:8080/job/Olivier Le Flohic - Pizzeria - Build/badge/icon)](http://ns377570.ip-5-196-89.eu:8080/job/Olivier Le Flohic - Pizzeria - Build)
+
 ## pizzeria-console-imperative
 Une application qui permet de manipuler une entité Pizza.
 

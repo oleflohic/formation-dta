@@ -11,7 +11,7 @@ import fr.pizzeria.exception.dao.ModifierPizzaException;
 import fr.pizzeria.exception.dao.SupprimerPizzaException;
 import fr.pizzeria.model.Pizza;
 
-public class PizzaDaoJpa implements IPizzaDao {
+public class PizzaDaoJpaImpl implements IPizzaDao {
 
 	// ==== Variables ====
 	
@@ -20,25 +20,24 @@ public class PizzaDaoJpa implements IPizzaDao {
 	 */
 	private EntityManagerFactory entityManagerFactory;
 	
-
+	
 	// ==== Constructeurs ====
-	public PizzaDaoJpa (EntityManagerFactory entityManagerFactory) {
+	public PizzaDaoJpaImpl (EntityManagerFactory entityManagerFactory) {
 		this.entityManagerFactory = entityManagerFactory;
 	}
 	
 	// ==== Méthodes ====
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Pizza> listePizzas() {
-		// TODO Auto-generated method stub
-		
-		/*
 		EntityManager manager = entityManagerFactory.createEntityManager();
-		Query query = manager.createQuery("SELECT * FROM pizza");
-		List results = query.getResultList();
-		*/
+		Query query = manager.createQuery("SELECT id,code,libelle,prix,type FROM pizza");
 		
-		return null;
+		//List<Pizza> result = (List<Pizza>) manager.createQuery("from Pizza").getResultList();
+		
+		manager.close();
+		return (List<Pizza>)query.getResultList();
 	}
 
 	@Override

@@ -76,6 +76,15 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-collections4</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.1-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+		</dependency>
+		
 	</dependencies>
 	
 	<profiles>
@@ -83,6 +92,7 @@
 		0 - implementation en memoire
 		1 - implementation fichier
 		2 - implementation SQL
+		3 - implementation JPA
 		-->
 		<profile>
 			<id>dev</id>
@@ -90,7 +100,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<dao.impl>2</dao.impl>
+				<dao.impl>3</dao.impl>
 			</properties>
 		</profile>
 		

@@ -2,11 +2,15 @@ package fr.pizzeria.console;
 
 import java.util.ResourceBundle;
 import java.util.Scanner;
+import java.util.logging.Level;
+
+import javax.persistence.Persistence;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDaoBddImpl;
 import fr.pizzeria.dao.PizzaDaoFichierImpl;
 import fr.pizzeria.dao.PizzaDaoImpl;
+import fr.pizzeria.dao.PizzaDaoJpaImpl;
 import fr.pizzeria.exception.dao.DaoException;
 import fr.pizzeria.ihm.menu.Menu;
 
@@ -23,6 +27,8 @@ public class PizzeriaAdminConsoleApp {
 	 * @throws DaoException 
 	 */
 	public static void main(String[] args) throws ClassNotFoundException, DaoException {
+		
+		java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
 		
 		ResourceBundle bundle = ResourceBundle.getBundle("application");
 		String confString = bundle.getString("dao.impl");
@@ -51,8 +57,13 @@ public class PizzeriaAdminConsoleApp {
 						jdbcBundle.getString("jdbc.username"),
 						jdbcBundle.getString("jdbc.password")
 					));
-			
 			break;
+
+		case 3:
+			System.out.println("Implémentation JPA");
+			lancerMenu(sc, new PizzaDaoJpaImpl(Persistence.createEntityManagerFactory("pizzeria-console")));
+			break;
+			
 		default:
 			System.err.println("Implémentation non reconnue dans le fichier \"application.properties\".");
 		}

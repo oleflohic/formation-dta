@@ -3,6 +3,7 @@ package fr.pizzeria.model;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -36,18 +37,21 @@ public class Pizza {
 	 * Code pizza en 3 caractères. Unique.
 	 */
 	@ToString
+	@Column (name="CODE", length=3, unique=true)
 	private String code;
 	
 	/**
 	 * Nom affiché de la pizza.
 	 */
 	@ToString
+	@Column (name="LIBELLE", length=50)
 	private String nom;
 	
 	/**
 	 * Prix de la pizza.
 	 */
 	@ToString
+	@Column (name="PRIX")
 	private double prix;
 	
 	/**
@@ -55,6 +59,7 @@ public class Pizza {
 	 */
 	@ToString
 	@Enumerated
+	@Column (name="CATEGORIE")
 	private CategoriePizza categorie;
 	
 	
