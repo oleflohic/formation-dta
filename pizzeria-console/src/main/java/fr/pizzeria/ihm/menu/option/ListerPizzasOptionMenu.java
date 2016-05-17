@@ -3,7 +3,7 @@ package fr.pizzeria.ihm.menu.option;
 import java.util.Comparator;
 import java.util.List;
 
-import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.admin.IPizzaDao;
 import fr.pizzeria.model.Pizza;
 
 public class ListerPizzasOptionMenu extends AbstractOptionMenu {

@@ -3,7 +3,7 @@ package fr.pizzeria.ihm.menu.option;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
-import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.admin.IPizzaDao;
 import fr.pizzeria.exception.dao.AjouterPizzaException;
 import fr.pizzeria.exception.dao.DaoException;
 import fr.pizzeria.model.CategoriePizza;

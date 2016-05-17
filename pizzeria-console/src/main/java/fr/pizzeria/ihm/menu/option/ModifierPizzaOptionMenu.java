@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
 
-import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.admin.IPizzaDao;
 import fr.pizzeria.exception.dao.ModifierPizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;

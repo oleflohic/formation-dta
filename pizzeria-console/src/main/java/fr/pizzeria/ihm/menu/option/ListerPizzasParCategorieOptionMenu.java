@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.admin.IPizzaDao;
 import fr.pizzeria.model.Pizza;
 
 public class ListerPizzasParCategorieOptionMenu extends AbstractOptionMenu {

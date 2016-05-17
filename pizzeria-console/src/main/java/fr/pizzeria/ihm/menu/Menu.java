@@ -5,7 +5,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
-import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.admin.IPizzaDao;
+import fr.pizzeria.dao.client.IClientDao;
 import fr.pizzeria.exception.dao.AjouterPizzaException;
 import fr.pizzeria.exception.dao.DaoException;
 import fr.pizzeria.exception.dao.ModifierPizzaException;
@@ -83,6 +84,30 @@ public class Menu {
 		options.put (7, new ImporterDonneesOptionMenu(pizzaDao));
 		
 		options.put (99, new QuitterOptionMenu());
+	}
+	
+	public void initialiserOptions (Scanner scanner, IClientDao clientDao) {
+		options = new TreeMap<Integer, AbstractOptionMenu> (new Comparator<Integer>() {
+			@Override
+			public int compare(Integer o1, Integer o2) {
+				return o1.compareTo(o2);
+			}
+		});
+		
+		/*
+		options.put (1, new ListerPizzasOptionMenu(pizzaDao));
+		options.put (2, new AjouterPizzaOptionMenu(pizzaDao, scanner));
+		options.put (3, new ModifierPizzaOptionMenu(pizzaDao, scanner));
+		options.put (4, new SupprimerPizzaOptionMenu(pizzaDao, scanner));
+
+		options.put (5, new ListerPizzasParCategorieOptionMenu(pizzaDao));
+		options.put (6, new AfficherPizzaLaPlusChereOptionMenu(pizzaDao));
+		
+		options.put (7, new ImporterDonneesOptionMenu(pizzaDao));
+		*/
+		
+		options.put (99, new QuitterOptionMenu());
+		
 	}
 	
 	/**

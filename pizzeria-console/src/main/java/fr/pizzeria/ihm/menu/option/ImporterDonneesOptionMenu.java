@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.ListUtils;
 
-import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaDaoBddImpl;
+import fr.pizzeria.dao.admin.IPizzaDao;
+import fr.pizzeria.dao.admin.PizzaDaoBddImpl;
 import fr.pizzeria.exception.dao.DaoException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;

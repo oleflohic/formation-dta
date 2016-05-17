@@ -36,28 +36,28 @@ public class Pizza {
 	 */
 	@Id
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
-	//@Column (name="ID", unique=true)
+	//@Column (name="id", unique=true)
 	private Integer id;
 	
 	/**
 	 * Code pizza en 3 caractères. Unique.
 	 */
 	@ToString
-	@Column (name="CODE", length=3, unique=true)
+	@Column (name="code", length=3, unique=true)
 	private String code;
 	
 	/**
 	 * Nom affiché de la pizza.
 	 */
 	@ToString
-	@Column (name="LIBELLE", length=50)
+	@Column (name="nom", length=50)
 	private String nom;
 	
 	/**
 	 * Prix de la pizza.
 	 */
 	@ToString
-	@Column (name="PRIX")
+	@Column (name="prix", columnDefinition="DECIMAL(10,2)")
 	private BigDecimal prix;
 	
 	/**
@@ -65,8 +65,14 @@ public class Pizza {
 	 */
 	@ToString
 	@Enumerated(EnumType.STRING)
-	@Column (name="CATEGORIE")
-	private CategoriePizza categorie;
+	@Column (name="categorie", columnDefinition="ENUM('VIANDE', 'POISSON', 'SANS_VIANDE') DEFAULT 'SANS_VIANDE'")
+	private CategoriePizza categorie = CategoriePizza.SANS_VIANDE;
+	
+	/**
+	 * Url de l'image de la pizza.
+	 */
+	@Column (name="URL_IMAGE", length=500, nullable=true)
+	private String urlImage;
 	
 	
 	// ==== Constructeurs ====
@@ -75,6 +81,7 @@ public class Pizza {
 		this.id = nbPizzas;
 		nbPizzas++;
 	}
+	
 	/**
 	 * Crée une nouvelle instance de pizza avec id unique.
 	 * @param code
@@ -108,6 +115,7 @@ public class Pizza {
 	/**
 	 * Cloner cette pizza.
 	 */
+	@Override
 	public Pizza clone () {
 		return new Pizza (id, code, nom, prix, categorie);
 	}
@@ -139,6 +147,7 @@ public class Pizza {
 	public int hashCode() {
 		return new HashCodeBuilder(17,37).append(code).toHashCode();
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		
@@ -205,6 +214,14 @@ public class Pizza {
 
 	public static int getNbPizzas() {
 		return nbPizzas;
+	}
+
+	public String getUrlImage() {
+		return urlImage;
+	}
+
+	public void setUrlImage(String urlImage) {
+		this.urlImage = urlImage;
 	}
 
 	

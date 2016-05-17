@@ -1,24 +1,11 @@
-package fr.pizzeria.console;
+package fr.pizzeria;
 
-import java.util.ResourceBundle;
-import java.util.Scanner;
-import java.util.logging.Level;
-
-import javax.persistence.Persistence;
-
-import fr.pizzeria.dao.admin.IPizzaDao;
-import fr.pizzeria.dao.admin.PizzaDaoBddImpl;
-import fr.pizzeria.dao.admin.PizzaDaoFichierImpl;
-import fr.pizzeria.dao.admin.PizzaDaoImpl;
-import fr.pizzeria.dao.admin.PizzaDaoJpaImpl;
 import fr.pizzeria.exception.dao.DaoException;
-import fr.pizzeria.ihm.menu.Menu;
 
 /**
- * classe de point d'entrée de l'application
- * @author oleflohic
+ *
  */
-public class PizzeriaAdminConsoleApp {
+public class PizzeriaClientConsoleApp {
 	
 	/**
 	 * Méthode principale.
@@ -28,6 +15,7 @@ public class PizzeriaAdminConsoleApp {
 	 */
 	public static void main(String[] args) throws ClassNotFoundException, DaoException {
 		
+		/*
 		java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.WARNING);
 		
 		ResourceBundle bundle = ResourceBundle.getBundle("application");
@@ -69,15 +57,15 @@ public class PizzeriaAdminConsoleApp {
 		}
 		
 		sc.close();
+		*/
 		
 	}
 	
 	
-	
+	/*
 	public static void lancerMenu (Scanner sc, IPizzaDao dao) {
 		Menu menu = new Menu (sc, dao);
 		menu.afficher();
 	}
-	
-
+	*/
 }
