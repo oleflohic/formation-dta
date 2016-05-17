@@ -34,18 +34,18 @@
 		<dependencies>
 			
 			<dependency>
-				<groupId>fr.pizzeria</groupId>
+				<groupId>${project.groupId}</groupId>
 				<artifactId>pizzeria-model</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>fr.pizzeria</groupId>
+				<groupId>${project.groupId}</groupId>
 				<artifactId>pizzeria-dao</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>fr.pizzeria</groupId>
-				<artifactId>pizzeria-console</artifactId>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>pizzeria-console-ihm-lib</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			

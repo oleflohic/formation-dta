@@ -1,4 +1,4 @@
-package fr.pizzeria.dao.admin;
+package fr.pizzeria.dao.pizza;
 
 import java.util.List;
 

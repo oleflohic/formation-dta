@@ -2,7 +2,7 @@ package fr.pizzeria.ihm.menu.option;
 
 import java.util.Scanner;
 
-import fr.pizzeria.dao.admin.IPizzaDao;
+import fr.pizzeria.dao.factory.DaoFactory;
 import fr.pizzeria.exception.dao.DaoException;
 
 /**
@@ -21,7 +21,8 @@ public abstract class AbstractOptionMenu {
 	/**
 	 * DAO gérant la carte à pizza. Peut être null.
 	 */
-	protected IPizzaDao pizzaDao;
+	//protected IPizzaDao pizzaDao;
+	protected DaoFactory daoFactory;
 	
 	/**
 	 * Lecteur d'entrées clavier. Peut être null.
@@ -45,10 +46,17 @@ public abstract class AbstractOptionMenu {
 	 * @param libelle
 	 * @param pizzaDao
 	 */
+	/*
 	public AbstractOptionMenu(String libelle, IPizzaDao pizzaDao) {
 		this(libelle);
 		this.pizzaDao = pizzaDao;
 	}
+	*/
+	public AbstractOptionMenu(String libelle, DaoFactory daoFactory) {
+		this(libelle);
+		this.daoFactory = daoFactory;
+	}
+	
 	
 	/**
 	 * Créer une option "active", qui a accès à la carte et peut écouter les entrées clavier.
@@ -56,8 +64,14 @@ public abstract class AbstractOptionMenu {
 	 * @param pizzaDao
 	 * @param scanner
 	 */
+	/*
 	public AbstractOptionMenu(String libelle, IPizzaDao pizzaDao, Scanner scanner) {
 		this(libelle, pizzaDao);
+		this.scanner = scanner;
+	}
+	*/
+	public AbstractOptionMenu(String libelle, DaoFactory daoFactory, Scanner scanner) {
+		this(libelle, daoFactory);
 		this.scanner = scanner;
 	}
 	

@@ -3,7 +3,7 @@ package fr.pizzeria.ihm.menu.option;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
-import fr.pizzeria.dao.admin.IPizzaDao;
+import fr.pizzeria.dao.factory.DaoFactory;
 import fr.pizzeria.exception.dao.AjouterPizzaException;
 import fr.pizzeria.exception.dao.DaoException;
 import fr.pizzeria.model.CategoriePizza;
@@ -22,8 +22,8 @@ public class AjouterPizzaOptionMenu extends AbstractOptionMenu {
 
 	// ==== Constructeurs ====
 	
-	public AjouterPizzaOptionMenu(IPizzaDao pizzaDao, Scanner scanner) {
-		super(AJOUTER_PIZZA_LIBELLE_MENU, pizzaDao, scanner);
+	public AjouterPizzaOptionMenu(DaoFactory daoFactory, Scanner scanner) {
+		super(AJOUTER_PIZZA_LIBELLE_MENU, daoFactory, scanner);
 	}
 
 	
@@ -53,7 +53,7 @@ public class AjouterPizzaOptionMenu extends AbstractOptionMenu {
 			CategoriePizza categorie = CategoriePizza.valueOf(categoriePizzaAjoutee);
 			Pizza pizzaAjoutee = new Pizza (codePizza, nomPizzaAjoutee, new BigDecimal(prixPizzaAjoutee), categorie);
 	
-			pizzaDao.ajouterPizza(pizzaAjoutee);
+			daoFactory.getPizzaDao().ajouterPizza(pizzaAjoutee);
 			System.out.println("La pizza de code " + codePizza + " a été ajoutée.");
 			
 			System.out.println();

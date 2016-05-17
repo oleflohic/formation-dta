@@ -1,5 +1,8 @@
 package fr.pizzeria.dao.client;
 
-public interface IClientDao {
+import fr.pizzeria.model.Client;
 
+public interface IClientDao {
+	void saveClient(Client client);
+	//void saveClient(Client client);
 }

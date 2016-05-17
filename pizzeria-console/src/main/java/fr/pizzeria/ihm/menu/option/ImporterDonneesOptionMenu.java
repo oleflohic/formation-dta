@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.ListUtils;
 
-import fr.pizzeria.dao.admin.IPizzaDao;
-import fr.pizzeria.dao.admin.PizzaDaoBddImpl;
+import fr.pizzeria.dao.factory.DaoFactory;
+import fr.pizzeria.dao.pizza.PizzaDaoBddImpl;
 import fr.pizzeria.exception.dao.DaoException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
@@ -23,8 +23,8 @@ public class ImporterDonneesOptionMenu extends AbstractOptionMenu {
 	
 	// ==== Constructeurs ====
 	
-	public ImporterDonneesOptionMenu(IPizzaDao pizzaDao) {
-		super("Importer données", pizzaDao);
+	public ImporterDonneesOptionMenu(DaoFactory daoFactory) {
+		super("Importer données", daoFactory);
 	}
 	
 	
@@ -75,23 +75,13 @@ public class ImporterDonneesOptionMenu extends AbstractOptionMenu {
 			
 			
 			// écriture dans la BDD
-			PizzaDaoBddImpl dao = (PizzaDaoBddImpl)pizzaDao;
+			PizzaDaoBddImpl dao = (PizzaDaoBddImpl)(daoFactory.getPizzaDao());
 			
 			List<List<Pizza>> groupesPizzas = ListUtils.partition(new ArrayList<Pizza>(pizzasLues.values()), 3);
 			
 			for (List<Pizza> lp : groupesPizzas) {
 				dao.ajouterGroupePizzas(lp);
 			}
-			
-			// pizzasLues.values().
-			
-			
-			
-			//dao.insererGroupePizzas(pizzasLues);
-			
-			//pizzaDao.ajouterPizza(pizzaAjoutee);
-			
-			
 			
 			
 		} else {

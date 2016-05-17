@@ -7,7 +7,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import fr.pizzeria.dao.admin.PizzaDaoImpl;
+import fr.pizzeria.dao.pizza.PizzaDaoImpl;
 import fr.pizzeria.exception.dao.AjouterPizzaException;
 import fr.pizzeria.exception.dao.ModifierPizzaException;
 import fr.pizzeria.exception.dao.SupprimerPizzaException;

@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import fr.pizzeria.dao.admin.IPizzaDao;
+import fr.pizzeria.dao.factory.DaoFactory;
 import fr.pizzeria.model.Pizza;
 
 public class AfficherPizzaLaPlusChereOptionMenu extends AbstractOptionMenu {
@@ -16,8 +16,8 @@ public class AfficherPizzaLaPlusChereOptionMenu extends AbstractOptionMenu {
 
 	// ==== Constructeurs ====
 	
-	public AfficherPizzaLaPlusChereOptionMenu(IPizzaDao pizzaDao) {
-		super(LISTER_PIZZAS_PAR_CATEGORIE_LIBELLE_MENU, pizzaDao);
+	public AfficherPizzaLaPlusChereOptionMenu(DaoFactory daoFactory) {
+		super(LISTER_PIZZAS_PAR_CATEGORIE_LIBELLE_MENU, daoFactory);
 	}
 
 	
@@ -29,7 +29,7 @@ public class AfficherPizzaLaPlusChereOptionMenu extends AbstractOptionMenu {
 		System.out.println();
 		System.out.println("Pizza la plus chère :");
 		
-		List<Pizza> pizzas = pizzaDao.listePizzas();
+		List<Pizza> pizzas = daoFactory.getPizzaDao().listePizzas();
 		
 		// aucune pizza : message d'information
 		if (pizzas.size() == 0) {

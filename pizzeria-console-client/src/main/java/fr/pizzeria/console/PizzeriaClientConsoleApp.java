@@ -1,4 +1,4 @@
-package fr.pizzeria;
+package fr.pizzeria.console;
 
 import fr.pizzeria.exception.dao.DaoException;
 

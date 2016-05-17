@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import fr.pizzeria.dao.admin.IPizzaDao;
+import fr.pizzeria.dao.factory.DaoFactory;
 import fr.pizzeria.model.Pizza;
 
 public class ListerPizzasParCategorieOptionMenu extends AbstractOptionMenu {
@@ -16,8 +16,8 @@ public class ListerPizzasParCategorieOptionMenu extends AbstractOptionMenu {
 
 	// ==== Constructeurs ====
 	
-	public ListerPizzasParCategorieOptionMenu(IPizzaDao pizzaDao) {
-		super(LISTER_PIZZAS_PAR_CATEGORIE_LIBELLE_MENU, pizzaDao);
+	public ListerPizzasParCategorieOptionMenu(DaoFactory daoFactory) {
+		super(LISTER_PIZZAS_PAR_CATEGORIE_LIBELLE_MENU, daoFactory);
 	}
 
 	
@@ -30,14 +30,14 @@ public class ListerPizzasParCategorieOptionMenu extends AbstractOptionMenu {
 		System.out.println("Liste des pizzas (par catégorie) :");
 		
 		
-		List<Pizza> pizzas = pizzaDao.listePizzas();
+		List<Pizza> pizzas = daoFactory.getPizzaDao().listePizzas();
 		
 		// aucune pizza : message d'information
 		if (pizzas.size() == 0) {
 			System.out.println("Il n'y a actuellement aucune pizza dans la base.");
 		} else {
 			
-			pizzaDao.listePizzas().stream()
+			daoFactory.getPizzaDao().listePizzas().stream()
 				.collect(Collectors.groupingBy(Pizza::getCategorie))
 				.forEach((categorie,listePizzas) -> {
 					System.out.println("+++" + categorie.getLibelle().toUpperCase() + "+++");

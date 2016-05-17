@@ -17,17 +17,16 @@ import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemOutRule;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
 
-import fr.pizzeria.dao.admin.IPizzaDao;
-import fr.pizzeria.dao.admin.PizzaDaoImpl;
+import fr.pizzeria.dao.factory.DaoFactory;
+import fr.pizzeria.dao.factory.DaoFactoryMemoireImpl;
 import fr.pizzeria.exception.dao.DaoException;
-import fr.pizzeria.ihm.menu.option.AjouterPizzaOptionMenu;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class AjouterPizzaOptionMenuTest {
 	
 	private AjouterPizzaOptionMenu optionMenu;
-	private IPizzaDao pizzaDao;
+	private DaoFactory daoFactory;
 
 	@Rule public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
 	@Rule public final TextFromStandardInputStream systemInMock = TextFromStandardInputStream.emptyStandardInputStream();
@@ -37,8 +36,8 @@ public class AjouterPizzaOptionMenuTest {
 	public void setUp() throws Exception {
 		Locale.setDefault(Locale.FRENCH); // Forcer le test unitaire à utiliser le format français pour la saisie des nombres décimaux
 		Scanner scanner = new Scanner(System.in);
-		pizzaDao = new PizzaDaoImpl();
-		optionMenu = new AjouterPizzaOptionMenu (pizzaDao, scanner);	
+		daoFactory = new DaoFactoryMemoireImpl();
+		optionMenu = new AjouterPizzaOptionMenu (daoFactory, scanner);	
 	}
 
 	@Test
@@ -46,7 +45,7 @@ public class AjouterPizzaOptionMenuTest {
 		systemInMock.provideLines("NEW", "NewPizza", "12,5", "VIANDE");
 		boolean next = optionMenu.executer ();
 		Assert.assertTrue(next);
-		List<Pizza> allPizzas = pizzaDao.listePizzas();
+		List<Pizza> allPizzas = daoFactory.getPizzaDao().listePizzas();
 		Optional<Pizza> pizzaOpt =
 				allPizzas.stream().filter(p->"NEW".equals(p.getCode()))
 				.findFirst();

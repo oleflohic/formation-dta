@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
 
-import fr.pizzeria.dao.admin.IPizzaDao;
+import fr.pizzeria.dao.factory.DaoFactory;
 import fr.pizzeria.exception.dao.ModifierPizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
@@ -18,17 +18,18 @@ public class ModifierPizzaOptionMenu extends AbstractOptionMenu {
 
 	// ==== Constructeurs ====
 	
-	public ModifierPizzaOptionMenu(IPizzaDao pizzaDao, Scanner scanner) {
-		super(MODIFIER_PIZZA_LIBELLE_MENU, pizzaDao, scanner);
+	public ModifierPizzaOptionMenu(DaoFactory daoFactory, Scanner scanner) {
+		super(MODIFIER_PIZZA_LIBELLE_MENU, daoFactory, scanner);
 	}
 
+	// stocker les getPizzaDao() dans une variable plutôt que les appeler tout le temps quand valide 
 
 	// ==== Méthodes ====
 
 	@Override
 	public boolean executer() throws ModifierPizzaException {
 		
-		List<Pizza> pizzas = pizzaDao.listePizzas();
+		List<Pizza> pizzas = daoFactory.getPizzaDao().listePizzas();
 		
 		// aucune pizza : message d'information et sortie immédiate
 		if (pizzas.size() == 0) {
@@ -54,7 +55,7 @@ public class ModifierPizzaOptionMenu extends AbstractOptionMenu {
 			} else {
 				
 				// cas d'erreur : code introuvable
-				if (! pizzaDao.codePizzaExiste(codePizzaAMaj)) {
+				if (! daoFactory.getPizzaDao().codePizzaExiste(codePizzaAMaj)) {
 					System.out.println("Erreur : le code " + codePizzaAMaj + " est introuvable.");
 				} else {
 
@@ -64,7 +65,7 @@ public class ModifierPizzaOptionMenu extends AbstractOptionMenu {
 					String codePizzaApresMaj = scanner.next();
 
 					// cas d'erreur : code déjà pris
-					if (pizzaDao.codePizzaExiste((codePizzaApresMaj))) {
+					if (daoFactory.getPizzaDao().codePizzaExiste((codePizzaApresMaj))) {
 						System.out.println("Erreur : le code " + codePizzaApresMaj + " est déjà pris.");
 
 					// succès : saisie des autres infos et màj de la pizza
@@ -88,9 +89,9 @@ public class ModifierPizzaOptionMenu extends AbstractOptionMenu {
 						try {
 							CategoriePizza categorieApresMaj = CategoriePizza.valueOf(categoriePizzaApresMaj);
 
-							Pizza pizzaAModifier = pizzaDao.trouverPizza(codePizzaAMaj);
+							Pizza pizzaAModifier = daoFactory.getPizzaDao().trouverPizza(codePizzaAMaj);
 							
-							pizzaDao.modifierPizza(codePizzaAMaj, new Pizza (pizzaAModifier.getId(), codePizzaApresMaj, nomPizzaApresMaj, new BigDecimal(prixPizzaApresMaj), categorieApresMaj));
+							daoFactory.getPizzaDao().modifierPizza(codePizzaAMaj, new Pizza (pizzaAModifier.getId(), codePizzaApresMaj, nomPizzaApresMaj, new BigDecimal(prixPizzaApresMaj), categorieApresMaj));
 							
 							System.out.println();
 					

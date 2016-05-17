@@ -1,18 +1,13 @@
 package fr.pizzeria.ihm.menu;
 
-import java.util.Comparator;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.TreeMap;
 
-import fr.pizzeria.dao.admin.IPizzaDao;
-import fr.pizzeria.dao.client.IClientDao;
+import fr.pizzeria.dao.factory.DaoFactory;
 import fr.pizzeria.exception.dao.AjouterPizzaException;
 import fr.pizzeria.exception.dao.DaoException;
 import fr.pizzeria.exception.dao.ModifierPizzaException;
 import fr.pizzeria.exception.dao.SupprimerPizzaException;
 import fr.pizzeria.exception.ihm.ChoixMenuException;
-import fr.pizzeria.ihm.menu.option.AbstractOptionMenu;
 import fr.pizzeria.ihm.menu.option.AfficherPizzaLaPlusChereOptionMenu;
 import fr.pizzeria.ihm.menu.option.AjouterPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.ImporterDonneesOptionMenu;
@@ -26,7 +21,7 @@ import fr.pizzeria.ihm.menu.option.SupprimerPizzaOptionMenu;
  * Menu principal de l'application. Permet d'écouter les saisies clavier et d'exécuter les actions en conséquence.
  * @author oleflohic
  */
-public class Menu {
+public class Menu extends AbstractMenu {
 	
 	// ==== Constantes =====
 	
@@ -38,12 +33,7 @@ public class Menu {
 	/**
 	 * Liste des options disponibles à l'utilisateur.
 	 */
-	private Map<Integer,AbstractOptionMenu> options;
-	
-	/**
-	 * Lecteur de saisies clavier.
-	 */
-	private Scanner scanner;
+	//private Map<Integer,AbstractOptionMenu> options;
 	
 	
 	// ==== Constructeurs ====
@@ -52,9 +42,15 @@ public class Menu {
 	 * Créer un menu console.
 	 * @param scanner
 	 */
+	/*
 	public Menu (Scanner scanner, IPizzaDao pizzaDao) {
 		initialiserOptions (scanner, pizzaDao);
 		this.scanner = scanner;
+	}
+	*/
+
+	public Menu (Scanner scanner, DaoFactory daoFactory) {
+		super(MENU_TITRE_LIBELLE, scanner, daoFactory);
 	}
 	
 	
@@ -65,6 +61,7 @@ public class Menu {
 	 * @param scanner
 	 * @param pizzaDao
 	 */
+	/*
 	public void initialiserOptions (Scanner scanner, IPizzaDao pizzaDao) {
 		options = new TreeMap<Integer, AbstractOptionMenu> (new Comparator<Integer>() {
 			@Override
@@ -85,14 +82,19 @@ public class Menu {
 		
 		options.put (99, new QuitterOptionMenu());
 	}
-	
-	public void initialiserOptions (Scanner scanner, IClientDao clientDao) {
+	*/
+
+
+	@Override
+	protected void initialiserOptionsMenu() {
+		/*
 		options = new TreeMap<Integer, AbstractOptionMenu> (new Comparator<Integer>() {
 			@Override
 			public int compare(Integer o1, Integer o2) {
 				return o1.compareTo(o2);
 			}
 		});
+		*/
 		
 		/*
 		options.put (1, new ListerPizzasOptionMenu(pizzaDao));
@@ -104,7 +106,19 @@ public class Menu {
 		options.put (6, new AfficherPizzaLaPlusChereOptionMenu(pizzaDao));
 		
 		options.put (7, new ImporterDonneesOptionMenu(pizzaDao));
+		
+		options.put (99, new QuitterOptionMenu());
 		*/
+
+		options.put (1, new ListerPizzasOptionMenu(daoFactory));
+		options.put (2, new AjouterPizzaOptionMenu(daoFactory, scanner));
+		options.put (3, new ModifierPizzaOptionMenu(daoFactory, scanner));
+		options.put (4, new SupprimerPizzaOptionMenu(daoFactory, scanner));
+
+		options.put (5, new ListerPizzasParCategorieOptionMenu(daoFactory));
+		options.put (6, new AfficherPizzaLaPlusChereOptionMenu(daoFactory));
+		
+		options.put (7, new ImporterDonneesOptionMenu(daoFactory));
 		
 		options.put (99, new QuitterOptionMenu());
 		

@@ -4,13 +4,8 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.logging.Level;
 
-import javax.persistence.Persistence;
-
-import fr.pizzeria.dao.admin.IPizzaDao;
-import fr.pizzeria.dao.admin.PizzaDaoBddImpl;
-import fr.pizzeria.dao.admin.PizzaDaoFichierImpl;
-import fr.pizzeria.dao.admin.PizzaDaoImpl;
-import fr.pizzeria.dao.admin.PizzaDaoJpaImpl;
+import fr.pizzeria.dao.factory.DaoFactory;
+import fr.pizzeria.dao.factory.DaoFactoryMemoireImpl;
 import fr.pizzeria.exception.dao.DaoException;
 import fr.pizzeria.ihm.menu.Menu;
 
@@ -39,30 +34,35 @@ public class PizzeriaAdminConsoleApp {
 		switch (daoImplConf) {
 		case 0:
 			System.out.println("Implémentation mémoire");
-			lancerMenu(sc, new PizzaDaoImpl());
+			lancerMenu(sc, new DaoFactoryMemoireImpl());
 			break;
 		case 1:
 			System.out.println("Implémentation fichier");
-			lancerMenu(sc, new PizzaDaoFichierImpl());
-			break;
+			
+			throw new UnsupportedOperationException();
+			//lancerMenu(sc, new PizzaDaoFichierImpl());
+			//break;
 		case 2:
 			System.out.println("Implémentation SQL");
 
 			ResourceBundle jdbcBundle = ResourceBundle.getBundle("jdbc");
 			
-			lancerMenu(sc,
+			throw new UnsupportedOperationException();
+			/*lancerMenu(sc,
 					new PizzaDaoBddImpl(jdbcBundle.getString("jdbc.driver"), 
 						"jdbc:" + jdbcBundle.getString("jdbc.dbtype") + "://" + jdbcBundle.getString("jdbc.host") + ":"
 								+ jdbcBundle.getString("jdbc.port") + "/" + jdbcBundle.getString("jdbc.dbname"),
 						jdbcBundle.getString("jdbc.username"),
 						jdbcBundle.getString("jdbc.password")
 					));
-			break;
+					*/
+			//break;
 
 		case 3:
 			System.out.println("Implémentation JPA");
-			lancerMenu(sc, new PizzaDaoJpaImpl(Persistence.createEntityManagerFactory("pizzeria-pu")));
-			break;
+			throw new UnsupportedOperationException();
+			//lancerMenu(sc, new PizzaDaoJpaImpl(Persistence.createEntityManagerFactory("pizzeria-pu")));
+			//break;
 			
 		default:
 			System.err.println("Implémentation non reconnue dans le fichier \"application.properties\".");
@@ -74,8 +74,10 @@ public class PizzeriaAdminConsoleApp {
 	
 	
 	
-	public static void lancerMenu (Scanner sc, IPizzaDao dao) {
-		Menu menu = new Menu (sc, dao);
+	public static void lancerMenu (Scanner sc, DaoFactory daoFactory) {
+		
+		//Menu menu = new Menu (sc, dao);
+		Menu menu = new Menu (sc, daoFactory);
 		menu.afficher();
 	}
 	

@@ -3,7 +3,7 @@ package fr.pizzeria.ihm.menu.option;
 import java.util.List;
 import java.util.Scanner;
 
-import fr.pizzeria.dao.admin.IPizzaDao;
+import fr.pizzeria.dao.factory.DaoFactory;
 import fr.pizzeria.exception.dao.SupprimerPizzaException;
 import fr.pizzeria.model.Pizza;
 
@@ -16,8 +16,8 @@ public class SupprimerPizzaOptionMenu extends AbstractOptionMenu {
 	
 	// ==== Constructeurs ====
 	
-	public SupprimerPizzaOptionMenu(IPizzaDao pizzaDao, Scanner scanner) {
-		super(SUPPRIMER_PIZZA_LIBELLE_MENU, pizzaDao, scanner);
+	public SupprimerPizzaOptionMenu(DaoFactory daoFactory, Scanner scanner) {
+		super(SUPPRIMER_PIZZA_LIBELLE_MENU, daoFactory, scanner);
 	}
 
 
@@ -26,7 +26,7 @@ public class SupprimerPizzaOptionMenu extends AbstractOptionMenu {
 	@Override
 	public boolean executer() throws SupprimerPizzaException {
 		
-		List<Pizza> pizzas = pizzaDao.listePizzas();
+		List<Pizza> pizzas = daoFactory.getPizzaDao().listePizzas();
 		
 		// aucune pizza : message d'information et sortie immédiate
 		if (pizzas.size() == 0) {
@@ -50,7 +50,7 @@ public class SupprimerPizzaOptionMenu extends AbstractOptionMenu {
 			// sinon continuer les saisies
 			} else {
 
-				pizzaDao.supprimerPizza(codePizzaASupprimer);
+				daoFactory.getPizzaDao().supprimerPizza(codePizzaASupprimer);
 				/*
 				try {
 					pizzaDao.supprimerPizza(codePizzaASupprimer);

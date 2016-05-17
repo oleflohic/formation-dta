@@ -1,10 +1,16 @@
-package fr.pizzeria.dao.admin;
+package fr.pizzeria.dao.pizza;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import fr.pizzeria.exception.dao.AjouterPizzaException;
 import fr.pizzeria.exception.dao.ModifierPizzaException;
@@ -12,7 +18,7 @@ import fr.pizzeria.exception.dao.SupprimerPizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
-public class PizzaDaoImpl implements IPizzaDao {
+public class PizzaDaoFichierImpl implements IPizzaDao {
 	
 	
 	// ==== Variables ====
@@ -22,39 +28,41 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 */
 	private Map<String, Pizza> pizzas;
 	
-	
-	// ==== Méthodes statiques ====
-	
-	public static Pizza[] pizzasParDefaut () {
-		return new Pizza[] {
-				new Pizza ("PEP", "Peperoni", new BigDecimal("10"), CategoriePizza.VIANDE),
-				new Pizza ("MAR", "Margherita", new BigDecimal("14"), CategoriePizza.SANS_VIANDE),
-				new Pizza ("REI", "La Reine", new BigDecimal("11.5"), CategoriePizza.VIANDE),
-				new Pizza ("FRO", "La 4 fromages", new BigDecimal("12"), CategoriePizza.SANS_VIANDE),
-				new Pizza ("CAN", "La cannibale", new BigDecimal("12.5"), CategoriePizza.VIANDE),
-				new Pizza ("SAV", "La savoyarde", new BigDecimal("13"), CategoriePizza.VIANDE),
-				new Pizza ("ORI", "L'orientale", new BigDecimal("13.5"), CategoriePizza.VIANDE),
-				new Pizza ("IND", "L'indienne", new BigDecimal("14"), CategoriePizza.VIANDE),
-				new Pizza ("SAU", "La saumoneta", new BigDecimal("14"), CategoriePizza.POISSON),
-			};
-	}
-	
-	
 	// ==== Constructeurs ====
 	
 	/**
 	 * Créer un DAO gérant une carte de pizzas pré-remplie.
 	 */
-	public PizzaDaoImpl() {
+	public PizzaDaoFichierImpl() {
 
 		// pizzas existantes
 		
 		pizzas = new HashMap<String, Pizza> ();
 		
-		for (Pizza p : pizzasParDefaut()) {
-			pizzas.put(p.getCode(), p);
+		// charger à partir du contenu du répertoire "data"
+		try {
+			
+			Files.list(Paths.get("data"))
+				.map(path -> {
+					Pizza p = new Pizza();
+					p.setCode(path.getFileName().toString().replaceAll(".txt",  ""));
+					try {
+						String ligne = Files.readAllLines(path).get(0);
+						String[] ligneTab = ligne.split(";");
+						p.setNom(ligneTab[0]);
+						p.setPrix(new BigDecimal(ligneTab[1]));
+						p.setCategorie(CategoriePizza.valueOf(ligneTab[2]));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					return p;
+				})
+				.collect(Collectors.toList())
+				.forEach(p -> pizzas.put(p.getCode(), p));
+			
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		
 		
 	}
 	
@@ -66,8 +74,12 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 * @return Tableau de Pizza, qui est une copie des pizzas à la carte. 
 	 */
 	@Override
-	public List<Pizza> listePizzas() { // equivalent correction : findAllPizzas
-		return new ArrayList<Pizza>(pizzas.values());
+	public List<Pizza> listePizzas() {
+		
+		ArrayList<Pizza> copie = new ArrayList<Pizza>();
+		copie.addAll(pizzas.values());
+		return copie;
+		
 	}
 	
 	/**
@@ -77,16 +89,26 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 * @throws AjouterPizzaException 
 	 */
 	@Override
-	public void ajouterPizza(Pizza nouvellePizza) throws AjouterPizzaException { // equivalent correction : savePizza
-		
-		// code de longueur invalide : exception
-		if (nouvellePizza.getCode().length() != 3) {
-			throw new AjouterPizzaException ("Le code pizza " + nouvellePizza.getCode() + " est de longueur invalide (doit contenir 3 caractères).");
-		}
+	public void ajouterPizza(Pizza nouvellePizza) throws AjouterPizzaException {
 		
 		// le code n'est pas encore pris : ajouter la pizza
 		if (! pizzas.containsKey(nouvellePizza.getCode())) {
 			pizzas.put(nouvellePizza.getCode(), nouvellePizza);
+			
+			// créer le fichier de pizza
+			File f = new File("data/" + nouvellePizza.getCode() + ".txt");
+			f.setWritable(true);
+			try {
+				f.createNewFile();
+				
+				FileWriter fw = new FileWriter(f);
+				fw.write(nouvellePizza.getNom() + ";" + nouvellePizza.getPrix() + ";" + nouvellePizza.getCategorie().name());
+				fw.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		} else {
 			throw new AjouterPizzaException ("Le code pizza " + nouvellePizza.getCode() + " est déjà pris.");
 		}
@@ -101,30 +123,36 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 * @throws ModifierPizzaException 
 	 */
 	@Override
-	public void modifierPizza(String codePizza, Pizza pizzaApresModification) throws ModifierPizzaException { // equivalent correction : updatePizza
-		
-		// code différent de l'original : tester si le nouveau n'est pas déjà pris
-		if (! codePizza.equals(pizzaApresModification.getCode())) {
-			
-			if (pizzas.containsKey(pizzaApresModification.getCode())) {
-				throw new ModifierPizzaException ("Le code pizza " + pizzaApresModification.getCode() + " est déjà pris.");
-			}
-			
-		}
-		
-		// nouveau code de longueur invalide
-		if (pizzaApresModification.getCode().length() != 3) {
-			throw new ModifierPizzaException ("Le nouveau code pizza " + pizzaApresModification.getCode() + " est de longueur invalide (doit contenir 3 caractères).");			
-		}
+	public void modifierPizza(String codePizza, Pizza pizzaApresModification) throws ModifierPizzaException {
 		
 		if (pizzas.containsKey(codePizza)) {
 			// changement de clé : supprimer l'ancienne instance
 			if (! codePizza.equals(pizzaApresModification.getCode())) {
 				pizzas.remove(codePizza);
+				
+				// supprimer l'ancien fichier de pizza
+				Paths.get("data/" + codePizza + ".txt").toFile().delete();
+				
 			}
 			
 			// dans tous les cas, ajouter la nouvelle (écrase l'ancienne si même clé)
 			pizzas.put(pizzaApresModification.getCode(), pizzaApresModification);
+
+			// créer le fichier de pizza
+			File f = new File("data/" + pizzaApresModification.getCode() + ".txt");
+			f.setWritable(true);
+			try {
+				f.createNewFile();
+				FileWriter fw = new FileWriter(f);
+				fw.write(pizzaApresModification.getNom() + ";" + pizzaApresModification.getPrix() + ";" + pizzaApresModification.getCategorie().name());
+				fw.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
 		} else {
 			throw new ModifierPizzaException ("Le code pizza " + codePizza + " est introuvable.");
 		}
@@ -138,12 +166,13 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 * @throws SupprimerPizzaException 
 	 */
 	@Override
-	public void supprimerPizza(String codePizza) throws SupprimerPizzaException { // equivalent correction : deletePizza
+	public void supprimerPizza(String codePizza) throws SupprimerPizzaException {
 		
 		// tenter de supprimer la pizza ; en cas d'échec, lancer l'exception
 		if (pizzas.remove(codePizza) == null) {
 			throw new SupprimerPizzaException ("Le code pizza " + codePizza + " est introuvable.");
 		}
+		Paths.get("data/" + codePizza + ".txt").toFile().delete();
 		
 	}
 	
@@ -153,7 +182,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 * @return true si le code a été trouvé, false sinon.
 	 */
 	@Override
-	public boolean codePizzaExiste(String codePizza) { // pas dans la correction
+	public boolean codePizzaExiste(String codePizza) {
 		return pizzas.containsKey(codePizza);
 	}
 	
@@ -163,11 +192,10 @@ public class PizzaDaoImpl implements IPizzaDao {
 	 * @return La pizza portant le code donné, ou null si le code est introuvable.
 	 */
 	@Override
-	public Pizza trouverPizza(String codePizza) { // pas dans la correction
+	public Pizza trouverPizza(String codePizza) {
 		return pizzas.get(codePizza);
+		
 	}
-	
-	
 	
 
 }

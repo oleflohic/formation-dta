@@ -3,7 +3,7 @@ package fr.pizzeria.ihm.menu.option;
 import java.util.Comparator;
 import java.util.List;
 
-import fr.pizzeria.dao.admin.IPizzaDao;
+import fr.pizzeria.dao.factory.DaoFactory;
 import fr.pizzeria.model.Pizza;
 
 public class ListerPizzasOptionMenu extends AbstractOptionMenu {
@@ -15,8 +15,8 @@ public class ListerPizzasOptionMenu extends AbstractOptionMenu {
 
 	// ==== Constructeurs ====
 	
-	public ListerPizzasOptionMenu(IPizzaDao pizzaDao) {
-		super(LISTER_PIZZAS_LIBELLE_MENU, pizzaDao);
+	public ListerPizzasOptionMenu(DaoFactory daoFactory) {
+		super(LISTER_PIZZAS_LIBELLE_MENU, daoFactory);
 	}
 	
 	
@@ -28,7 +28,7 @@ public class ListerPizzasOptionMenu extends AbstractOptionMenu {
 		System.out.println();
 		System.out.println("Liste des pizzas :");
 		
-		List<Pizza> pizzas = pizzaDao.listePizzas();
+		List<Pizza> pizzas = daoFactory.getPizzaDao().listePizzas();
 		
 		// aucune pizza : message d'information
 		if (pizzas.size() == 0) {
