@@ -71,7 +71,7 @@ public class Pizza {
 	/**
 	 * Url de l'image de la pizza.
 	 */
-	@Column (name="URL_IMAGE", length=500, nullable=true)
+	@Column (name="url_image", length=500, nullable=true)
 	private String urlImage;
 	
 	

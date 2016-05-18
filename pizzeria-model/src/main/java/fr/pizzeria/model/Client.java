@@ -27,6 +27,12 @@ public class Client {
 	
 	@Column (name="mot_de_passe", length=50)
 	private String motDePasse;
+	
+	@Column (name="ville", length=50)
+	private String ville;
+	
+	@Column (name="age")
+	private Integer age;
 
 	/*
 	@OneToMany
@@ -93,6 +99,24 @@ public class Client {
 	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
 	}
+
+	public String getVille() {
+		return ville;
+	}
+
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+	
+	
 	
 	/*
 	public Set<Commande> getCommandes() {
