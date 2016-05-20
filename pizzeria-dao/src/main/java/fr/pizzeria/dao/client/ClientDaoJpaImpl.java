@@ -25,7 +25,7 @@ public class ClientDaoJpaImpl implements IClientDao {
 	@Override
 	public void saveClient(Client client) {
 		// TODO Auto-generated method stub
-		
+		throw new UnsupportedOperationException();
 	}
 	
 }

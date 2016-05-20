@@ -1,24 +1,12 @@
 package fr.pizzeria.dao.factory;
 
-import fr.pizzeria.dao.client.IClientDao;
-import fr.pizzeria.dao.pizza.IPizzaDao;
+import fr.pizzeria.dao.client.ClientDaoImpl;
 import fr.pizzeria.dao.pizza.PizzaDaoImpl;
 
-public class DaoFactoryMemoireImpl implements DaoFactory {
+public class DaoFactoryMemoireImpl extends GenericDaoFactoryImpl {
 	
-	
-	
-	@Override
-	public IClientDao getClientDao() {
-		
-		//return new ClientDaoMemoireImpl();
-		
-		throw new UnsupportedOperationException();
+	public DaoFactoryMemoireImpl () {
+		super(new PizzaDaoImpl(), new ClientDaoImpl());
 	}
 	
-	@Override
-	public IPizzaDao getPizzaDao() {
-		return new PizzaDaoImpl();
-	}
-
 }
