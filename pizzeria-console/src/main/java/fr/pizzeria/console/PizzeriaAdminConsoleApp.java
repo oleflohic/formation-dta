@@ -39,6 +39,8 @@ public class PizzeriaAdminConsoleApp {
 		case 1:
 			System.out.println("Implémentation fichier");
 			
+			
+			sc.close();
 			throw new UnsupportedOperationException();
 			//lancerMenu(sc, new PizzaDaoFichierImpl());
 			//break;
@@ -47,6 +49,8 @@ public class PizzeriaAdminConsoleApp {
 
 			ResourceBundle jdbcBundle = ResourceBundle.getBundle("jdbc");
 			
+
+			sc.close();
 			throw new UnsupportedOperationException();
 			/*lancerMenu(sc,
 					new PizzaDaoBddImpl(jdbcBundle.getString("jdbc.driver"), 
@@ -60,6 +64,8 @@ public class PizzeriaAdminConsoleApp {
 
 		case 3:
 			System.out.println("Implémentation JPA");
+
+			sc.close();
 			throw new UnsupportedOperationException();
 			//lancerMenu(sc, new PizzaDaoJpaImpl(Persistence.createEntityManagerFactory("pizzeria-pu")));
 			//break;
