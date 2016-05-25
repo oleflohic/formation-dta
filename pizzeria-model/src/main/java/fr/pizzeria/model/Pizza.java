@@ -93,6 +93,12 @@ public class Pizza {
 		this (nbPizzas, code, nom, prix, categorie);
 		nbPizzas++;
 	}
+
+	public Pizza (String code, String nom, BigDecimal prix, CategoriePizza categorie, String urlImage) {
+		this (nbPizzas, code, nom, prix, categorie);
+		this.urlImage = urlImage;
+		nbPizzas++;
+	}
 	
 	/**
 	 * Crée une instance de pizza dont l'id a été précisé. N'incrémente pas nbPizzas.
@@ -109,6 +115,8 @@ public class Pizza {
 		this.prix = prix;
 		this.categorie = categorie;
 	}
+	
+	
 	
 	// ==== Méthodes ====
 	

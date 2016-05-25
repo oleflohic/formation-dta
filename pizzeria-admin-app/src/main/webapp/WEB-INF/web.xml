@@ -20,6 +20,12 @@
 		<description></description>
 		<servlet-class>fr.pizzeria.admin.web.ListerPizzaController</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>EditerPizzaController</servlet-name>
+		<display-name>EditerPizzaController</display-name>
+		<description></description>
+		<servlet-class>fr.pizzeria.admin.web.EditerPizzaController</servlet-class>
+	</servlet>
 	
 	
 	<servlet-mapping>
@@ -34,5 +40,9 @@
 	<servlet-mapping>
 		<servlet-name>ListerPizzaController</servlet-name>
 		<url-pattern>/pizzas/list</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>EditerPizzaController</servlet-name>
+		<url-pattern>/pizzas/edit</url-pattern>
 	</servlet-mapping>
 </web-app>

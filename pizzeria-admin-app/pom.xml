@@ -20,6 +20,10 @@
 			<groupId>fr.pizzeria</groupId>
 			<artifactId>pizzeria-dao</artifactId>
 		</dependency>
+		<dependency>
+				<groupId>jstl</groupId>
+				<artifactId>jstl</artifactId>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>pizzeria-admin-app</finalName>
