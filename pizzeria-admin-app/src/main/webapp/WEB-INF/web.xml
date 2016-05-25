@@ -5,6 +5,18 @@
 <web-app>
 	<display-name>Archetype Created Web Application</display-name>
 	
+	
+	<filter>
+		<filter-name>UtilisateurFilter</filter-name>
+		<filter-class>fr.pizzeria.admin.web.UtilisateurFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>UtilisateurFilter</filter-name>
+		<url-pattern>/pizzas/*</url-pattern>
+	</filter-mapping>
+	
+	
 	<servlet>
 		<servlet-name>PizzaServletWebApi</servlet-name>
 		<servlet-class>fr.pizzeria.admin.web.PizzaServletWebApi</servlet-class>
@@ -55,4 +67,5 @@
 		<servlet-name>LoginController</servlet-name>
 		<url-pattern>/login</url-pattern>
 	</servlet-mapping>
+	
 </web-app>

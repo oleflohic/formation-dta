@@ -38,9 +38,9 @@ public class ListerPizzaController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		boolean connecte = (boolean)request.getSession().getAttribute("connecte");
+		//boolean connecte = (boolean)request.getSession().getAttribute("connecte");
 		
-		if (connecte) {
+		//if (connecte) {
 			// récupération de la liste des pizzas, tri, puis mise en attribut de cette liste. Java s'occupe de la mapper ensuite.
 			List<Pizza> pizzas = pizzaDao.listePizzas();
 			
@@ -55,9 +55,12 @@ public class ListerPizzaController extends HttpServlet {
 			
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/views/pizzas/listerPizzas.jsp");
 			dispatcher.forward(request, response);
-		} else {
+		
+	/*
+	} else {
 			response.sendRedirect(getServletContext().getContextPath() + "/login");
 		}
+	*/
 		
 	}
 	
