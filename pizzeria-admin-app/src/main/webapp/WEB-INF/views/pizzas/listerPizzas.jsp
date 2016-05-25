@@ -2,11 +2,10 @@
 <%@ page import="fr.pizzeria.model.Pizza" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-
-<%@ page isELIgnored="false" %>
+	pageEncoding="ISO-8859-1" %>
 
 <!DOCTYPE html>
 <html>
@@ -55,7 +54,7 @@
 					<td class="text-center"><img class="img-circle" src="${pizza.urlImage}" /></td>
 					<td class="text-center">${pizza.prix} &euro;</td>
 					<td><a class="btn btn-info" href="pizzas/edit?code=${pizza.code}">&Eacute;diter</a></td>
-					<td><a class="btn btn-danger"href="pizzas/delete?code=${pizza.id}">Supprimer</a></td>
+					<td><a class="btn btn-danger" href="pizzas/delete?code=${pizza.id}">Supprimer</a></td>
 				</tr>
 				
 			</c:forEach>

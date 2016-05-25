@@ -1,6 +1,5 @@
 <%@ page import="java.util.List" %>
 <%@ page import="fr.pizzeria.model.Pizza" %>
-<%@ page import="fr.pizzeria.model.CategoriePizza" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
@@ -29,47 +28,36 @@
 	</head>
 	<body>
 		
+		Connect&eacute; ? <%= request.getSession().getAttribute("connecte") %><br />
+		
 		<form action="" method="post">
-			
-			<input name="ancien_code" type="hidden" value="${pizza.code}" />
 			
 			<table class="table">
 				<tr>
-					<td><label>Code</label></td>
-					<td><input name="code" type="text" placeholder="Code" value="${pizza.code}" /></td>
-				</tr>
-				<tr>
-					<td><label>Nom</label></td>
-					<td><input name="nom" type="text" placeholder="" value="${pizza.nom}" /></td>
-				</tr>
-				<tr>
-					<td><label>Cat&eacute;gorie</label></td>
 					<td>
-						<select name="categorie">
-						
-							<c:forEach var="categorie_pizza" items="${CategoriePizza.values()}">
-								<option value="${categorie_pizza.name()}" <c:if test="${pizza.categorie == categorie_pizza}" >selected</c:if>>
-									${categorie_pizza.getLibelle()}
-								</option>
-							</c:forEach>
-							
-						</select>
+						<label>Identifiant</label>
+					</td>
+					<td>
+						<input type="text" name="identifiant" />
 					</td>
 				</tr>
 				<tr>
-					<td><label>Prix</label></td>
-					<td><input name="prix" type="number" placeholder="Prix" value="${pizza.prix}" class="text-right" /> &euro;</td>
+					<td>
+						<label>Mot de passe</label>
+					</td>
+					<td>
+						<input type="password" name="mot_de_passe" /><br />
+					</td>
 				</tr>
 				<tr>
-					<td><label>URL de l'image</label></td>
-					<td><input name="url_image" type="url" placeholder="URL" value="${pizza.urlImage}" /></td>
-				</tr>
-				<tr>
-					<td colspan="2"><input type="submit" class="btn btn-success" value="Confirmer" /><a href="pizzas/list" class="btn btn-warning">Annuler</a></td>
+					<td colspan="2">
+						<input type="submit" value="Valider" />
+					</td>	
 				</tr>
 			</table>
 			
 		</form>
+		
 		
 	    <!-- Bootstrap core JavaScript
 	    ================================================== -->
