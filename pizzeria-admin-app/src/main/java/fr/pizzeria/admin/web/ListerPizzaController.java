@@ -4,22 +4,27 @@ import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.pizzeria.dao.pizza.IPizzaDao;
-import fr.pizzeria.dao.pizza.PizzaDaoImpl;
+import fr.pizzeria.admin.metier.PizzaService;
 import fr.pizzeria.model.Pizza;
 
 /**
  * Servlet implementation class ListerPizzaController
  */
+@WebServlet("/pizzas/list")
 public class ListerPizzaController extends HttpServlet {
 
-	private IPizzaDao pizzaDao = new PizzaDaoImpl();
+	//private IPizzaDao pizzaDao = new PizzaDaoImpl();
+	
+	@Inject private PizzaService service;
+	
 	
 	/**
 	 * 
@@ -38,30 +43,21 @@ public class ListerPizzaController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//boolean connecte = (boolean)request.getSession().getAttribute("connecte");
+		// récupération de la liste des pizzas, tri, puis mise en attribut de cette liste. Java s'occupe de la mapper ensuite.
+		List<Pizza> pizzas = service.listePizzas();
 		
-		//if (connecte) {
-			// récupération de la liste des pizzas, tri, puis mise en attribut de cette liste. Java s'occupe de la mapper ensuite.
-			List<Pizza> pizzas = pizzaDao.listePizzas();
-			
-			pizzas.sort(new Comparator<Pizza> () {
-				@Override
-				public int compare(Pizza o1, Pizza o2) {
-					return o1.getCode().compareTo(o2.getCode());
-				}
-			});
-			
-			request.setAttribute("listePizzas", pizzas);
-			
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/views/pizzas/listerPizzas.jsp");
-			dispatcher.forward(request, response);
+		pizzas.sort(new Comparator<Pizza> () {
+			@Override
+			public int compare(Pizza o1, Pizza o2) {
+				return o1.getCode().compareTo(o2.getCode());
+			}
+		});
 		
-	/*
-	} else {
-			response.sendRedirect(getServletContext().getContextPath() + "/login");
-		}
-	*/
+		request.setAttribute("listePizzas", pizzas);
 		
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/views/pizzas/listerPizzas.jsp");
+		dispatcher.forward(request, response);
+	
 	}
 	
 }

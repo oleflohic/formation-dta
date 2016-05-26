@@ -107,6 +107,20 @@
 				<version>1.2</version>
 				<scope>provided</scope>
 			</dependency>
+			
+			<dependency>
+				<groupId>javax.enterprise</groupId>
+				<artifactId>cdi-api</artifactId>
+				<version>1.2</version>
+				<scope>provided</scope>
+			</dependency>
+			
+			<!-- http://mvnrepository.com/artifact/javax.ejb/javax.ejb-api -->
+			<dependency>
+				<groupId>javax.ejb</groupId>
+				<artifactId>javax.ejb-api</artifactId>
+				<version>3.2</version>
+			</dependency>
 						
 		</dependencies>
 	</dependencyManagement>

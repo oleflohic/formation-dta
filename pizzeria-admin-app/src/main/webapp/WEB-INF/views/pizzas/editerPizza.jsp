@@ -46,10 +46,19 @@
 					<td><label>Cat&eacute;gorie</label></td>
 					<td>
 						<select name="categorie">
-						
-							<c:forEach var="categorie_pizza" items="${CategoriePizza.values()}">
-								<option value="${categorie_pizza.name()}" <c:if test="${pizza.categorie == categorie_pizza}" >selected</c:if>>
-									${categorie_pizza.getLibelle()}
+							
+							<%
+							/*
+								for(CategoriePizza ctg : CategoriePizza.values()) {
+									out.print("- " + ctg + "; " + ctg.name() + ";" + ctg.getLibelle());
+								}
+							*/
+							%>
+							
+							
+							<c:forEach var="categoriePizza" items="${CategoriePizza.values()}">
+								<option value="${categoriePizza.name()}" <c:if test="${pizza.categorie == categoriePizza}" >selected</c:if>>
+									${categoriePizza.getLibelle()}
 								</option>
 							</c:forEach>
 							

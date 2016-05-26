@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class LoginController
  */
+@WebServlet("/login")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -25,13 +27,17 @@ public class LoginController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-
 		if (request.getParameter("deconnexion") != null) {
 			request.getSession().setAttribute("connecte", false);
 		}
+		/*
+		 * else if ("true".equals(""+request.getSession().getAttribute("connecte"))) {
+			response.sendRedirect(getServletContext().getContextPath() + "/index.jsp");
+		}
+		*/
+
+		//boolean connecte = (boolean)request.getSession().getAttribute("connecte");
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/views/login.jsp");
 		dispatcher.forward(request, response);
@@ -46,8 +52,11 @@ public class LoginController extends HttpServlet {
 		String identifiant = request.getParameter("identifiant");
 		String motDePasse = request.getParameter("mot_de_passe");
 		
-		if (identifiant.equals("admin@pizzeria.fr") && motDePasse.equals("admin")) {
+		if ("true".equals(""+request.getSession().getAttribute("connecte"))) {
+			response.sendRedirect(getServletContext().getContextPath() + "/index.jsp");
+		} else if (identifiant.equals("admin@pizzeria.fr") && motDePasse.equals("admin")) {
 			request.getSession().setAttribute("connecte", true);
+			response.sendRedirect(getServletContext().getContextPath() + "/index.jsp");
 		} else {
 			request.getSession().setAttribute("connecte", false);
 		}

@@ -10,6 +10,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
+
 import fr.pizzeria.exception.dao.AjouterPizzaException;
 import fr.pizzeria.exception.dao.DaoException;
 import fr.pizzeria.exception.dao.ModifierPizzaException;
@@ -21,6 +24,8 @@ import fr.pizzeria.model.Pizza;
 
 // TODO nettoyage
 
+@Named
+@ApplicationScoped
 public class PizzaDaoBddImpl implements IPizzaDao {
 
 	// ==== Variables ====

@@ -8,12 +8,13 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet Filter implementation class UtilisateurFilter
  */
+@WebFilter(urlPatterns = { "/pizzas/*" })
 public class UtilisateurFilter implements Filter {
 	
 	/**
@@ -30,12 +31,16 @@ public class UtilisateurFilter implements Filter {
 		
 		String connecte = "" + ((HttpServletRequest)request).getSession().getAttribute("connecte");
 		
-		if (connecte == null || "false".equals(connecte)) {
-			((HttpServletResponse)response).sendRedirect(request.getServletContext().getContextPath() + "/login");
+		// TODO remplacer ce bidouillage
+		if ("null".equals(connecte) || "false".equals(connecte)) {
+			
+			// TODO réactiver pour forcer l'utilisateur a être connecté pour consulter la page 
+			//((HttpServletResponse)response).sendRedirect(request.getServletContext().getContextPath() + "/login");
+			
+			chain.doFilter(request, response);
 		} else {
 			chain.doFilter(request, response);
 		}
-		
 	}
 
 	/**

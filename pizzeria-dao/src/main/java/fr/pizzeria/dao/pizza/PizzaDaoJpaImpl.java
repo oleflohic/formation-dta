@@ -2,6 +2,8 @@ package fr.pizzeria.dao.pizza;
 
 import java.util.List;
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
@@ -13,6 +15,8 @@ import fr.pizzeria.exception.dao.ModifierPizzaException;
 import fr.pizzeria.exception.dao.SupprimerPizzaException;
 import fr.pizzeria.model.Pizza;
 
+@Named
+@ApplicationScoped
 public class PizzaDaoJpaImpl implements IPizzaDao {
 
 	// ==== Variables ====

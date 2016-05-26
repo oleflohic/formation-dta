@@ -6,7 +6,7 @@
 		<artifactId>pizzeria-parent</artifactId>
 		<version>0.0.1</version>
 	</parent>
-
+	
 	<artifactId>pizzeria-admin-app</artifactId>
 	<packaging>war</packaging>
 
@@ -24,6 +24,11 @@
 				<groupId>jstl</groupId>
 				<artifactId>jstl</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>pizzeria-admin-app</finalName>
