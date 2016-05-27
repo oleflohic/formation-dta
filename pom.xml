@@ -12,6 +12,7 @@
 		<module>pizzeria-dao</module>
 		<module>pizzeria-console</module>
 		<module>pizzeria-admin-app</module>
+		<module>pizzeria-console-ihm-lib</module>
 	</modules>
 	
 	<properties>
@@ -48,6 +49,7 @@
 				<groupId>${project.groupId}</groupId>
 				<artifactId>pizzeria-console-ihm-lib</artifactId>
 				<version>${project.version}</version>
+				
 			</dependency>
 			
 			<dependency>
