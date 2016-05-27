@@ -42,7 +42,7 @@ public class AjouterPizzaOptionMenuTest {
 
 	@Test
 	public void testExecuter() throws DaoException, IOException {
-		systemInMock.provideLines("NEW", "NewPizza", "12,5", "VIANDE");
+		systemInMock.provideLines("NEW", "NewPizza", "12.5", "VIANDE");
 		boolean next = optionMenu.executer ();
 		Assert.assertTrue(next);
 		List<Pizza> allPizzas = daoFactory.getPizzaDao().listePizzas();
