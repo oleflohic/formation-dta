@@ -1,11 +1,11 @@
 <%@ page import="java.util.List" %>
 <%@ page import="fr.pizzeria.model.Pizza" %>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page isELIgnored="false" %>
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 
 <!DOCTYPE html>
 <html>
@@ -23,7 +23,7 @@
 	    <title>Pizzeria</title>
 	
 	    <!-- Bootstrap core CSS -->
-		<link href="<%=request.getContextPath() %>/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="<%= request.getContextPath() %>/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 		
 	</head>
 	<body>
@@ -45,7 +45,7 @@
 			<tbody>
 		
 			<c:forEach var="pizza" items="${listePizzas}">
-			
+				
 				<tr>
 					<td class="text-center">${pizza.id}</td>
 					<td class="text-center">${pizza.code}</td>
@@ -54,7 +54,7 @@
 					<td class="text-center"><img class="img-circle" src="${pizza.urlImage}" /></td>
 					<td class="text-center">${pizza.prix} &euro;</td>
 					<td><a class="btn btn-info" href="pizzas/edit?code=${pizza.code}">&Eacute;diter</a></td>
-					<td><a class="btn btn-danger" href="pizzas/delete?code=${pizza.id}">Supprimer</a></td>
+					<td><a class="btn btn-danger" href="pizzas/delete?code=${pizza.code}">Supprimer</a></td>
 				</tr>
 				
 			</c:forEach>

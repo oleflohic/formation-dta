@@ -123,7 +123,15 @@
 				<artifactId>javax.ejb-api</artifactId>
 				<version>3.2</version>
 			</dependency>
-						
+			
+			<!-- http://mvnrepository.com/artifact/org.jboss.resteasy/resteasy-jaxrs -->
+			<dependency>
+				<groupId>org.jboss.resteasy</groupId>
+				<artifactId>resteasy-jaxrs</artifactId>
+				<version>3.0.17.Final</version>
+				<scope>provided</scope>
+			</dependency>
+			
 		</dependencies>
 	</dependencyManagement>
 	
@@ -142,6 +150,12 @@
 				<plugin>
 					<artifactId>maven-dependency-plugin</artifactId>
 					<version>2.9</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-war-plugin</artifactId>
+					<configuration>
+						<failOnMissingWebXml>false</failOnMissingWebXml>
+					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>

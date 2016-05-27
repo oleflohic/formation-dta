@@ -2,11 +2,10 @@
 <%@ page import="fr.pizzeria.model.Pizza" %>
 <%@ page import="fr.pizzeria.model.CategoriePizza" %>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page isELIgnored="false" %>
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 
 <!DOCTYPE html>
 <html>
@@ -46,28 +45,17 @@
 					<td><label>Cat&eacute;gorie</label></td>
 					<td>
 						<select name="categorie">
-							
-							<%
-							/*
-								for(CategoriePizza ctg : CategoriePizza.values()) {
-									out.print("- " + ctg + "; " + ctg.name() + ";" + ctg.getLibelle());
-								}
-							*/
-							%>
-							
-							
-							<c:forEach var="categoriePizza" items="${CategoriePizza.values()}">
-								<option value="${categoriePizza.name()}" <c:if test="${pizza.categorie == categoriePizza}" >selected</c:if>>
-									${categoriePizza.getLibelle()}
+							<c:forEach var="categorie_pizza" items="${categories}">
+								<option value="${categorie_pizza.name()}" <c:if test="${pizza.categorie == categorie_pizza}" >selected</c:if>>
+									${categorie_pizza.getLibelle()}
 								</option>
 							</c:forEach>
-							
 						</select>
 					</td>
 				</tr>
 				<tr>
 					<td><label>Prix</label></td>
-					<td><input name="prix" type="number" placeholder="Prix" value="${pizza.prix}" class="text-right" /> &euro;</td>
+					<td><input name="prix" type="number" step="0.01" min="0" placeholder="Prix" value="${pizza.prix}" class="text-right" /> &euro;</td>
 				</tr>
 				<tr>
 					<td><label>URL de l'image</label></td>

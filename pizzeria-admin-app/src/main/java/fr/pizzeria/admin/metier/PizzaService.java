@@ -1,103 +1,86 @@
 package fr.pizzeria.admin.metier;
 
+import java.math.BigDecimal;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 @Stateless
 public class PizzaService {
 	
-	//@Inject @Named("pizzaDaoImpl") IPizzaDao pizzaDao;
-	
-	@PersistenceContext(unitName="pizzeria-admin-app") private EntityManager em;
-	
 	// ==== Variables ====
-	/*
-	protected String url;
-	protected String utilisateur;
-	protected String mdp;
-	*/
+	@PersistenceContext(unitName="pizzeria-admin-app") private EntityManager em;
 	
 	
 	// ==== Méthodes ====
+
 	
+    @PostConstruct 
+    public void peuplerBdd() {
+    	String imgSrc = "http://placehold.it/75x75";
+	
+    	// TODO modifier la classe pour que la persistance ne provoque pas une recréation systématique
+    	
+    	// REMARQUE : récrée les pizzas à chaque page. En cas de suppression, cette dernière est annulée dès le rechargement de la page.
+    	// AUTRE PROBLEME : utilise la valeur id comme index, qui est générée automatiquement. Supprimer l'original provoquera une recréation systématique
+    	// des pizzas, ce qui se heurtera à des problèmes de doublons de code, ce qui n'est pas autorisé par les contraintes d'intégrité.
+    	
+		if (em.find(Pizza.class, 1) == null)	em.persist(new Pizza ("PEP", "Peperoni",		new BigDecimal("10"),	CategoriePizza.VIANDE,		imgSrc));
+		if (em.find(Pizza.class, 2) == null)	em.persist(new Pizza ("MAR", "Margherita",		new BigDecimal("14"),	CategoriePizza.SANS_VIANDE,	imgSrc));
+		if (em.find(Pizza.class, 3) == null)	em.persist(new Pizza ("REI", "La Reine",		new BigDecimal("11.5"),	CategoriePizza.VIANDE,		imgSrc));
+		if (em.find(Pizza.class, 4) == null)	em.persist(new Pizza ("FRO", "La 4 fromages",	new BigDecimal("12"),	CategoriePizza.SANS_VIANDE,	imgSrc));
+		if (em.find(Pizza.class, 5) == null)	em.persist(new Pizza ("CAN", "La cannibale",	new BigDecimal("12.5"),	CategoriePizza.VIANDE,		imgSrc));
+		if (em.find(Pizza.class, 6) == null)	em.persist(new Pizza ("SAV", "La savoyarde",	new BigDecimal("13"),	CategoriePizza.VIANDE,		imgSrc));
+		if (em.find(Pizza.class, 7) == null)	em.persist(new Pizza ("ORI", "L'orientale",		new BigDecimal("13.5"),	CategoriePizza.VIANDE,		imgSrc));
+		if (em.find(Pizza.class, 8) == null)	em.persist(new Pizza ("IND", "L'indienne",		new BigDecimal("14"),	CategoriePizza.VIANDE,		imgSrc));
+		if (em.find(Pizza.class, 9) == null)	em.persist(new Pizza ("SAU", "La saumoneta",	new BigDecimal("14"),	CategoriePizza.POISSON,		imgSrc));
+    }
 	
 	@SuppressWarnings("unchecked")
 	public List<Pizza> listePizzas() {
 		return (List<Pizza>)em.createQuery("SELECT p FROM Pizza p").getResultList();
-		/*
-		try {
-			ArrayList<Pizza> resultat = new ArrayList<Pizza>();
-			
-			Connection c = getConnection();
-			Statement s = c.createStatement();
-			ResultSet rs = s.executeQuery("SELECT * FROM pizza");
-			
-			while (rs.next()) {
-				resultat.add(new Pizza(rs.getInt("id"), rs.getString("code"), rs.getString("libelle"), new BigDecimal(rs.getDouble("prix")), CategoriePizza.valueOf(rs.getString("categorie"))));
-			}
-
-			rs.close();
-			s.close();
-			c.close();
-			
-			return resultat;
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("Erreur : échec d'accès à la base.");
-			return new ArrayList<Pizza>();
-		}
-		*/
-		
-		//return pizzaDao.listePizzas();
 	}
 	
 	public Pizza trouverPizza(String codePizza) {
-		return (Pizza)em.createQuery("SELECT p FROM Pizza p WHERE code='" + codePizza + "'").getSingleResult();
-		
-/*
-		try {
-			Connection c = getConnection();
-			Statement s = c.createStatement();
-			ResultSet rs = s.executeQuery("SELECT * FROM pizza WHERE code = '" + codePizza + "'");
-			
-			while (rs.next()) {
-				Pizza p = new Pizza(rs.getInt("id"), rs.getString("code"), rs.getString("libelle"), new BigDecimal(rs.getDouble("prix")), CategoriePizza.valueOf(rs.getString("categorie")));
-				rs.close();
-				s.close();
-				c.close();
-				return p;
-			}
-
-			rs.close();
-			s.close();
-			c.close();
-			
-			return null;
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("Erreur : échec d'accès à la base.");
-			return null;
-		}
-		*/
-		
-		//return pizzaDao.trouverPizza(codePizza);
+		Query requete = em.createQuery("SELECT p FROM Pizza p WHERE p.code=:code", Pizza.class);
+		requete.setParameter("code", codePizza);
+		return (Pizza)requete.getSingleResult();
 	}
 	
-	/*
-	new PizzaDaoBddImpl(jdbcBundle.getString("jdbc.driver"), 
-		"jdbc:" + jdbcBundle.getString("jdbc.dbtype") + "://" + jdbcBundle.getString("jdbc.host") + ":"
-				+ jdbcBundle.getString("jdbc.port") + "/" + jdbcBundle.getString("jdbc.dbname"),
-		jdbcBundle.getString("jdbc.username"),
-		jdbcBundle.getString("jdbc.password")
-	));
-	*/
+	public void modifierPizza (String ancienCode, Pizza pizza) {
+		
+		Query requete = em.createQuery("SELECT p FROM Pizza p WHERE p.code=:code", Pizza.class);
+		
+		requete.setParameter("code", ancienCode);
+		
+		Pizza anciennePizza = (Pizza)requete.getSingleResult();
+		
+		if (anciennePizza == null) {
+			// ERREUR : ne peut pas modifier une pizza inexistante
+			
+			System.err.println("CODE " + ancienCode + " INVALIDE");
+			
+		} else {
+			
+			//em.getTransaction().begin();
+			
+			anciennePizza.setNom(pizza.getNom());
+			anciennePizza.setCategorie(pizza.getCategorie());
+			anciennePizza.setPrix(pizza.getPrix());
+			anciennePizza.setUrlImage(pizza.getUrlImage());
+			
+			//em.getTransaction().commit();
+			
+		}
+		
+	}
 	
 	
 	// @Schedule(second="*/10", minute="*", hour="*")
@@ -114,6 +97,7 @@ public class PizzaService {
 		}
 	}
 	*/
+	
 	
 	
 	
