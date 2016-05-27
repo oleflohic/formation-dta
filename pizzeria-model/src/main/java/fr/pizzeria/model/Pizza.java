@@ -78,7 +78,7 @@ public class Pizza {
 	// ==== Constructeurs ====
 
 	public Pizza () {
-		this.id = nbPizzas;
+		//this.id = nbPizzas;
 		nbPizzas++;
 	}
 	

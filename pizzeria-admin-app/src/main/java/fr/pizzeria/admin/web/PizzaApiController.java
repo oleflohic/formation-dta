@@ -3,6 +3,7 @@ package fr.pizzeria.admin.web;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -22,7 +23,6 @@ public class PizzaApiController {
 	
 	@Inject private PizzaService service;
 	
-	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Pizza> listePizzas () {
@@ -30,11 +30,10 @@ public class PizzaApiController {
 	}
 	
 	@POST
-	public void ajouterPizza () {
-		
+    @Consumes(MediaType.APPLICATION_JSON)
+	public void ajouterPizza (Pizza pizza) {
+		service.ajouterPizza(pizza);
 	}
-
 	
-
 }
 

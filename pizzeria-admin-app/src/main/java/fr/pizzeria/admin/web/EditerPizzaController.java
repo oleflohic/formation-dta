@@ -20,9 +20,7 @@ import fr.pizzeria.model.Pizza;
  */
 @WebServlet("/pizzas/edit")
 public class EditerPizzaController extends HttpServlet {
-
-	//private IPizzaDao pizzaDao = new PizzaDaoImpl();
-
+	
 	@Inject private PizzaService service;
 	
     /**
@@ -35,9 +33,8 @@ public class EditerPizzaController extends HttpServlet {
      */
     public EditerPizzaController() {
         super();
-        // TODO Auto-generated constructor stub
     }
-
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -58,9 +55,9 @@ public class EditerPizzaController extends HttpServlet {
 		} else {
 			response.sendError(400, "Aucun code pizza n'a été fourni.");
 		}
-	
+		
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

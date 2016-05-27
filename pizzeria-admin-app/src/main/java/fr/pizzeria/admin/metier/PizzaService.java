@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -80,6 +82,17 @@ public class PizzaService {
 			
 		}
 		
+	}
+	
+	public void ajouterPizza (Pizza pizza) {
+		try {
+			
+			//em.createQuery("INSERT INTO Pizza p SELECT p.nom, p.code, p.categorie, p.prix, p.url_image ")
+			
+			em.persist(pizza);
+		} catch (EntityExistsException e) {
+			System.err.println("CODE " + pizza.getCode() + " DEJA PRIS");
+		}
 	}
 	
 	
