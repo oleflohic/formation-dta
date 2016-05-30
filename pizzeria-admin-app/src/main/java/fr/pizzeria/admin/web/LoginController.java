@@ -36,7 +36,7 @@ public class LoginController extends HttpServlet {
 			response.sendRedirect(getServletContext().getContextPath() + "/index.jsp");
 		}
 		*/
-
+		
 		//boolean connecte = (boolean)request.getSession().getAttribute("connecte");
 		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/views/login.jsp");

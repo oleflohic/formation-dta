@@ -180,6 +180,15 @@ public class Pizza {
 
 	// ==== Accesseurs ====
 	
+	public void set (Pizza pizza) {
+		//this.id = pizza.getId();
+		this.code = new String(pizza.getCode());
+		this.nom = new String(pizza.getNom());
+		this.prix = pizza.getPrix();
+		this.categorie = pizza.getCategorie();
+		this.urlImage = new String(pizza.getUrlImage());
+	} 
+	
 	public Integer getId() {
 		return id;
 	}
@@ -220,16 +229,16 @@ public class Pizza {
 		return categorie;
 	}
 
-	public static int getNbPizzas() {
-		return nbPizzas;
-	}
-
 	public String getUrlImage() {
 		return urlImage;
 	}
 
 	public void setUrlImage(String urlImage) {
 		this.urlImage = urlImage;
+	}
+
+	public static int getNbPizzas() {
+		return nbPizzas;
 	}
 
 	

@@ -7,7 +7,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -24,7 +23,7 @@ public class PizzaService {
 	// ==== Méthodes ====
 
 	
-    @PostConstruct 
+    @PostConstruct
     public void peuplerBdd() {
     	String imgSrc = "http://placehold.it/75x75";
 	
@@ -73,10 +72,13 @@ public class PizzaService {
 			
 			//em.getTransaction().begin();
 			
+			anciennePizza.set(pizza);
+			/*
 			anciennePizza.setNom(pizza.getNom());
 			anciennePizza.setCategorie(pizza.getCategorie());
 			anciennePizza.setPrix(pizza.getPrix());
 			anciennePizza.setUrlImage(pizza.getUrlImage());
+			*/
 			
 			//em.getTransaction().commit();
 			
@@ -95,6 +97,10 @@ public class PizzaService {
 		}
 	}
 	
+	
+	public void supprimerPizza (String code) {
+		
+	}
 	
 	// @Schedule(second="*/10", minute="*", hour="*")
 	/*

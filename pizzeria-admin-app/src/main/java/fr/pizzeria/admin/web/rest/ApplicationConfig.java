@@ -1,4 +1,4 @@
-package fr.pizzeria.admin;
+package fr.pizzeria.admin.web.rest;
 
 import javax.ws.rs.ApplicationPath;
 
