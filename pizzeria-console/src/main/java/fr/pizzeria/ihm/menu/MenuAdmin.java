@@ -2,6 +2,8 @@ package fr.pizzeria.ihm.menu;
 
 import java.util.Scanner;
 
+import org.springframework.stereotype.Component;
+
 import fr.pizzeria.dao.factory.DaoFactory;
 import fr.pizzeria.exception.dao.AjouterPizzaException;
 import fr.pizzeria.exception.dao.DaoException;
@@ -21,6 +23,7 @@ import fr.pizzeria.ihm.menu.option.SupprimerPizzaOptionMenu;
  * Menu principal de l'application. Permet d'écouter les saisies clavier et d'exécuter les actions en conséquence.
  * @author oleflohic
  */
+@Component
 public class MenuAdmin extends AbstractMenu {
 	
 	// ==== Constantes =====

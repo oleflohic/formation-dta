@@ -113,5 +113,10 @@ public class PizzaDaoJpaImpl implements IPizzaDao {
 			return null;
 		}
 	}
+
+	@Override
+	public void ajouterGroupePizzas(List<Pizza> pizzasAInserer) {
+		throw new UnsupportedOperationException();
+	}
 	
 }

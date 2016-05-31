@@ -201,6 +201,12 @@ public class PizzaDaoFichierImpl implements IPizzaDao {
 		return pizzas.get(codePizza);
 		
 	}
+
+
+	@Override
+	public void ajouterGroupePizzas(List<Pizza> pizzasAInserer) {
+		throw new UnsupportedOperationException();
+	}
 	
 
 }

@@ -192,7 +192,7 @@ public class PizzaDaoBddImpl implements IPizzaDao {
 		}
 	}
 	
-	
+	@Override
 	public void ajouterGroupePizzas (List<Pizza> pizzasAInserer) {
 		
 		try {

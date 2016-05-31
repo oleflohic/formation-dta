@@ -4,6 +4,14 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<bean id="daoFactory" class="fr.pizzeria.dao.factory.DaoFactoryBddImpl"></bean>
-	<bean id="pizzaDao" class="fr.pizzeria.dao.pizza.PizzaDaoBddImpl"></bean>
+	
+	<bean id="pizzaDao" class="fr.pizzeria.dao.pizza.PizzaDaoBddImpl">
+		<constructor-arg value="${jbdc.driver}"></constructor-arg>
+		<constructor-arg value="${jbdc.url}"></constructor-arg>
+		<constructor-arg value="${jbdc.user}"></constructor-arg>
+		<constructor-arg value="${jbdc.pass}"></constructor-arg>
+	</bean>
+	
+	<import resource="dao.xml" />
 	
 </beans>

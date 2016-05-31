@@ -57,4 +57,10 @@ public interface IPizzaDao {
 	 */
 	public Pizza trouverPizza (String codePizza);
 	
+	/**
+	 * 
+	 * @param pizzasAInserer
+	 */
+	public void ajouterGroupePizzas (List<Pizza> pizzasAInserer);
+	
 }

@@ -51,7 +51,8 @@ public class AjouterPizzaOptionMenu extends AbstractOptionMenu {
 	
 		try {
 			CategoriePizza categorie = CategoriePizza.valueOf(categoriePizzaAjoutee);
-			Pizza pizzaAjoutee = new Pizza (codePizza, nomPizzaAjoutee, new BigDecimal(prixPizzaAjoutee), categorie);
+			// TODO support pour url image
+			Pizza pizzaAjoutee = new Pizza (codePizza, nomPizzaAjoutee, new BigDecimal(prixPizzaAjoutee), categorie, "");
 	
 			daoFactory.getPizzaDao().ajouterPizza(pizzaAjoutee);
 			System.out.println("La pizza de code " + codePizza + " a été ajoutée.");

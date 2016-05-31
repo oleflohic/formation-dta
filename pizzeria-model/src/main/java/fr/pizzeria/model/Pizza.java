@@ -75,8 +75,15 @@ public class Pizza {
 	private String urlImage;
 	
 	
+	// ==== Méthodes statiques ====
+	/*
+	public int genererNouvelId () {
+		return ++nbPizzas;
+	}
+	*/
+	
 	// ==== Constructeurs ====
-
+	
 	public Pizza () {
 		//this.id = nbPizzas;
 		nbPizzas++;
@@ -88,12 +95,8 @@ public class Pizza {
 	 * @param nom 
 	 * @param prix
 	 * @param categorie
+	 * @param urlImage
 	 */
-	public Pizza (String code, String nom, BigDecimal prix, CategoriePizza categorie) {
-		this (nbPizzas, code, nom, prix, categorie);
-		nbPizzas++;
-	}
-
 	public Pizza (String code, String nom, BigDecimal prix, CategoriePizza categorie, String urlImage) {
 		this (nbPizzas, code, nom, prix, categorie);
 		this.urlImage = urlImage;
@@ -108,7 +111,7 @@ public class Pizza {
 	 * @param prix
 	 * @param categorie
 	 */
-	public Pizza (int id, String code, String nom, BigDecimal prix, CategoriePizza categorie) {
+	public Pizza (Integer id, String code, String nom, BigDecimal prix, CategoriePizza categorie) {
 		//this.id = id;
 		this.code = code;
 		this.nom = nom;

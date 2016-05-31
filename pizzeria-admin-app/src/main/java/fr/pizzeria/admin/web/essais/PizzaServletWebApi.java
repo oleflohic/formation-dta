@@ -54,7 +54,8 @@ public class PizzaServletWebApi extends HttpServlet {
 		if (StringUtils.isBlank(code) || StringUtils.isBlank(nom) || StringUtils.isBlank(prix) || StringUtils.isBlank(cat)) {
 			resp.sendError(400, "Non non non ! Donnes moi toutes les valeurs !");
 		} else {
-			Pizza newPizza = new Pizza(code, nom, new BigDecimal(prix), CategoriePizza.valueOf(cat));
+			// TODO support pour url image
+			Pizza newPizza = new Pizza(code, nom, new BigDecimal(prix), CategoriePizza.valueOf(cat), "");
 			try {
 				pizzaDao.ajouterPizza(newPizza);
 				LOG.info("Nouvelle pizza créée");
