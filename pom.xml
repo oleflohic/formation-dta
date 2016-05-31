@@ -49,7 +49,6 @@
 				<groupId>${project.groupId}</groupId>
 				<artifactId>pizzeria-console-ihm-lib</artifactId>
 				<version>${project.version}</version>
-				
 			</dependency>
 			
 			<dependency>
@@ -130,6 +129,14 @@
 				<artifactId>resteasy-jaxrs</artifactId>
 				<version>3.0.17.Final</version>
 				<scope>provided</scope>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-framework-bom</artifactId>
+				<version>4.2.6.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
 			</dependency>
 			
 		</dependencies>

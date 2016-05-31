@@ -89,14 +89,19 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		
 	</dependencies>
 	
 	<profiles>
-		<!-- Valeurs de dao.impl :
-		0 - implementation en memoire
-		1 - implementation fichier
-		2 - implementation SQL
-		3 - implementation JPA
+		<!-- Valeurs possibles de dao.impl :
+		- dao-memoire-config.xml	: implémentation mémoire ; les données sont définies en dur
+		- dao-fichier-config.xml	: implémentation fichier ; les données sont stockées dans des fichiers locaux
+		- dao-jdbc-config.xml		: implémentation avec base de données, où sont stockées les données
+		- dao-jpa-config.xml		: implémentation avec persistance ; voir la config de JPA pour savoir où sont stockées les données
 		-->
 		<profile>
 			<id>dev</id>
@@ -104,14 +109,14 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<dao.impl>0</dao.impl>
+				<dao.impl>dao-fichier-config.xml</dao.impl>
 			</properties>
 		</profile>
 		
 		<profile>
 			<id>prod</id>
 			<properties>
-				<dao.impl>1</dao.impl>
+				<dao.impl>dao-jpa-config.xml</dao.impl>
 			</properties>
 		</profile>
 	

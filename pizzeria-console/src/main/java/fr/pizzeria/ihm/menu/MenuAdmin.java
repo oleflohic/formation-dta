@@ -21,95 +21,28 @@ import fr.pizzeria.ihm.menu.option.SupprimerPizzaOptionMenu;
  * Menu principal de l'application. Permet d'écouter les saisies clavier et d'exécuter les actions en conséquence.
  * @author oleflohic
  */
-public class Menu extends AbstractMenu {
+public class MenuAdmin extends AbstractMenu {
 	
 	// ==== Constantes =====
 	
 	public static final String MENU_TITRE_LIBELLE = "Application Pizzeria Console";
-	
-	
-	// ==== Variables =====
-	
-	/**
-	 * Liste des options disponibles à l'utilisateur.
-	 */
-	//private Map<Integer,AbstractOptionMenu> options;
-	
 	
 	// ==== Constructeurs ====
 	
 	/**
 	 * Créer un menu console.
 	 * @param scanner
+	 * @param daoFactory
 	 */
-	/*
-	public Menu (Scanner scanner, IPizzaDao pizzaDao) {
-		initialiserOptions (scanner, pizzaDao);
-		this.scanner = scanner;
-	}
-	*/
-
-	public Menu (Scanner scanner, DaoFactory daoFactory) {
+	public MenuAdmin (Scanner scanner, DaoFactory daoFactory) {
 		super(MENU_TITRE_LIBELLE, scanner, daoFactory);
 	}
 	
 	
 	// ==== Méthodes ====
 	
-	/**
-	 * Initialiser le menu en définissant des options.
-	 * @param scanner
-	 * @param pizzaDao
-	 */
-	/*
-	public void initialiserOptions (Scanner scanner, IPizzaDao pizzaDao) {
-		options = new TreeMap<Integer, AbstractOptionMenu> (new Comparator<Integer>() {
-			@Override
-			public int compare(Integer o1, Integer o2) {
-				return o1.compareTo(o2);
-			}
-		});
-		
-		options.put (1, new ListerPizzasOptionMenu(pizzaDao));
-		options.put (2, new AjouterPizzaOptionMenu(pizzaDao, scanner));
-		options.put (3, new ModifierPizzaOptionMenu(pizzaDao, scanner));
-		options.put (4, new SupprimerPizzaOptionMenu(pizzaDao, scanner));
-
-		options.put (5, new ListerPizzasParCategorieOptionMenu(pizzaDao));
-		options.put (6, new AfficherPizzaLaPlusChereOptionMenu(pizzaDao));
-		
-		options.put (7, new ImporterDonneesOptionMenu(pizzaDao));
-		
-		options.put (99, new QuitterOptionMenu());
-	}
-	*/
-
-
 	@Override
 	protected void initialiserOptionsMenu() {
-		/*
-		options = new TreeMap<Integer, AbstractOptionMenu> (new Comparator<Integer>() {
-			@Override
-			public int compare(Integer o1, Integer o2) {
-				return o1.compareTo(o2);
-			}
-		});
-		*/
-		
-		/*
-		options.put (1, new ListerPizzasOptionMenu(pizzaDao));
-		options.put (2, new AjouterPizzaOptionMenu(pizzaDao, scanner));
-		options.put (3, new ModifierPizzaOptionMenu(pizzaDao, scanner));
-		options.put (4, new SupprimerPizzaOptionMenu(pizzaDao, scanner));
-
-		options.put (5, new ListerPizzasParCategorieOptionMenu(pizzaDao));
-		options.put (6, new AfficherPizzaLaPlusChereOptionMenu(pizzaDao));
-		
-		options.put (7, new ImporterDonneesOptionMenu(pizzaDao));
-		
-		options.put (99, new QuitterOptionMenu());
-		*/
-
 		options.put (1, new ListerPizzasOptionMenu(daoFactory));
 		options.put (2, new AjouterPizzaOptionMenu(daoFactory, scanner));
 		options.put (3, new ModifierPizzaOptionMenu(daoFactory, scanner));
@@ -121,7 +54,6 @@ public class Menu extends AbstractMenu {
 		options.put (7, new ImporterDonneesOptionMenu(daoFactory));
 		
 		options.put (99, new QuitterOptionMenu());
-		
 	}
 	
 	/**
