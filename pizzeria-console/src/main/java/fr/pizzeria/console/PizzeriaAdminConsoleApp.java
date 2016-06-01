@@ -1,13 +1,12 @@
 package fr.pizzeria.console;
 
 import java.util.ResourceBundle;
-import java.util.Scanner;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import org.springframework.beans.BeansException;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import fr.pizzeria.dao.factory.DaoFactory;
+import fr.pizzeria.dao.pizza.PizzaDaoFichierImpl;
 import fr.pizzeria.exception.dao.DaoException;
 import fr.pizzeria.ihm.menu.MenuAdmin;
 
@@ -16,6 +15,8 @@ import fr.pizzeria.ihm.menu.MenuAdmin;
  * @author oleflohic
  */
 public class PizzeriaAdminConsoleApp {
+
+	private static final Logger LOG = Logger.getLogger(PizzaDaoFichierImpl.class.toString());
 	
 	/**
 	 * Méthode principale.
@@ -30,19 +31,13 @@ public class PizzeriaAdminConsoleApp {
 		ResourceBundle bundle = ResourceBundle.getBundle("application");
 		String confString = bundle.getString("dao.impl");
 		
-		System.out.println("Implémentation : " + confString);
-		try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] {confString, "application-config.xml"})) {
-			lancerMenu(context.getBean(Scanner.class), context.getBean(DaoFactory.class));
-		} catch (BeansException e) {
-			System.err.println("Erreur : l'implémentation '" + confString + "' n'a pas pu être chargée.");
-			e.printStackTrace();
+		LOG.log(Level.INFO, "Implémentation : " + confString);
+		try (AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(PizzeriaAppSpringConfig.class)) {
+			MenuAdmin menu = context.getBean(MenuAdmin.class);
+			menu.afficher();
 		}
 		
 	}
 	
-	public static void lancerMenu (Scanner sc, DaoFactory daoFactory) {
-		MenuAdmin menu = new MenuAdmin (sc, daoFactory);
-		menu.afficher();
-	}
 	
 }

@@ -33,4 +33,6 @@ public class PizzaTest {
 		Assert.assertEquals(CategoriePizza.VIANDE, pizza.getCategorie());
 	}
 	
+	
+	
 }

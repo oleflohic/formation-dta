@@ -102,6 +102,7 @@
 		- dao-fichier-config.xml	: implémentation fichier ; les données sont stockées dans des fichiers locaux
 		- dao-jdbc-config.xml		: implémentation avec base de données, où sont stockées les données
 		- dao-jpa-config.xml		: implémentation avec persistance ; voir la config de JPA pour savoir où sont stockées les données
+		- dao-springjdbc-config.xml	: implémentation via Spring avec base de données, où sont stockées les données
 		-->
 		<profile>
 			<id>dev</id>
@@ -109,7 +110,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<dao.impl>dao-fichier-config.xml</dao.impl>
+				<dao.impl>dao-springjdbc-config.xml</dao.impl>
 			</properties>
 		</profile>
 		

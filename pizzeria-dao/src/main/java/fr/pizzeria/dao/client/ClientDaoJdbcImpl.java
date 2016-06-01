@@ -2,7 +2,7 @@ package fr.pizzeria.dao.client;
 
 import fr.pizzeria.model.Client;
 
-public class ClientDaoBddImpl implements IClientDao {
+public class ClientDaoJdbcImpl implements IClientDao {
 
 	@Override
 	public void saveClient(Client client) {

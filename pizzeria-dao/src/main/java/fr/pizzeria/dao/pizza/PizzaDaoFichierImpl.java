@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Repository;
 
 import fr.pizzeria.exception.dao.AjouterPizzaException;
 import fr.pizzeria.exception.dao.ModifierPizzaException;
@@ -21,8 +21,8 @@ import fr.pizzeria.exception.dao.SupprimerPizzaException;
 import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
-@Named
-@ApplicationScoped
+@Repository
+@Lazy
 public class PizzaDaoFichierImpl implements IPizzaDao {
 	
 	

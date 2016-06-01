@@ -2,21 +2,23 @@ package fr.pizzeria.dao.pizza;
 
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Repository;
+
 import fr.pizzeria.exception.dao.AjouterPizzaException;
 import fr.pizzeria.exception.dao.ModifierPizzaException;
 import fr.pizzeria.exception.dao.SupprimerPizzaException;
 import fr.pizzeria.model.Pizza;
 
-@Named
-@ApplicationScoped
+@Repository
+@Lazy
 public class PizzaDaoJpaImpl implements IPizzaDao {
 
 	// ==== Variables ====
@@ -28,6 +30,7 @@ public class PizzaDaoJpaImpl implements IPizzaDao {
 	
 	
 	// ==== Constructeurs ====
+	@Autowired
 	public PizzaDaoJpaImpl (EntityManagerFactory entityManagerFactory) {
 		this.entityManagerFactory = entityManagerFactory;
 	}

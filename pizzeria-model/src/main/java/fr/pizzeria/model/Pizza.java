@@ -57,7 +57,7 @@ public class Pizza {
 	 * Prix de la pizza.
 	 */
 	@ToString
-	@Column (name="prix", columnDefinition="DECIMAL(10,2)")
+	@Column (name="prix", columnDefinition="DECIMAL(10,2)", nullable=false)
 	private BigDecimal prix;
 	
 	/**
@@ -65,7 +65,7 @@ public class Pizza {
 	 */
 	@ToString
 	@Enumerated(EnumType.STRING)
-	@Column (name="categorie", columnDefinition="ENUM('VIANDE', 'POISSON', 'SANS_VIANDE') DEFAULT 'SANS_VIANDE'")
+	@Column (name="categorie", columnDefinition="ENUM('VIANDE', 'POISSON', 'SANS_VIANDE') DEFAULT 'SANS_VIANDE'", nullable=false)
 	private CategoriePizza categorie = CategoriePizza.SANS_VIANDE;
 	
 	/**

@@ -2,6 +2,7 @@ package fr.pizzeria.ihm.menu;
 
 import java.util.Scanner;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import fr.pizzeria.dao.factory.DaoFactory;
@@ -37,6 +38,7 @@ public class MenuAdmin extends AbstractMenu {
 	 * @param scanner
 	 * @param daoFactory
 	 */
+	@Autowired
 	public MenuAdmin (Scanner scanner, DaoFactory daoFactory) {
 		super(MENU_TITRE_LIBELLE, scanner, daoFactory);
 	}

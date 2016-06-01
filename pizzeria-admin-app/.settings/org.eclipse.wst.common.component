@@ -10,7 +10,7 @@
         <dependent-module archiveName="pizzeria-model-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/pizzeria-model/pizzeria-model">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <property name="java-output-path" value="/pizzeria-admin-web/target/classes"/>
         <property name="context-root" value="pizzeria-admin-app"/>
-        <property name="java-output-path" value="/pizzeria-admin-app/target/classes"/>
     </wb-module>
 </project-modules>

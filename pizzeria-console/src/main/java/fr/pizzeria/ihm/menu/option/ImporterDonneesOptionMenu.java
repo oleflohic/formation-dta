@@ -75,9 +75,7 @@ public class ImporterDonneesOptionMenu extends AbstractOptionMenu {
 		
 		
 		// écriture dans la BDD
-		//PizzaDaoBddImpl dao = (PizzaDaoBddImpl)(daoFactory.getPizzaDao());
 		IPizzaDao dao = daoFactory.getPizzaDao();
-		
 		List<List<Pizza>> groupesPizzas = ListUtils.partition(new ArrayList<Pizza>(pizzasLues.values()), 3);
 		
 		try {
@@ -87,13 +85,6 @@ public class ImporterDonneesOptionMenu extends AbstractOptionMenu {
 		} catch (UnsupportedOperationException e) {
 			throw new DaoException("Veuillez configurer l’application avec une implémentation base de données");
 		}
-		
-		
-		/*
-		} else {
-			throw new DaoException("Veuillez configurer l’application avec une implémentation base de données");
-		}
-		*/
 		
 		return true;
 	}

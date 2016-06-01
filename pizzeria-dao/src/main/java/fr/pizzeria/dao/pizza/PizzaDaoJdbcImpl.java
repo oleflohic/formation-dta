@@ -10,8 +10,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Repository;
 
 import fr.pizzeria.exception.dao.AjouterPizzaException;
 import fr.pizzeria.exception.dao.DaoException;
@@ -24,9 +26,9 @@ import fr.pizzeria.model.Pizza;
 
 // TODO nettoyage
 
-@Named
-@ApplicationScoped
-public class PizzaDaoBddImpl implements IPizzaDao {
+@Repository
+@Lazy
+public class PizzaDaoJdbcImpl implements IPizzaDao {
 
 	// ==== Variables ====
 	protected String url;
@@ -34,8 +36,8 @@ public class PizzaDaoBddImpl implements IPizzaDao {
 	protected String mdp;
 	
 	// ==== Constructeurs ====
-	
-	public PizzaDaoBddImpl (String pilote, String url, String utilisateur, String mdp) throws DaoException {
+	@Autowired
+	public PizzaDaoJdbcImpl (@Value("${jdbc.driver}") String pilote, @Value("${jdbc.url}")String url, @Value("${jdbc.username}")String utilisateur, @Value("${jdbc.password}")String mdp) throws DaoException {
 		
 		try {
 			Class.forName(pilote);

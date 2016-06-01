@@ -65,22 +65,10 @@ public class PizzaService {
 		
 		if (anciennePizza == null) {
 			// ERREUR : ne peut pas modifier une pizza inexistante
-			
 			System.err.println("CODE " + ancienCode + " INVALIDE");
 			
 		} else {
-			
-			//em.getTransaction().begin();
-			
 			anciennePizza.set(pizza);
-			/*
-			anciennePizza.setNom(pizza.getNom());
-			anciennePizza.setCategorie(pizza.getCategorie());
-			anciennePizza.setPrix(pizza.getPrix());
-			anciennePizza.setUrlImage(pizza.getUrlImage());
-			*/
-			
-			//em.getTransaction().commit();
 			
 		}
 		
