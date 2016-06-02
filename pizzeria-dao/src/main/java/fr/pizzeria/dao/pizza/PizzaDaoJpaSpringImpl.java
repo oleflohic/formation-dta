@@ -29,16 +29,18 @@ public class PizzaDaoJpaSpringImpl implements IPizzaDao {
 	/**
 	 * 
 	 */
-	//@PersistenceContext(unitName="pizzeria-pu")
-	
+	@PersistenceContext
 	private EntityManager em;
 	
 	
 	// ==== Constructeurs ====
+	/*
 	@Autowired
 	public PizzaDaoJpaSpringImpl (EntityManagerFactory entityManagerFactory) {
 		em = entityManagerFactory.createEntityManager();
 	}
+	*/
+	
 	
 	// ==== Méthodes ====
 	
@@ -50,10 +52,8 @@ public class PizzaDaoJpaSpringImpl implements IPizzaDao {
 	@Override
 	@Transactional
 	public void ajouterPizza(Pizza pizzaAjoutee) throws AjouterPizzaException {
-		em.getTransaction().begin();
 		try {
 			em.persist(pizzaAjoutee);
-			em.getTransaction().commit();
 		} catch (PersistenceException e) {
 			throw new AjouterPizzaException("Le code \"" + pizzaAjoutee.getCode() + "\" est déjà pris.");
 		}
@@ -61,8 +61,6 @@ public class PizzaDaoJpaSpringImpl implements IPizzaDao {
 	
 	@Override
 	public void modifierPizza(String codePizza, Pizza pizzaModifiee) throws ModifierPizzaException {
-		em.getTransaction().begin();
-		
 		TypedQuery<Pizza> query = em.createQuery("SELECT p FROM Pizza p WHERE p.code=:codePizza", Pizza.class);
 		query.setParameter("codePizza", codePizza);
 		Pizza pizza = query.getSingleResult();
@@ -71,18 +69,14 @@ public class PizzaDaoJpaSpringImpl implements IPizzaDao {
 		pizza.setNom(pizzaModifiee.getNom());
 		pizza.setPrix(pizzaModifiee.getPrix());
 		pizza.setCategorie(pizzaModifiee.getCategorie());
-
-		em.getTransaction().commit();
 	}
 	
 	@Override
 	public void supprimerPizza(String codePizza) throws SupprimerPizzaException {
-		em.getTransaction().begin();
 		TypedQuery<Pizza> query = em.createQuery("SELECT p FROM Pizza p WHERE p.code=:codePizza", Pizza.class);
 		query.setParameter("codePizza", codePizza);
 		try {
 			em.remove(query.getSingleResult());
-			em.getTransaction().commit();
 		} catch (NoResultException e) {
 			throw new SupprimerPizzaException("Code pizza inconnu.");
 		}
@@ -95,7 +89,6 @@ public class PizzaDaoJpaSpringImpl implements IPizzaDao {
 	
 	@Override
 	public Pizza trouverPizza(String codePizza) {
-		em.getTransaction().begin();
 		try {
 			TypedQuery<Pizza> query = em.createQuery("SELECT p FROM Pizza p WHERE p.code=:codePizza", Pizza.class);
 			query.setParameter("codePizza", codePizza);
