@@ -88,11 +88,13 @@
 				<artifactId>hibernate-jpa-2.1-api</artifactId>
 				<version>1.0.0.Final</version>
 			</dependency>
+			
+			<!-- http://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-entitymanager</artifactId>
 				<version>5.1.0.Final</version>
-				<scope>runtime</scope>
+				<scope>import</scope>
 			</dependency>
 			
 			<!-- http://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
@@ -150,14 +152,6 @@
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-orm</artifactId>
 				<version>4.2.6.RELEASE</version>
-			</dependency>
-			
-			<!-- http://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
-			<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-entitymanager</artifactId>
-				<version>5.1.0.Final</version>
-				<scope>import</scope>
 			</dependency>
 			
 			<!-- 

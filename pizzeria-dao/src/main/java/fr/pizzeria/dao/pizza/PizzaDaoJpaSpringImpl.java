@@ -3,15 +3,12 @@ package fr.pizzeria.dao.pizza;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,6 +42,7 @@ public class PizzaDaoJpaSpringImpl implements IPizzaDao {
 	// ==== Méthodes ====
 	
 	@Override
+	@Transactional
 	public List<Pizza> listePizzas() {
 		return em.createQuery("SELECT p FROM Pizza p", Pizza.class).getResultList();
 	}
