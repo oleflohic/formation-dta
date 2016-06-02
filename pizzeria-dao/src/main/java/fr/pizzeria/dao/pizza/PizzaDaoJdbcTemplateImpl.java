@@ -6,6 +6,7 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
@@ -51,42 +52,57 @@ public class PizzaDaoJdbcTemplateImpl implements IPizzaDao {
 	}
 
 	@Override
-	public void ajouterPizza(Pizza pizzaAjoutee) throws AjouterPizzaException {
-		// TODO Auto-generated method stub
-		//throw new UnsupportedOperationException();
+	public void ajouterPizza(Pizza nouvellePizza) throws AjouterPizzaException {
+
+		// code de longueur invalide : exception
+		if (nouvellePizza.getCode().length() != 3) {
+			throw new AjouterPizzaException ("Le code pizza " + nouvellePizza.getCode() + " est de longueur invalide (doit contenir 3 caractères).");
+		}
 		
-		jdbcTemplate.update("INSERT INTO pizza (code,nom,prix,categorie,url_image) VALUES(?,?,?,?,?)",
-				pizzaAjoutee.getCode(), pizzaAjoutee.getNom(), pizzaAjoutee.getPrix(), pizzaAjoutee.getCategorie().name(), pizzaAjoutee.getUrlImage());
+		try {
+			jdbcTemplate.update("INSERT INTO pizza (code,nom,prix,categorie,url_image) VALUES(?,?,?,?,?)",
+				nouvellePizza.getCode(), nouvellePizza.getNom(), nouvellePizza.getPrix(), nouvellePizza.getCategorie().name(), nouvellePizza.getUrlImage());
+		} catch (DuplicateKeyException e) {
+			throw new AjouterPizzaException("Erreur : le code pizza " + nouvellePizza.getCode() + " est déjà pris.");
+		}
 	}
 
 	@Override
 	public void modifierPizza(String codePizza, Pizza pizzaModifiee) throws ModifierPizzaException {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		try {
+			int count = jdbcTemplate.update("UPDATE pizza SET code=?, nom=?, prix=?, categorie=?, url_image=? WHERE code=?",
+					pizzaModifiee.getCode(), pizzaModifiee.getNom(), pizzaModifiee.getPrix(), pizzaModifiee.getCategorie().name(), pizzaModifiee.getUrlImage(), codePizza);
+			if (count < 1) {
+				throw new ModifierPizzaException("Erreur : code pizza '" + codePizza + "' introuvable.");
+			}
+		} catch (DuplicateKeyException e) {
+			throw new ModifierPizzaException("Erreur : le code pizza " + pizzaModifiee.getCode() + " est déjà pris.");
+		}
+		
 	}
 
 	@Override
 	public void supprimerPizza(String codePizza) throws SupprimerPizzaException {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+		int count = jdbcTemplate.update("DELETE FROM pizza WHERE code=?", codePizza);
+		if (count < 1) {
+			throw new SupprimerPizzaException("Erreur : code pizza '" + codePizza + "' introuvable.");
+		}
 	}
 
 	@Override
 	public boolean codePizzaExiste(String codePizza) {
-		// TODO Auto-generated method stub
+		//return !jdbcTemplate.query("SELECT TOP 1 code FROM pizza WHERE code=" + codePizza, (rs, rowNum) -> { return rs.getString("code"); }).isEmpty();
+		
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Pizza trouverPizza(String codePizza) {
-		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void ajouterGroupePizzas(List<Pizza> pizzasAInserer) {
-		// TODO Auto-generated method stub
-		
 		
 		this.txTemplate.execute(status -> {
 			pizzasAInserer.forEach(t -> {
@@ -99,16 +115,6 @@ public class PizzaDaoJdbcTemplateImpl implements IPizzaDao {
 			});
 			return null;
 		});
-		
-		
-		/*
-		this.txTemplate.execute(new TransactionCallback<Pizza>() {
-			@Override
-			public Pizza doInTransaction(TransactionStatus status) {
-				return null;
-			}
-		});
-		*/
 		
 	}
 	

@@ -17,7 +17,7 @@ import fr.pizzeria.model.Pizza;
 public class PizzaService {
 	
 	// ==== Variables ====
-	@PersistenceContext(unitName="pizzeria-admin-app") private EntityManager em;
+	@PersistenceContext(unitName="pizzeria-admin-web") private EntityManager em;
 	
 	
 	// ==== Méthodes ====

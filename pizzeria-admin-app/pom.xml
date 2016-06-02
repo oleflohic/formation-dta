@@ -36,6 +36,6 @@
 		
 	</dependencies>
 	<build>
-		<finalName>pizzeria-admin-app</finalName>
+		<finalName>pizzeria-admin-web</finalName>
 	</build>
 </project>

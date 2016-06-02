@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<base href="/pizzeria-admin-app/" />
+		<base href="/pizzeria-admin-web/" />
 		
 		<title>Index</title>
 	</head>

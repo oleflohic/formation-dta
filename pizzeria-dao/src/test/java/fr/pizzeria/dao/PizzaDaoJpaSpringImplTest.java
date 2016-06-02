@@ -6,14 +6,15 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.test.context.ContextConfiguration;
 
 import fr.pizzeria.dao.pizza.IPizzaDao;
 import fr.pizzeria.model.Pizza;
 
-public class PizzaDaoJdbcTemplateImplTest extends PizzaDaoImplTest {
-
+@ContextConfiguration(classes = SpringJpaConfig.class)
+public class PizzaDaoJpaSpringImplTest extends PizzaDaoTest {
 	@Autowired
-	public void setPizzaDao(@Qualifier("pizzaDaoJdbcTemplateImpl") IPizzaDao pizzaDao) {
+	public void setPizzaDao(@Qualifier("pizzaDaoJpaSpringImpl") IPizzaDao pizzaDao) {
 		this.pizzaDao = pizzaDao;
 	}
 	
@@ -24,5 +25,4 @@ public class PizzaDaoJdbcTemplateImplTest extends PizzaDaoImplTest {
 		Assert.assertNotNull(pizzas);
 		Assert.assertEquals(11, pizzas.size());
 	}
-	
 }

@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<base href="/pizzeria-admin-app/" />
+		<base href="/pizzeria-admin-web/" />
     	
 	    <meta charset="utf-8">
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
