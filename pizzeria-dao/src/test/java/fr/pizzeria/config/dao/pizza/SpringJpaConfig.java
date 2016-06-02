@@ -1,4 +1,4 @@
-package fr.pizzeria.dao;
+package fr.pizzeria.config.dao.pizza;
 
 import javax.sql.DataSource;
 
@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -15,9 +15,12 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ComponentScan("fr.pizzeria.dao")
+@ComponentScan("fr.pizzeria.dao.pizza")
 @EnableTransactionManagement
+@EnableJpaRepositories("fr.pizzeria.dao.pizza")
 public class SpringJpaConfig {
+	
+	// TODO remplacer par la configuration réelle
 	
 	@Bean
 	public DataSource dataSource () {

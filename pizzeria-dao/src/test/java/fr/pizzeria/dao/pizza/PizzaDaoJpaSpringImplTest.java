@@ -1,4 +1,4 @@
-package fr.pizzeria.dao;
+package fr.pizzeria.dao.pizza;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 
-import fr.pizzeria.dao.pizza.IPizzaDao;
+import fr.pizzeria.config.dao.pizza.SpringJpaConfig;
 import fr.pizzeria.model.Pizza;
 
 @ContextConfiguration(classes = SpringJpaConfig.class)
