@@ -8,11 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 
-import fr.pizzeria.config.dao.pizza.SpringJpaConfig;
+import fr.pizzeria.config.dao.pizza.SpringAOPConfig;
 import fr.pizzeria.model.Pizza;
 
-@ContextConfiguration(classes = SpringJpaConfig.class)
-public class PizzaDaoDataJpaImplTest extends PizzaDaoTest {
+//@ContextConfiguration(classes = SpringJpaConfig.class)
+@ContextConfiguration(classes = SpringAOPConfig.class)
+public class PizzaDaoDataJpaImplTest extends AbstractPizzaDaoTest {
 	@Autowired
 	public void setPizzaDao(@Qualifier("pizzaDaoDataJpaImpl") IPizzaDao pizzaDao) {
 		this.pizzaDao = pizzaDao;

@@ -12,7 +12,6 @@ public class PizzaTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		//pizza = new Pizza("ABC", "def", new BigDecimal("72.34"), CategoriePizza.VIANDE);
 		pizza = new Pizza();
 	}
 

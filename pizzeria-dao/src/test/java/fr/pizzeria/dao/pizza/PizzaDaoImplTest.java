@@ -6,8 +6,8 @@ import org.springframework.test.context.ContextConfiguration;
 
 import fr.pizzeria.config.dao.pizza.SpringConfig;
 
-@ContextConfiguration(classes = SpringConfig.class)
-public class PizzaDaoImplTest extends PizzaDaoTest {
+//@ContextConfiguration(classes = SpringConfig.class)
+public class PizzaDaoImplTest extends AbstractPizzaDaoTest {
 	@Autowired
 	public void setPizzaDao(@Qualifier("pizzaDaoImpl") IPizzaDao pizzaDao) {
 		this.pizzaDao = pizzaDao;

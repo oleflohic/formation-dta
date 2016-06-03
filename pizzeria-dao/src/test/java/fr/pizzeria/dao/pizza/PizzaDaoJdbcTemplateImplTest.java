@@ -11,7 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import fr.pizzeria.config.dao.pizza.SpringConfig;
 import fr.pizzeria.model.Pizza;
 
-@ContextConfiguration(classes = SpringConfig.class)
+//@ContextConfiguration(classes = SpringConfig.class)
 public class PizzaDaoJdbcTemplateImplTest extends PizzaDaoImplTest {
 
 	@Autowired

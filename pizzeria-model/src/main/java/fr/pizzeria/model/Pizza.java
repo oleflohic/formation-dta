@@ -24,6 +24,21 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 @Table(name="pizza")
 public class Pizza {
 	
+	// ==== Classes ====
+	/*
+	public static class LongueurCodeException extends Exception {
+		private static final long serialVersionUID = 1013815773107174810L;
+		
+		public LongueurCodeException(String string) {
+			super(string);
+		}
+	}
+	*/
+	
+	
+	// ==== Constantes ====
+	public static final int LONGUEUR_CODE = 3; 
+	
 	/**
 	 * Nombre de (nouvelles) pizzas qui ont été créées depuis le début du programme.
 	 */
@@ -40,10 +55,10 @@ public class Pizza {
 	private Integer id;
 	
 	/**
-	 * Code pizza en 3 caractères. Unique.
+	 * Code pizza en LONGUEUR_CODE caractères. Unique.
 	 */
 	@ToString
-	@Column (name="code", length=3, unique=true)
+	@Column (name="code", length=LONGUEUR_CODE, unique=true)
 	private String code;
 	
 	/**
@@ -204,7 +219,12 @@ public class Pizza {
 		return code;
 	}
 
-	public void setCode(String code) {
+	public void setCode(String code)/* throws LongueurCodeException*/ {
+		/*
+		if (code.length() != LONGUEUR_CODE) {
+			throw new LongueurCodeException("Code '" + code + "' de longueur invalide : " + code.length() + " (attendu : " + LONGUEUR_CODE + ").");
+		}
+		*/
 		this.code = code;
 	}
 

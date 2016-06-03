@@ -34,13 +34,13 @@ public class AjouterPizzaOptionMenu extends AbstractOptionMenu {
 		
 		System.out.println("Veuillez saisir le code : ");
 		String codePizza = scanner.next();
-
+		
 		System.out.println("Veuillez saisir le nom : ");
 		String nomPizzaAjoutee = scanner.next();
 		
 		System.out.println("Veuillez saisir le prix (utiliser , comme séparateur décimal) : ");
 		String prixPizzaAjoutee = scanner.next();
-
+		
 		System.out.println("Veuillez saisir la catégorie parmi les options suivantes (saisir le code) : ");
 		CategoriePizza[] categoriesPizza = CategoriePizza.values();
 		for (CategoriePizza c : categoriesPizza) {
@@ -48,21 +48,21 @@ public class AjouterPizzaOptionMenu extends AbstractOptionMenu {
 		}
 		System.out.println("Choix : ");
 		String categoriePizzaAjoutee = scanner.next();
-	
+		
 		try {
 			CategoriePizza categorie = CategoriePizza.valueOf(categoriePizzaAjoutee);
 			// TODO support pour url image
 			Pizza pizzaAjoutee = new Pizza (codePizza, nomPizzaAjoutee, new BigDecimal(prixPizzaAjoutee), categorie, "");
-	
+			
 			daoFactory.getPizzaDao().ajouterPizza(pizzaAjoutee);
 			System.out.println("La pizza de code " + codePizza + " a été ajoutée.");
 			
 			System.out.println();
-	
+			
 		} catch (IllegalArgumentException e) {
 			throw new AjouterPizzaException ("Catégorie \"" + categoriePizzaAjoutee + "\" invalide.");
 		}
-
+		
 		return true;
 		
 	}

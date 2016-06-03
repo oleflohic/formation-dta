@@ -70,6 +70,11 @@ public class PizzaDaoJdbcTemplateImpl implements IPizzaDao {
 	@Override
 	public void modifierPizza(String codePizza, Pizza pizzaModifiee) throws ModifierPizzaException {
 		try {
+			
+			if (pizzaModifiee.getCode().length() != 3) {
+				throw new ModifierPizzaException ("Le code pizza " + pizzaModifiee.getCode() + " est de longueur invalide (doit contenir 3 caractères).");
+			}
+			
 			int count = jdbcTemplate.update("UPDATE pizza SET code=?, nom=?, prix=?, categorie=?, url_image=? WHERE code=?",
 					pizzaModifiee.getCode(), pizzaModifiee.getNom(), pizzaModifiee.getPrix(), pizzaModifiee.getCategorie().name(), pizzaModifiee.getUrlImage(), codePizza);
 			if (count < 1) {

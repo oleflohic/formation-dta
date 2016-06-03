@@ -8,3 +8,11 @@ CREATE TABLE `pizza` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_uwl42bkm53vnwm0ncklemrij` (`code`)
 );
+
+
+CREATE TABLE `performance` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `service` varchar(255) DEFAULT NULL,
+  `date` timestamp,
+  `temps_execution` int(255) DEFAULT NULL,
+);

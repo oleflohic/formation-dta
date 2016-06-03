@@ -18,10 +18,9 @@ import fr.pizzeria.model.Pizza;
 @RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration(classes = SpringConfig.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public abstract class PizzaDaoTest {
+public abstract class AbstractPizzaDaoTest {
 	
 	protected IPizzaDao pizzaDao;
-	
 	
 	// listePizza
 	

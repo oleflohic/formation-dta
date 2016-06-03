@@ -15,12 +15,10 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ComponentScan("fr.pizzeria.dao.pizza")
+@ComponentScan("fr.pizzeria.dao")
 @EnableTransactionManagement
-@EnableJpaRepositories("fr.pizzeria.dao.pizza")
+@EnableJpaRepositories("fr.pizzeria.repositories")
 public class SpringJpaConfig {
-	
-	// TODO remplacer par la configuration réelle
 	
 	@Bean
 	public DataSource dataSource () {

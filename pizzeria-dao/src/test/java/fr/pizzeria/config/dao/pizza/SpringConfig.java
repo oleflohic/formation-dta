@@ -12,7 +12,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@ComponentScan("fr.pizzeria.dao.pizza")
+@ComponentScan("fr.pizzeria.dao")
 @EnableTransactionManagement
 public class SpringConfig {
 	
@@ -25,19 +25,9 @@ public class SpringConfig {
 				build();
 	}
 	
-	/*
-	// définir ce bean n'est pas nécessaire, car la classe en question est déjà annotée avec @Repository et @Lazy ;
-	// contrairement à la DataSource, qui est un fichier auquel le développeur n'a pas accès direct et ne peut donc pas directement annoter.
-	@Bean
-	public PizzaDaoJdbcTemplateImpl pizzaDaoJdbcTemplateImpl (@Qualifier("dataSource") DataSource dataSource) {
-		return new PizzaDaoJdbcTemplateImpl(dataSource);
-	}
-	*/
-	
 	@Bean
 	public PlatformTransactionManager transactionManager() {
 		return new DataSourceTransactionManager(dataSource());
 	}
-
 	
 }

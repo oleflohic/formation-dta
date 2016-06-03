@@ -12,6 +12,7 @@ import fr.pizzeria.exception.dao.AjouterPizzaException;
 import fr.pizzeria.exception.dao.ModifierPizzaException;
 import fr.pizzeria.exception.dao.SupprimerPizzaException;
 import fr.pizzeria.model.Pizza;
+import fr.pizzeria.repositories.IPizzaRepository;
 
 @Repository
 @Lazy
