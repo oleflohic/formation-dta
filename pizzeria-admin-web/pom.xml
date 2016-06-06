@@ -6,10 +6,10 @@
 		<artifactId>pizzeria-parent</artifactId>
 		<version>0.0.1</version>
 	</parent>
-	
+
 	<artifactId>pizzeria-admin-web</artifactId>
 	<packaging>war</packaging>
-	
+
 	<name>pizzeria-admin-web Maven Webapp</name>
 	<dependencies>
 		<dependency>
@@ -19,6 +19,68 @@
 		<dependency>
 			<groupId>fr.pizzeria</groupId>
 			<artifactId>pizzeria-dao</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-context</artifactId>
+				</exclusion>
+
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-jdbc</artifactId>
+				</exclusion>
+
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-orm</artifactId>
+				</exclusion>
+				
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-aspects</artifactId>
+				</exclusion>
+
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-context</artifactId>
+				</exclusion>
+			
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-jdbc</artifactId>
+				</exclusion>
+
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-orm</artifactId>
+				</exclusion>
+
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-aspects</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-aop</artifactId>
+				</exclusion>
+
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-tx</artifactId>
+				</exclusion>
+
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-beans</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>jstl</groupId>
@@ -28,17 +90,17 @@
 			<groupId>javax.enterprise</groupId>
 			<artifactId>cdi-api</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jaxrs</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 		</dependency>
-		
+
 	</dependencies>
 	<build>
 		<finalName>pizzeria-admin-web</finalName>

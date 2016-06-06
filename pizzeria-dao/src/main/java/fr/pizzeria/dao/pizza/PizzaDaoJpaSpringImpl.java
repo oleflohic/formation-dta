@@ -26,7 +26,7 @@ public class PizzaDaoJpaSpringImpl implements IPizzaDao {
 	/**
 	 * 
 	 */
-	@PersistenceContext
+	//@PersistenceContext
 	private EntityManager em;
 	
 	

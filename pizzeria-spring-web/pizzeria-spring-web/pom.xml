@@ -7,12 +7,12 @@
 		<artifactId>pizzeria-parent</artifactId>
 		<version>0.0.1</version>
 	</parent>
-	
+
 	<name>pizzeria-spring-web Maven Webapp</name>
 	<artifactId>pizzeria-spring-web</artifactId>
 	<packaging>war</packaging>
-	
-	
+
+
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -30,17 +30,16 @@
 			<groupId>javax.enterprise</groupId>
 			<artifactId>cdi-api</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jaxrs</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
 		</dependency>
-		
 		
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -53,12 +52,18 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.7.4</version>
 		</dependency>
-
-	</dependencies>
 		
-	
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.192</version>
+		</dependency>
+		
+	</dependencies>
+
+
 	<build>
 		<finalName>pizzeria-spring-web</finalName>
 	</build>
-	
+
 </project>

@@ -4,6 +4,12 @@
 		<jta-data-source>jdbc/pizza-ds</jta-data-source>
 		
 		<class>fr.pizzeria.model.Pizza</class>
+		<!-- 
+		<class>fr.pizzeria.model.Client</class>
+		<class>fr.pizzeria.model.Livreur</class>
+		<class>fr.pizzeria.model.Commande</class>
+		<class>fr.pizzeria.model.performance.Performance</class>
+		-->
 		
 		<properties>
 			<property name="javax.persistence.schema-generation.database.action" value="drop-and-create" />
