@@ -1,0 +1,17 @@
+CREATE TABLE `pizza` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `categorie` varchar(255) DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `nom` varchar(255) DEFAULT NULL,
+  `prix` decimal(19,2) DEFAULT NULL,
+  `url_image` varchar(255) DEFAULT NULL
+);
+
+ALTER TABLE `pizza` ADD CONSTRAINT `code_unique` UNIQUE(`code`);
+
+CREATE TABLE `performance` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `service` varchar(255) DEFAULT NULL,
+  `date` timestamp,
+  `temps_execution` int(255) DEFAULT NULL,
+);
