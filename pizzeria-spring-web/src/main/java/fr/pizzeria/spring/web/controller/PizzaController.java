@@ -1,21 +1,19 @@
 package fr.pizzeria.spring.web.controller;
 
 
-import fr.pizzeria.dao.pizza.IPizzaDao;
-import fr.pizzeria.model.Pizza;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import fr.pizzeria.dao.pizza.IPizzaDao;
+import fr.pizzeria.exception.dao.AjouterPizzaException;
+import fr.pizzeria.model.Pizza;
 
 @RestController
 @RequestMapping("/pizzas")
@@ -31,12 +29,18 @@ public class PizzaController {
 
     @RequestMapping(method = RequestMethod.GET)
     public List<Pizza> list() {
-        return pizzaDao.findAllPizzas();
+        return pizzaDao.listePizzas();
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public Pizza post(@RequestBody Pizza pizza) {
-        pizzaDao.savePizza(pizza);
+        try {
+			pizzaDao.ajouterPizza(pizza);
+		} catch (AjouterPizzaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
         return pizza;
     }
 

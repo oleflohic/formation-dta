@@ -1,7 +1,6 @@
 package fr.pizzeria.spring.web;
 
-import fr.pizzeria.dao.pizza.IPizzaDao;
-import fr.pizzeria.dao.pizza.PizzaDaoMemoire;
+import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,14 +11,13 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import javax.sql.DataSource;
+import fr.pizzeria.dao.pizza.IPizzaDao;
+import fr.pizzeria.dao.pizza.PizzaDaoImpl;
 
 @Configuration
 @ComponentScan({"fr.pizzeria.spring.web.controller", "fr.pizzeria.aspects"})
@@ -30,7 +28,7 @@ public class PizzeriaSpringConfig {
 
     @Bean
     IPizzaDao pizzaDao() {
-        return new PizzaDaoMemoire();
+        return new PizzaDaoImpl();
     }
 
     @Bean

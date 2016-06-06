@@ -1,18 +1,19 @@
 package fr.pizzeria.spring.web.controller;
 
-import fr.pizzeria.dao.performance.IPerformanceRepository;
-import fr.pizzeria.model.performance.Performance;
-import org.apache.commons.lang3.CharSetUtils;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.Charset;
-import java.util.List;
+import fr.pizzeria.model.performance.Performance;
+import fr.pizzeria.repositories.IPerformanceRepository;
+
 
 @Controller
 @RequestMapping("/performance")
